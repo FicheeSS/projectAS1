@@ -6,16 +6,16 @@
 #include <filesystem>
 #include <stdexcept>
 #define EXT ".png"
-namespace fs = boost::filesystem;
+
 
 class RessourcePack {
 private:
-	std::vector<sf::Image*> imgList;
-	std::vector<sf::Image> imgLoc;
+	std::vector<sf::Image*> *imgList = new std::vector<sf::Image*>;
+	std::vector<sf::Image> *imgLoc = new std::vector<sf::Image>;;
 
 public:
-	RessourcePack(std::string path);
-	std::vector<sf::Image*> getImgList();
+	void generateImg(std::string path);
+	sf::Image* getImg(int n);
 	//On vide les tableaux déclarés dans le HEAP
 	~RessourcePack();
 
