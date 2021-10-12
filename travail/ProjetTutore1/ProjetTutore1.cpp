@@ -11,7 +11,7 @@ int main()
     shape.setFillColor(sf::Color::Green);
     RessourcePack RP;
     try{
-        RP.generateImg("/Ressource/img");
+        RP.generateImg("\\Ressources\\img");
     }
     catch (std::invalid_argument e) {
         std::cerr << e.what() << std::endl;
@@ -19,8 +19,8 @@ int main()
     }
 
     TerrainConstructor TC;
-    TC.ConstructTerrain("/Ressource/Level1.dat", RP);
-
+    TC.ConstructTerrain("\\Ressources\\level1.dat", RP);
+    //TC.ConstructTerrain("10 10 1 0 8 0 0 9", RP);
     while (window.isOpen())
     {
         sf::Event event;

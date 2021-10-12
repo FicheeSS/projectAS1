@@ -5,6 +5,7 @@
 #include <SFML/Graphics/Image.hpp>
 #include <filesystem>
 #include <stdexcept>
+#include <iostream>
 #define EXT ".png"
 
 

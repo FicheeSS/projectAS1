@@ -1,20 +1,27 @@
 #include "Element.h"
 
 
-Element::Element(int xe , int ye , sf::IntRect recte, sf::Image *imge) {
+Element::Element(int xe, int ye, sf::IntRect recte, sf::Image* imge) {
 	if (imge == nullptr) {
 		throw std::runtime_error::runtime_error("Null pointer to img");
 	}
-	img = imge;
 	rect = recte;
 	x = xe;
 	y = ye;
+	sf::Texture tex;
+	tex.loadFromImage(*imge);
+	sprite->setTextureRect(recte);
+	sprite->setTexture(tex);
+	sprite->setPosition(x, y);
 }
 
-void Element::show()
+void Element::show(sf::RenderWindow window)
 {
-	//TODO
+	window.draw(*sprite);
+
 }
+
+
 
 std::tuple<int, int> Element::collide(Element e)
 {

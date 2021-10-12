@@ -7,5 +7,7 @@ protected:
 	int y;
 	sf::IntRect  rect;
 	bool isPhy;
-	sf::Image *img;
+	sf::Sprite *sprite = new sf::Sprite();
+	//deplace l'élément 
+	void move(int x, int y);
 };
