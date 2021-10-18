@@ -1,15 +1,12 @@
 #include "Element.h"
 
 
-Element::Element(int xe, int ye, sf::IntRect recte, sf::Image* imge) {
-	if (imge == nullptr) {
-		throw std::runtime_error("Null pointer to img");
-	}
+Element::Element(int xe, int ye, sf::IntRect recte, const sf::Image & imge) {
 	rect = recte;
 	x = xe;
 	y = ye;
 	sf::Texture *tex =  new sf::Texture();
-	tex->loadFromImage(*imge);
+	tex->loadFromImage(imge);
 	sprite = new sf::Sprite(*tex,rect);
 	sprite->setPosition(x, y);
 }

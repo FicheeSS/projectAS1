@@ -29,8 +29,8 @@ void RessourcePack::generateImg(std::string path)
     }
 }
 
-sf::Image* RessourcePack::getImg(int n) {
-    return &imgLoc->at(n-1);//UHMMM
+sf::Image RessourcePack::getImg(int n) {
+    return imgLoc->at(n);//UHMMM
 };
 
 RessourcePack::~RessourcePack() {

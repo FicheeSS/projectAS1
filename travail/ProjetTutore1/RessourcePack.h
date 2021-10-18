@@ -15,7 +15,7 @@ private:
 
 public:
 	void generateImg(std::string path);
-	sf::Image* getImg(int n);
+	sf::Image getImg(int n);
 	//On vide les tableaux déclarés dans le HEAP
 	~RessourcePack();
 
