@@ -11,8 +11,7 @@
 
 class RessourcePack {
 private:
-	std::vector<sf::Image*> *imgList = new std::vector<sf::Image*>;
-	std::vector<sf::Image> *imgLoc = new std::vector<sf::Image>;;
+	std::vector<sf::Image> *imgLoc;
 
 public:
 	void generateImg(std::string path);

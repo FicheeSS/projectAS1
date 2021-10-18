@@ -19,7 +19,8 @@ int main()
     }
 
     TerrainConstructor TC;
-    TC.ConstructTerrain("\\Ressources\\level1.dat", RP);
+    std::vector<std::vector<Tile*>>* Terrain  = TC.ConstructTerrain("\\Ressources\\level1.dat", RP);
+
     //TC.ConstructTerrain("10 10 1 0 8 0 0 9", RP);
     while (window.isOpen())
     {
@@ -34,10 +35,36 @@ int main()
                 ////std::cout << "new mouse x: " << event.mouseMove.x << std::endl;
                 ////std::cout << "new mouse y: " << event.mouseMove.y << std::endl;
                 break;
+            case sf::Event::KeyPressed:
+                switch (event.key.code) {
+                case sf::Keyboard::Left:
+                    break;
+                case sf::Keyboard::Right:
+                    break;
+                case sf::Keyboard::Up:
+                    break;
+                case sf::Keyboard::Down:
+                    break;
+
+
+                }
+
             }
         }
-
+        
         window.clear();
+        /*
+        for (uint32_t x = 0; x < Terrain->size(); x++) {
+            for (uint32_t y = 0; y < Terrain[x].size(); y++) {
+                void* memoryPlace = Terrain->at(x).at(y);
+                Tile t = (Tile) *memoryPlace;
+                if (t.className == "Element") {
+                    Element* e = (Element*)&t;
+                    e->show(window);
+                }
+            }
+        }
+        */
         window.draw(shape);
         window.display();
     }

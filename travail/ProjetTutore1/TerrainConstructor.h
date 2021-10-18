@@ -10,8 +10,8 @@
 #define BLOCKHEIGHT 10
 class TerrainConstructor {
 private:
-	std::vector<std::vector<Tile>>* ConstructTerrainFromData(std::string,RessourcePack&);
-	std::vector<std::vector<Tile>>* Terrain ;
+	std::vector<std::vector<Tile*>>* ConstructTerrainFromData(std::string,RessourcePack&);
+	std::vector<std::vector<Tile*>>* Terrain ;
 public:
 	/*
 	* \brief prends un filepath correspondant a un fichier .dat tel que décrit si dessous et place à l'aide de RP les élément dans le tableau
@@ -24,7 +24,6 @@ public:
 	* 10 10  //taille// 0 0 9 1 0 8  // definie deux élément l'un sur l'autre à la postion 0 en bas à gauche
 
 	*/
-	std::vector<std::vector<Tile>>* ConstructTerrain(std::string filePath, RessourcePack& RP);
-
+	std::vector<std::vector<Tile*>>* ConstructTerrain(std::string filePath, RessourcePack& RP);
 	~TerrainConstructor();
 };

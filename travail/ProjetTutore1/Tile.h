@@ -7,7 +7,9 @@ protected:
 	int y;
 	sf::IntRect  rect;
 	bool isPhy;
-	sf::Sprite *sprite = new sf::Sprite();
+	sf::Sprite *sprite ;
 	//deplace l'élément 
 	void move(int x, int y);
+public:
+	std::string className = "Tile";
 };

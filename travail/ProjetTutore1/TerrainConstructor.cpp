@@ -18,7 +18,7 @@ std::vector<std::string> split(std::string s, std::string delimiter) {
     return res;
 }
 
-std::vector<std::vector<Tile>>* TerrainConstructor::ConstructTerrain(std::string filePath,  RessourcePack& RP)
+std::vector<std::vector<Tile*>>* TerrainConstructor::ConstructTerrain(std::string filePath,  RessourcePack& RP)
 {
     boost::filesystem::path full_path(boost::filesystem::current_path());
     filePath = full_path.string() + filePath;
@@ -32,38 +32,41 @@ std::vector<std::vector<Tile>>* TerrainConstructor::ConstructTerrain(std::string
         }
         file.close();
     }
+    //return new std::vector<std::vector<void*>>();
 	return ConstructTerrainFromData(data,RP);
 }
 
 
-std::vector<std::vector<Tile>>* TerrainConstructor::ConstructTerrainFromData(std::string fileData, RessourcePack& RP)
+std::vector<std::vector<Tile*>>* TerrainConstructor::ConstructTerrainFromData(std::string fileData, RessourcePack& RP)
 {
     std::vector<std::string> fileDataParsed = split(fileData, " ");
     std::tuple<int, int> size = std::tuple<int, int>(stoi(fileDataParsed[0]), stoi(fileDataParsed[1]));
     void* memoryAloc = malloc(sizeof(Tile) * std::get<0>(size) * std::get<1>(size));
-    Terrain = new (memoryAloc) std::vector<std::vector<Tile>>();
+    Terrain = new (memoryAloc) std::vector<std::vector<Tile*>>();
     uint32_t cpt = 2;
     for (uint32_t x = 0; x < std::get<0>(size); ++x) {
-        std::vector<Tile> subres;
+        std::vector<Tile*> subres;
         for (uint32_t y = 0; y < std::get<1>(size); ++y) {
             bool isInData = false;
             if(cpt != fileDataParsed.size()){
                  isInData = stoi(fileDataParsed[cpt + 1]) == x && stoi(fileDataParsed[cpt + 2]) == y;
                 if (isInData) {
                     if (stoi(fileDataParsed[cpt]) > 0) {
-                        sf::IntRect rect(stoi(fileDataParsed[cpt]), stoi(fileDataParsed[cpt + 1]), BLOCKWIDTH, BLOCKWIDTH);
-                        Element* e = new Element(stoi(fileDataParsed[cpt + 1]), stoi(fileDataParsed[cpt + 2]), rect, RP.getImg(stoi(fileDataParsed[cpt])));
-                        subres.push_back((Tile)*e);
+                        sf::IntRect rect(stoi(fileDataParsed[cpt]), stoi(fileDataParsed[cpt + 1]), BLOCKHEIGHT, BLOCKWIDTH);
+                        Element* e = new Element(stoi(fileDataParsed[cpt + 1])* BLOCKHEIGHT, stoi(fileDataParsed[cpt + 2])*BLOCKWIDTH, rect, RP.getImg(stoi(fileDataParsed[cpt])));
+                        subres.push_back(e);
                     }
                     else {
                         //tmp
-                        subres.push_back(Tile());
+                        Tile *t=  new Tile();
+                        subres.push_back(t);
                     }
                     cpt += 3;
                 }
             }
             if(!isInData) {
-                subres.push_back(Tile());
+                Tile* t = new Tile();
+                subres.push_back(t);
             }
         }
         Terrain->push_back(subres);

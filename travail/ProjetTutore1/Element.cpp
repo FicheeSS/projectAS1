@@ -3,19 +3,18 @@
 
 Element::Element(int xe, int ye, sf::IntRect recte, sf::Image* imge) {
 	if (imge == nullptr) {
-		throw std::runtime_error::runtime_error("Null pointer to img");
+		throw std::runtime_error("Null pointer to img");
 	}
 	rect = recte;
 	x = xe;
 	y = ye;
-	sf::Texture tex;
-	tex.loadFromImage(*imge);
-	sprite->setTextureRect(recte);
-	sprite->setTexture(tex);
+	sf::Texture *tex =  new sf::Texture();
+	tex->loadFromImage(*imge);
+	sprite = new sf::Sprite(*tex,rect);
 	sprite->setPosition(x, y);
 }
 
-void Element::show(sf::RenderWindow window)
+void Element::show(sf::RenderWindow& window)
 {
 	window.draw(*sprite);
 
