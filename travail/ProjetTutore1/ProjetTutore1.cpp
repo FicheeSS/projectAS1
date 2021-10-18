@@ -28,7 +28,7 @@ int main()
         while (window.pollEvent(event))
         {
             switch (event.type) {
-            case sf::Event::Closed:
+            case sf::Event::Closed: [[unlikely]];
                 window.close();
                 break;
             case sf::Event::MouseMoved:
