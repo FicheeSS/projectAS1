@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
-class Tile {
+#include "TerrainElement.h"
+class Tile : public TerrainElement{
 protected:
 	int x;
 	int y;
@@ -11,5 +11,5 @@ protected:
 	//deplace l'élément 
 	void move(int x, int y);
 public:
-	std::string className = "Tile";
+	Tile();
 };

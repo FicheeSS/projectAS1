@@ -1,11 +1,12 @@
 #include "Element.h"
 
 
-Element::Element(int xe, int ye, sf::IntRect recte, const sf::Image & imge) {
+Element::Element(int ye, int xe, sf::IntRect recte, const sf::Image & imge) {
+	type = TerrainElement::Element;
 	rect = recte;
 	x = xe;
 	y = ye;
-	sf::Texture *tex =  new sf::Texture();
+	sf::Texture *tex =  new sf::Texture();//Attention à l'allocation random
 	tex->loadFromImage(imge);
 	sprite = new sf::Sprite(*tex,rect);
 	sprite->setPosition(x, y);

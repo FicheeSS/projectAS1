@@ -7,7 +7,7 @@ void RessourcePack::generateImg(std::string path)
     //Rechercher et charger les images dans le HEAP
     std::vector< boost::filesystem::path> paths;
     boost::filesystem::path full_path(boost::filesystem::current_path());
-    std::cout << "Current path is : " << full_path << std::endl;
+    //std::cout << "Current path is : " << full_path << std::endl;
     path =   full_path.string() + path;
 
     if ( boost::filesystem::exists(path) &&  boost::filesystem::is_directory(path)) {
@@ -21,18 +21,24 @@ void RessourcePack::generateImg(std::string path)
         }
     }
     if (paths.empty()) throw std::invalid_argument("Aucune image n'été trouve");
-    imgLoc = new std::vector<sf::Image>(paths.size());
+    imgLoc = new std::vector<sf::Image*>;
     for ( boost::filesystem::path path : paths) {
-        sf::Image img;
-        if (!img.loadFromFile(path.string())) throw std::invalid_argument("File " + path.string() + "not found"); // on lance une exeption si on n'arrive pas a charger l'image
+        sf::Image *img = new sf::Image();
+        if (!img->loadFromFile(path.string())) throw std::invalid_argument("File " + path.string() + "not found"); // on lance une exeption si on n'arrive pas a charger l'image
         imgLoc->push_back(img); // On charge l'image dans le tableau d'image
     }
 }
 
-sf::Image RessourcePack::getImg(int n) {
-    return imgLoc->at(n);//UHMMM
+RessourcePack::RessourcePack()
+{
+    imgLoc = nullptr;
+}
+
+sf::Image* RessourcePack::getImg(int n) {
+    return imgLoc->at(n);
 };
 
 RessourcePack::~RessourcePack() {
+    //TODO : Iter imgloc
     delete(imgLoc);
 }

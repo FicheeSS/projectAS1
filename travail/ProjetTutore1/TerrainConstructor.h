@@ -6,24 +6,23 @@
 #include "Tile.h"
 #include <fstream>
 #include <filesystem>
+#include "TerrainElement.h"
+#include "Levels.h"
+#include "Player.h"
 #define BLOCKWIDTH 50
-#define BLOCKHEIGHT 10
+#define BLOCKHEIGHT 40
 class TerrainConstructor {
 private:
-	std::vector<std::vector<Tile*>>* ConstructTerrainFromData(std::string,RessourcePack&);
-	std::vector<std::vector<Tile*>>* Terrain ;
+	Player* p;
+	std::vector<std::vector<TerrainElement*>*>* Terrain ;
 public:
+	TerrainConstructor();
 	/*
-	* \brief prends un filepath correspondant a un fichier .dat tel que décrit si dessous et place à l'aide de RP les élément dans le tableau
-	*
-	* */
-
-	/*
-	* Les fichiers.dat sont formater de tel façon (séparation par un seul espace entre les chiffres !!!)
-	*example.dat
-	* 10 10  //taille// 0 0 9 1 0 8  // definie deux élément l'un sur l'autre à la postion 0 en bas à gauche
 
 	*/
-	std::vector<std::vector<Tile*>>* ConstructTerrain(std::string filePath, RessourcePack& RP);
+	inline Player* getPlayer() {
+		return p;
+	}
+	std::vector<std::vector<TerrainElement*>*>* ConstructTerrainFromLevelFile(int level,  RessourcePack& RP);
 	~TerrainConstructor();
 };
