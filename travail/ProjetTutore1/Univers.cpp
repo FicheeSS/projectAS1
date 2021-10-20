@@ -3,6 +3,7 @@
 void Univers::animate()
 {
     while (RW->isOpen()) {
+        RW->clear();
         sf::Event event;
         while (RW->pollEvent(event))
         {
@@ -27,7 +28,6 @@ void Univers::animate()
                     break;
                 case sf::Keyboard::Down:
                     dir = std::make_tuple(Player::DOWN, std::get<1>(dir));
-
                     break;
                 }
             case sf::Event::KeyReleased:
@@ -56,7 +56,7 @@ void Univers::animate()
                 case TerrainElement::Tile:
                     break;
                 case TerrainElement::Element:
-                    Element* e = static_cast<Element*>(t);
+                    Block* e = static_cast<Block*>(t);
                     e->show(*RW);
                     break;
 
@@ -64,7 +64,6 @@ void Univers::animate()
             }
         }
         p->show(*RW);
-        RW->clear();
         RW->display();
     }
 }

@@ -19,7 +19,7 @@ void Player::show(sf::RenderWindow& window)
 
 }
 
-void Player::move(std::tuple<dir_t, dir_t> dir)
+void Player::move(std::tuple<dir_t, dir_t>  &dir)
 {
 	switch (std::get<0>(dir)) {
 	case UP :

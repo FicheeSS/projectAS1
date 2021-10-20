@@ -18,7 +18,7 @@ std::vector<std::vector<TerrainElement*>*>* TerrainConstructor::ConstructTerrain
         for (uint32_t y = 0; y < lvl->at(x).size();y++) {
             if (lvl->at(x)[y] > 0) {
                 sf::IntRect rect(x, y, BLOCKWIDTH, BLOCKHEIGHT);
-                Element* e = new Element(x * BLOCKHEIGHT, y * BLOCKWIDTH, rect, *RP.getImg(lvl->at(x)[y]));
+                Block* e = new Block(x * BLOCKHEIGHT, y * BLOCKWIDTH, rect, *RP.getImg(lvl->at(x)[y]));
                 ligne->push_back(e);
             }
             else if (lvl->at(x)[y]==-1) {

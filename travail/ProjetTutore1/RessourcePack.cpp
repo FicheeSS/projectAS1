@@ -39,6 +39,8 @@ sf::Image* RessourcePack::getImg(int n) {
 };
 
 RessourcePack::~RessourcePack() {
-    //TODO : Iter imgloc
+    for (uint32_t i = 0; i < imgLoc->size(); i++) {
+        delete(imgLoc->at(i));
+    }
     delete(imgLoc);
 }

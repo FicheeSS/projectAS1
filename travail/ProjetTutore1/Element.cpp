@@ -1,7 +1,7 @@
 #include "Element.h"
 
 
-Element::Element(int ye, int xe, sf::IntRect recte, const sf::Image & imge) {
+Block::Block(int ye, int xe, sf::IntRect recte, const sf::Image & imge) {
 	type = TerrainElement::Element;
 	rect = recte;
 	x = xe;
@@ -12,7 +12,7 @@ Element::Element(int ye, int xe, sf::IntRect recte, const sf::Image & imge) {
 	sprite->setPosition(x, y);
 }
 
-void Element::show(sf::RenderWindow& window)
+void Block::show(sf::RenderWindow& window)
 {
 	window.draw(*sprite);
 
@@ -20,7 +20,7 @@ void Element::show(sf::RenderWindow& window)
 
 
 
-std::tuple<int, int> Element::collide(Element e)
+std::tuple<int, int> Block::collide(Block e)
 {
 	sf::IntRect intersec;
 	return (e.rect.intersects(rect, intersec)) ? std::tuple<int, int>(intersec.left, intersec.top) : std::tuple<int,int>(-1,-1) ;

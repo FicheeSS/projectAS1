@@ -11,9 +11,9 @@ private:
 	TerrainConstructor TC;
 public :
 	Terrain(RessourcePack* RP);
+	//Charge le terrain selon le niveau dans l'objet
 	void loadTerrain(int level);
-	std::vector<std::vector<TerrainElement*>*>* getTerrain();
-	inline Player* getPlayer() {
-		return TC.getPlayer();
-	}
+	//
+	inline std::vector<std::vector<TerrainElement*>*>* getTerrain() { return terrain; }
+	inline Player* getPlayer() {return TC.getPlayer();}
 };

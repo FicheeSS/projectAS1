@@ -11,6 +11,7 @@ private:
 	std::vector<std::vector<TerrainElement*>*>* terrain;
 	Player* p;
 public:
+	//Constructeur par defaut pour l'univers
 	Univers(RessourcePack *rp,sf::RenderWindow*);
 	void animate();
 };

@@ -23,6 +23,7 @@ public:
 	inline Player* getPlayer() {
 		return p;
 	}
+	//Renvoie le Terrain construit à l'aide du numéro du niveau
 	std::vector<std::vector<TerrainElement*>*>* ConstructTerrainFromLevelFile(int level,  RessourcePack& RP);
 	~TerrainConstructor();
 };

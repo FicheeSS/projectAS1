@@ -12,7 +12,3 @@ void Terrain::loadTerrain(int level)
 	
 }
 
-std::vector<std::vector<TerrainElement*>*>* Terrain::getTerrain()
-{
-	return terrain;
-}
