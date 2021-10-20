@@ -23,16 +23,23 @@ void Player::move(std::tuple<dir_t, dir_t>  &dir)
 {
 	switch (std::get<0>(dir)) {
 	case UP :
+		if (y > 0) {
+			y--;
+		}
 		break;
 	case DOWN:
+		y++;
 		break;
 	}
 	switch (std::get<1>(dir)) {
 	case LEFT:
+		if(x>0){
 		x--;
+		}
 		break;
 	case RIGHT:
 		x++;
 		break;
 	}
+	sprite->setPosition(x, y);
 }

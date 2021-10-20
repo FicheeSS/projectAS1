@@ -7,6 +7,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Projet Tutoré Groupe 1");
+    window.setVerticalSyncEnabled(true);//MDR ALED
 
     RessourcePack RP;
     try{

@@ -15,40 +15,43 @@ void Univers::animate()
                 ////std::cout << "new mouse x: " << event.mouseMove.x << std::endl;
                 ////std::cout << "new mouse y: " << event.mouseMove.y << std::endl;
                 break;
-            case sf::Event::KeyPressed:
-                switch (event.key.code) {
-                case sf::Keyboard::Left:
-                    dir = std::make_tuple(std::get<0>(dir), Player::LEFT);
-                    break;
-                case sf::Keyboard::Right:
-                    dir = std::make_tuple(std::get<0>(dir), Player::RIGHT);
-                    break;
-                case sf::Keyboard::Up:
-                    dir = std::make_tuple(Player::UP, std::get<1>(dir));
-                    break;
-                case sf::Keyboard::Down:
-                    dir = std::make_tuple(Player::DOWN, std::get<1>(dir));
-                    break;
-                }
-            case sf::Event::KeyReleased:
-                switch (event.key.code) {
-                case sf::Keyboard::Left:
-                    dir = std::make_tuple(std::get<0>(dir), Player::NONE);
-                    break;
-                case sf::Keyboard::Right:
-                    dir = std::make_tuple(std::get<0>(dir), Player::NONE);
-                    break;
-                case sf::Keyboard::Up:
-                    dir = std::make_tuple(Player::NONE, std::get<1>(dir));
-                    break;
-                case sf::Keyboard::Down:
-                    dir = std::make_tuple(Player::NONE, std::get<1>(dir));
-                    break;
+            }
+        if (event.type == sf::Event::KeyPressed) {
+            switch (event.key.code) {
+            case sf::Keyboard::Left:
+                dir = std::make_tuple(std::get<0>(dir), Player::LEFT);
+                break;
+            case sf::Keyboard::Right:
+                dir = std::make_tuple(std::get<0>(dir), Player::RIGHT);
+                break;
+            case sf::Keyboard::Up:
+                dir = std::make_tuple(Player::UP, std::get<1>(dir));
+                break;
+            case sf::Keyboard::Down:
+                dir = std::make_tuple(Player::DOWN, std::get<1>(dir));
+                break;
+            }
+        }
 
-                }
+        else if (event.type == sf::Event::KeyReleased) {
+            switch (event.key.code) {
+            case sf::Keyboard::Left:
+                dir = std::make_tuple(std::get<0>(dir), Player::NONE);
+                break;
+            case sf::Keyboard::Right:
+                dir = std::make_tuple(std::get<0>(dir), Player::NONE);
+                break;
+            case sf::Keyboard::Up:
+                dir = std::make_tuple(Player::NONE, std::get<1>(dir));
+                break;
+            case sf::Keyboard::Down:
+                dir = std::make_tuple(Player::NONE, std::get<1>(dir));
+                break;
 
             }
         }
+    }
+
         p->move(dir);
         for (auto ligne : *terrain) {
             for (TerrainElement* t : *ligne) {
