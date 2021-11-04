@@ -7,28 +7,29 @@ std::vector<std::vector<TerrainElement*>*>* TerrainConstructor::ConstructTerrain
     case 1 :
         lvl = &level1;
         break;
-    default:
+    default:       //Ajouter ici si ils ont veux d'autres niveaux
         throw std::invalid_argument("Le niveau demandé n'existe pas");
-        break;
-    //Ajouter ici si ils ont veux d'autres niveaux
     }
-    Terrain = new std::vector<std::vector<TerrainElement*>*>;
-    for (uint32_t x = 0; x < lvl->size(); x++) {
+    Terrain = new std::vector<std::vector<TerrainElement*>*>; // faire une rotation de 90 clockwise
+    for (uint32_t y = 0; y < lvl->at(0).size(); y++) {
         std::vector<TerrainElement*>* ligne = new std::vector<TerrainElement*>;
-        for (uint32_t y = 0; y < lvl->at(x).size();y++) {
+        for (uint32_t x = 0; x < lvl->size(); x++) {
             if (lvl->at(x)[y] > 0) {
                 sf::IntRect rect(x, y, BLOCKWIDTH, BLOCKHEIGHT);
                 Block* e = new Block(x * BLOCKHEIGHT, y * BLOCKWIDTH, rect, *RP.getImg(lvl->at(x)[y]));
                 ligne->push_back(e);
             }
-            else if (lvl->at(x)[y]==-1) {
+            else if (lvl->at(x)[y] == -1) {
                 sf::IntRect rect(x, y, BLOCKWIDTH, BLOCKHEIGHT);
-                 p = new Player(x * BLOCKHEIGHT, y * BLOCKWIDTH, rect, *RP.getImg(0));
-            }
-            else{
+                p = new Player(x * BLOCKHEIGHT, y * BLOCKWIDTH, rect, *RP.getImg(0));
                 TerrainElement* t = new TerrainElement();
                 ligne->push_back(t);
             }
+            else {
+                TerrainElement* t = new TerrainElement();
+                ligne->push_back(t);
+            }
+
         }
         Terrain->push_back(ligne);
     }

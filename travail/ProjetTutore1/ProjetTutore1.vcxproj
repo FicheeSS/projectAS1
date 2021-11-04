@@ -94,6 +94,7 @@
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <AssemblerOutput>All</AssemblerOutput>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

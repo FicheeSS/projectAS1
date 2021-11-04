@@ -6,6 +6,7 @@ void Univers::animate()
     float lastTime = 0;
     sf::Font font;
     font.loadFromFile("DS-DIGI.TTF");
+
     while (RW->isOpen()) {
         RW->clear();
         sf::Event event;
@@ -14,6 +15,10 @@ void Univers::animate()
             switch (event.type) {
             case sf::Event::Closed: [[unlikely]];
                 RW->close();
+                break;
+            case sf::Event::MouseMoved:
+                ////std::cout << "new mouse x: " << event.mouseMove.x << std::endl;
+                ////std::cout << "new mouse y: " << event.mouseMove.y << std::endl;
                 break;
             }
         if (event.type == sf::Event::KeyPressed) {
@@ -51,12 +56,7 @@ void Univers::animate()
             }
         }
     }
-        /*
-        sf::RectangleShape Bound(sf::Vector2f(0, 0));
-        Bound.setSize(sf::Vector2f(ter->getSizeofX() * BLOCKWIDTH, ter->getSizeofY() * BLOCKHEIGHT));
-        Bound.setPosition(0, 0);
-        RW->draw(Bound);
-        */
+
         p->move(dir);
         for (auto ligne : *terrain) {
             for (TerrainElement* t : *ligne) {
@@ -71,35 +71,15 @@ void Univers::animate()
                 }
             }
         }
-        p->setCollide(isCollidingWithGround(ter, p));
         p->show(*RW);
+        float currentTime = clock.restart().asMilliseconds();
+        float fps = 1.f / (currentTime - lastTime);
+        lastTime = currentTime;
+        sf::Text FPS(std::to_string(fps), font, 25);
+        //RW->draw(FPS);
         RW->display();
     }
 }
-bool isCollidingWithGround(Terrain* t, Player *p)
-{
-    sf::IntRect rec = p->getRect();
-    int x = ceil(rec.left / BLOCKWIDTH);
-    int y = ceil(rec.top / BLOCKHEIGHT);
-    TerrainElement* tE = nullptr;
-    int maxY = t->getSizeofY();
-    if (y < t->getSizeofY() -1 ) {
-        y++;
-    }
-    try {
-        tE = t->getElementAtPos(x, y); // Il faudra trouver pourquoi ca marche pas correctement suce
-    }
-    catch (std::out_of_range e) {
-        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
-        return false;
-    }
-    if (tE->getType() == TerrainElement::Element) {
-        return true;
-       }
-    return false;
-
-}
-
 Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
 {   
     RW = rw;
@@ -111,9 +91,8 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
         std::cerr << e.what() << std::endl;
         return;
     }
-    ter = new Terrain(RP);
-    ter->loadTerrain(1);
-    terrain = ter->getTerrain();
-    p = ter->getPlayer();
-    p->setTerrainBoundaries(ter->getSizeofX() * BLOCKWIDTH, ter->getSizeofY()* BLOCKHEIGHT);
+    t = new Terrain(RP);
+    t->loadTerrain(1);
+    terrain = t->getTerrain();
+    p = t->getPlayer();
 }

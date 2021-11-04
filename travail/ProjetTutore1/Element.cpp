@@ -20,8 +20,8 @@ void Block::show(sf::RenderWindow& window)
 
 
 
-std::tuple<int, int> Block::collide(Block e)
+std::tuple<int, int> Block::collide(sf::IntRect e)
 {
 	sf::IntRect intersec;
-	return (e.rect.intersects(rect, intersec)) ? std::tuple<int, int>(intersec.left, intersec.top) : std::tuple<int,int>(-1,-1) ;
+	return (e.intersects(rect, intersec)) ? std::tuple<int, int>(intersec.left, intersec.top) : std::tuple<int,int>(-1,-1) ;
 }

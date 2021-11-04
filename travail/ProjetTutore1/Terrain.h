@@ -16,4 +16,7 @@ public :
 	//
 	inline std::vector<std::vector<TerrainElement*>*>* getTerrain() { return terrain; }
 	inline Player* getPlayer() {return TC.getPlayer();}
+	inline TerrainElement* getElementAtPos(int x, int y) { return terrain->at(x)->at(y); }
+	inline unsigned int getSizeofY() { return terrain->at(0)->size(); }
+	inline unsigned int getSizeofX() { return terrain->size(); }
 };
