@@ -14,7 +14,7 @@ int main()
 {
     /// Ecrane principale
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT), "Projet jeux video",sf::Style::Default);
-
+    window.setFramerateLimit(144);
     bool entiteRight, entiteLeft, entiteUp, entiteDown = false;
 
     Entite joueur;
