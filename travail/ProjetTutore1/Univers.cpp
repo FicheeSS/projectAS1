@@ -71,7 +71,8 @@ void Univers::animate()
                 }
             }
         }
-        p->setCollide(isCollidingWithGround(ter, p));
+        bool listCollision[4] = { isCollidingWithGround (ter,p),isCollidingWithHead(ter,p),isCollidingWithSideRight(ter,p),isCollidingWithSideLeft(ter,p) };
+        p->setCollide(listCollision);
         p->show(*RW);
         RW->display();
     }
@@ -87,7 +88,70 @@ bool isCollidingWithGround(Terrain* t, Player *p)
         y++;
     }
     try {
-        tE = t->getElementAtPos(x, y); // Il faudra trouver pourquoi ca marche pas correctement suce
+        tE = t->getElementAtPos(x, y); 
+    }
+    catch (std::out_of_range e) {
+        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
+        return false;
+    }
+    if (tE->getType() == TerrainElement::Element) {
+        return true;
+       }
+    return false;
+
+}
+bool isCollidingWithHead(Terrain* t, Player *p)
+{
+    sf::IntRect rec = p->getRect();
+    int x = ceil(rec.left / BLOCKWIDTH);
+    int y = ceil(rec.top / BLOCKHEIGHT);
+    TerrainElement* tE = nullptr;
+    int maxY = t->getSizeofY();
+    try {
+        tE = t->getElementAtPos(x, y); 
+    }
+    catch (std::out_of_range e) {
+        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
+        return false;
+    }
+    if (tE->getType() == TerrainElement::Element) {
+        return true;
+       }
+    return false;
+
+}
+bool isCollidingWithSideRight(Terrain* t, Player *p)
+{
+    sf::IntRect rec = p->getRect();
+    int x = ceil(rec.left / BLOCKWIDTH);
+    int y = ceil(rec.top / BLOCKHEIGHT);
+    TerrainElement* tE = nullptr;
+    int maxY = t->getSizeofY();
+    if (x < t->getSizeofX() -1 )  {
+        x++;
+    }
+    try {
+        tE = t->getElementAtPos(x, y); 
+    }
+    catch (std::out_of_range e) {
+        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
+        return false;
+    }
+    if (tE->getType() == TerrainElement::Element) {
+        return true;
+       }
+    return false;
+
+}
+bool isCollidingWithSideLeft(Terrain* t, Player *p)
+{
+    sf::IntRect rec = p->getRect();
+    int x = ceil(rec.left / BLOCKWIDTH);
+    int y = ceil(rec.top / BLOCKHEIGHT);
+    TerrainElement* tE = nullptr;
+    int maxY = t->getSizeofY();
+    try {
+        tE = t->getElementAtPos(x, y); 
     }
     catch (std::out_of_range e) {
         std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;

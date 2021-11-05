@@ -17,5 +17,7 @@ public:
 	void animate();
 };
 bool isCollidingWithGround(Terrain* t, Player* p);
-
+bool isCollidingWithHead(Terrain* t, Player* p);
+bool isCollidingWithSideRight(Terrain* t, Player* p);
+bool isCollidingWithSideLeft(Terrain* t, Player* p);
 

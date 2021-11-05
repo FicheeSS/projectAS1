@@ -12,7 +12,6 @@ Player::Player(int xp, int yp, sf::IntRect recte ,const sf::Image& imge)
 	sprite->setPosition(x, y);
 	maxX = 0;
 	maxY = 0;
-	isOnTerrain = false;
 }
 
 void Player::show(sf::RenderWindow& window)
@@ -25,24 +24,24 @@ void Player::move(std::tuple<dir_t, dir_t>  &dir)
 {
 	switch (std::get<0>(dir)) {
 	case UP :
-		if (y > 0 ) {
+		if (y > 0 and !collisionList[1]) {
 			y--;
 		}
 		break;
 	case DOWN:
-		if (y < maxY - rect.height and !isOnTerrain) {
+		if (y < maxY - rect.height and !collisionList[0]) {
 			y++;
 		}
 		break;
 	}
 	switch (std::get<1>(dir)) {
 	case LEFT:
-		if(x>0){
+		if(x>0 and !collisionList[3]){
 		x--;
 		}
 		break;
 	case RIGHT:
-		if (x < maxX - rect.width) {
+		if (x < maxX - rect.width and !collisionList[2]) {
 
 			x++;
 		}
@@ -57,3 +56,4 @@ void Player::setTerrainBoundaries(int xb, int yb)
 	maxX = xb;
 	maxY = yb;
 }
+

@@ -8,7 +8,7 @@ private:
 	sf::IntRect  rect;
 	int maxX;
 	int maxY;
-	bool isOnTerrain;
+	bool *collisionList ;
 
 public :
 	//Correspond aux différents sens dans lequel va se déplacer le player
@@ -21,5 +21,5 @@ public :
 	inline sf::IntRect getRect() { return rect; }
 	void move(std::tuple<dir_t,dir_t>&);
 	void setTerrainBoundaries(int, int);
-	inline void setCollide(bool col) { isOnTerrain = col; }
+	inline void setCollide(bool *col) { collisionList = col; }
 };
