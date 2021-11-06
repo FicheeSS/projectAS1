@@ -94,6 +94,7 @@
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <AssemblerOutput>All</AssemblerOutput>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,19 +147,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Element.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProjetTutore1.cpp" />
     <ClCompile Include="RessourcePack.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainConstructor.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Univers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Element.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Levels.h" />
     <ClInclude Include="RessourcePack.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainConstructor.h" />
+    <ClInclude Include="TerrainElement.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Univers.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include=".vcpkg_deps.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

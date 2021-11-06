@@ -1,17 +1,18 @@
 #include "Element.h"
 
 
-Element::Element(int xe, int ye, sf::IntRect recte, const sf::Image & imge) {
+Block::Block(int ye, int xe, sf::IntRect recte, const sf::Image & imge) {
+	type = TerrainElement::Element;
 	rect = recte;
 	x = xe;
 	y = ye;
-	sf::Texture *tex =  new sf::Texture();
+	sf::Texture *tex =  new sf::Texture();//Attention à l'allocation random
 	tex->loadFromImage(imge);
 	sprite = new sf::Sprite(*tex,rect);
 	sprite->setPosition(x, y);
 }
 
-void Element::show(sf::RenderWindow& window)
+void Block::show(sf::RenderWindow& window)
 {
 	window.draw(*sprite);
 
@@ -19,8 +20,8 @@ void Element::show(sf::RenderWindow& window)
 
 
 
-std::tuple<int, int> Element::collide(Element e)
+std::tuple<int, int> Block::collide(sf::IntRect e)
 {
 	sf::IntRect intersec;
-	return (e.rect.intersects(rect, intersec)) ? std::tuple<int, int>(intersec.left, intersec.top) : std::tuple<int,int>(-1,-1) ;
+	return (e.intersects(rect, intersec)) ? std::tuple<int, int>(intersec.left, intersec.top) : std::tuple<int,int>(-1,-1) ;
 }

@@ -7,3 +7,8 @@ void Tile::move(int xi, int yi)
 	y = yi;
 }
 
+Tile::Tile()
+{
+	type = TerrainElement::Tile;
+}
+
