@@ -4,7 +4,6 @@
 #include <iostream>
 #include "entite.h"
 
-//using namespace sf;
 using namespace std;
 
 uint32_t const WINDOW_WIDTH=800;
@@ -29,54 +28,17 @@ int main()
     {
         /// Sortie du jeux : fermeture de l'écrane
         sf::Event event;
+
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            entiteRight=true;
-        }
-        else
-        {
-            entiteRight=false;
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            entiteLeft=true;
-        }
-        else
-        {
-            entiteLeft=false;
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            entiteUp=true;
-        }
-
-        else
-        {
-            entiteUp=false;
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            entiteDown=true;
-        }
-
-        else
-        {
-            entiteDown=false;
-        }
-
-        joueur.update(entiteUp,entiteDown,entiteLeft,entiteRight);
+        keyboardInput(entiteRight, entiteLeft, entiteUp, entiteDown, joueur, 2, true);
 
         std::cout << "   y : " << joueur.getY() << " // x : " << joueur.getX() << std::endl;
+
 
         /// Clear screen
 
