@@ -21,7 +21,7 @@ std::vector<std::vector<TerrainElement*>*>* TerrainConstructor::ConstructTerrain
             }
             else if (lvl->at(x)[y] == -1) {
                 sf::IntRect rect(x, y, BLOCKWIDTH, BLOCKHEIGHT);
-                p = new Player(x * BLOCKHEIGHT, y * BLOCKWIDTH, rect, *RP.getImg(0));
+                p = new Player(x * BLOCKHEIGHT, y * BLOCKWIDTH, rect, *RP.getPlayerImg());
                 TerrainElement* t = new TerrainElement();
                 ligne->push_back(t);
             }

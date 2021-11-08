@@ -1,5 +1,6 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include "RessourcePack.h"
 class Player{
 private:
 	int x;
@@ -9,12 +10,14 @@ private:
 	int maxX;
 	int maxY;
 	bool *collisionList ;
+	std::vector<sf::Image*>* listImg;
+	sf::Texture* tex;
 
 public :
 	//Correspond aux différents sens dans lequel va se déplacer le player
 	enum dir_t { NONE, LEFT, RIGHT, UP, DOWN };
 	//Constructeur complet du Player
-	Player(int, int, sf::IntRect ,const sf::Image&);
+	Player(int, int, sf::IntRect ,std::vector<sf::Image*>&);
 	//Methode d'affihcage du Player
 	void show(sf::RenderWindow& window);
 	//Déplace le Player selon un tuple avec la direction <UP/DOWN/NONE,LEFT/RIGHT/NONE>

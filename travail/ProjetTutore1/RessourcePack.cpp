@@ -25,13 +25,32 @@ void RessourcePack::generateImg(std::string path)
     for ( boost::filesystem::path path : paths) {
         sf::Image *img = new sf::Image();
         if (!img->loadFromFile(path.string())) throw std::invalid_argument("File " + path.string() + "not found"); // on lance une exeption si on n'arrive pas a charger l'image
-        imgLoc->push_back(img); // On charge l'image dans le tableau d'image
+        std::regex nb(".*([0-9])*.png");
+        if (std::regex_match(path.string(),nb) ) {
+            imgLoc->push_back(img); // On charge l'image dans le tableau d'image
+        }
+        else {
+            if (path.string() == "left.png") {
+                imgLocPlayer->at(LEFT)= img;
+            }
+            else if (path.string() == "right.png") {
+                imgLocPlayer->at(RIGHT) = img;
+
+            }
+            else if (path.string() == "up.png") {
+                imgLocPlayer->at(UP) = img;
+            }
+            else  {
+                imgLocPlayer->at(DOWN) = img;
+            }
+        }
     }
 }
 
 RessourcePack::RessourcePack()
 {
     imgLoc = nullptr;
+    imgLoc = new std::vector<sf::Image*>(4);
 }
 
 sf::Image* RessourcePack::getImg(int n) {
