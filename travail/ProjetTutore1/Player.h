@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "RessourcePack.h"
+#include <SFML/Audio.hpp>
 class Player{
 private:
 	int x;
@@ -12,6 +13,7 @@ private:
 	bool *collisionList ;
 	std::vector<sf::Image*>* listImg;
 	sf::Texture* tex;
+	sf::SoundBuffer* sound;
 
 public :
 	//Correspond aux différents sens dans lequel va se déplacer le player
