@@ -12,35 +12,112 @@ Entite::Entite()
     float _yDep=0;
 }
 
-void Entite::update(bool up, bool down, bool left, bool right)
+void keyboardInput(bool entiteRight, bool entiteLeft, bool entiteUp, bool entiteDown, Entite& joueur, float vitesse, bool syndromeCoordinationOppose)
 {
-    if(up && !down)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        _yDep=1;
-    }
-    else if (down && !up)
-    {
-        _yDep=-1;
+        entiteRight=true;
     }
     else
     {
-        _yDep=0;
-    }
-    if(left && !right)
-    {
-        _xDep=-1;
-    }
-    else if(right && !left)
-    {
-        _xDep=1;
-    }
-    else
-    {
-        _xDep=0;
+        entiteRight=false;
     }
 
-    _x+=_xDep;
-    _y+=_yDep;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        entiteLeft=true;
+    }
+    else
+    {
+        entiteLeft=false;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        entiteUp=true;
+    }
+
+    else
+    {
+        entiteUp=false;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        entiteDown=true;
+    }
+
+    else
+    {
+        entiteDown=false;
+    }
+
+    joueur.update(entiteUp,entiteDown,entiteLeft,entiteRight, vitesse, syndromeCoordinationOppose);
+}
+
+void Entite::update(bool up, bool down, bool left, bool right, float vitesse, bool syndromeCoordinationOppose)
+{
+    if(syndromeCoordinationOppose)
+    {
+        if(up && !down)
+        {
+            _yDep=vitesse;
+        }
+        else if (down && !up)
+        {
+            _yDep=-vitesse;
+        }
+        else
+        {
+            _yDep=0;
+        }
+        if(left && !right)
+        {
+            _xDep=-vitesse;
+        }
+        else if(right && !left)
+        {
+            _xDep=vitesse;
+        }
+        else
+        {
+            _xDep=0;
+        }
+
+        _x+=_xDep;
+        _y+=_yDep;
+    }
+
+    else
+    {
+        if(up && !down)
+        {
+            _yDep=-vitesse;
+        }
+        else if (down && !up)
+        {
+            _yDep=vitesse;
+        }
+        else
+        {
+            _yDep=0;
+        }
+        if(left && !right)
+        {
+            _xDep=-vitesse;
+        }
+        else if(right && !left)
+        {
+            _xDep=vitesse;
+        }
+        else
+        {
+            _xDep=0;
+        }
+
+        _x+=_xDep;
+        _y+=_yDep;
+    }
 }
 
 float Entite::getX()const
@@ -59,13 +136,6 @@ float Entite::getYDep()const
 {
     return _yDep;
 }
-
-
-
-
-
-
-
 
 
 
