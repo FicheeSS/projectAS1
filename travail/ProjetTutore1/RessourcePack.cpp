@@ -20,7 +20,7 @@ void RessourcePack::generateImg(std::string path)
             }
         }
     }
-    if (paths.empty()) throw std::invalid_argument("Aucune image n'été trouve");
+    if (paths.empty()) throw std::invalid_argument("Aucune image n't trouve");
     imgLoc = new std::vector<sf::Image*>;
     for ( boost::filesystem::path path : paths) {
         sf::Image *img = new sf::Image();
@@ -50,7 +50,7 @@ void RessourcePack::generateImg(std::string path)
 RessourcePack::RessourcePack()
 {
     imgLoc = nullptr;
-    imgLoc = new std::vector<sf::Image*>(4);
+    imgLocPlayer = new std::vector<sf::Image*>(4);
 }
 
 sf::Image* RessourcePack::getImg(int n) {
