@@ -1,2 +1,6 @@
 .vs/
+<<<<<<< Updated upstream
 vcpkg_installed/
+=======
+vcpkg_installed/
+>>>>>>> Stashed changes
