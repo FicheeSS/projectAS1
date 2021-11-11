@@ -60,7 +60,6 @@ void Univers::animate()
         Bound.setPosition(0, 0);
         RW->draw(Bound);
         */
-        p->move(dir);
         for (auto ligne : *terrain) {
             for (TerrainElement* t : *ligne) {
                 switch (t->getType()) {
@@ -76,6 +75,7 @@ void Univers::animate()
         }
         bool listCollision[4] = { isCollidingWithGround (ter,p),isCollidingWithHead(ter,p),isCollidingWithSideRight(ter,p),isCollidingWithSideLeft(ter,p) };
         p->setCollide(listCollision);
+        p->move(dir);
         p->show(*RW);
         RW->display();
     }

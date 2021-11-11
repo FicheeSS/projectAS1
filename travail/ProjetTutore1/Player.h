@@ -2,6 +2,8 @@
 #include<SFML/Graphics.hpp>
 #include "RessourcePack.h"
 #include <SFML/Audio.hpp>
+
+#define ACCEL 5
 class Player{
 private:
 	int x;
@@ -14,6 +16,8 @@ private:
 	std::vector<sf::Image*>* listImg;
 	sf::Texture* tex;
 	sf::SoundBuffer* sound;
+	float yDelta = 0;
+	bool canJump = true;
 
 public :
 	//Correspond aux différents sens dans lequel va se déplacer le player

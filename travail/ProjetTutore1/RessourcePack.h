@@ -25,13 +25,18 @@ private:
 public:
 	enum places {LEFT=0,RIGHT=1,UP=2,DOWN=3};
 	RessourcePack();
+	//charge les images depuis le path specifié en paramtètre
 	void generateImg(std::string path);
 	sf::Image* getImg(int n);
 	//On vide les tableaux déclarés dans le HEAP
 	~RessourcePack();
 	inline std::vector<sf::Image*>* getPlayerImg() { return imgLocPlayer; };
+	//comme generateImg pour le son
 	void generateAudioData(std::string path);
+	//Va chercher le sound qui correspond au nom qu'on lui à donner comme fichier
+	//EX : fichier "boing.flac" -> boing
 	sf::SoundBuffer* getSoundBufferByName(std::string);
+	//renvoie la music pour le niveau donner en paramètre ou si le niveau est en dehors du tableau la music la plus proche
 	inline sf::Music* getLevelMusic(int lvl) 
 	{ return (lvl >= musicList->size()) ? musicList->at(musicList->size() - 1) : musicList->at(lvl); };
 
