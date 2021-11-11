@@ -11,6 +11,7 @@ private:
 	sf::RenderWindow* RW;
 	std::vector<std::vector<TerrainElement*>*>* terrain;
 	Player* p;
+	int lvl = 1 ;
 public:
 	//Constructeur par defaut pour l'univers
 	Univers(RessourcePack* rp, sf::RenderWindow*);

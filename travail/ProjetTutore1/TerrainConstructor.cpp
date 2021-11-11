@@ -10,7 +10,7 @@ std::vector<std::vector<TerrainElement*>*>* TerrainConstructor::ConstructTerrain
     default:       //Ajouter ici si ils ont veux d'autres niveaux
         throw std::invalid_argument("Le niveau demandé n'existe pas");
     }
-    Terrain = new std::vector<std::vector<TerrainElement*>*>; // faire une rotation de 90 clockwise
+    Terrain = new std::vector<std::vector<TerrainElement*>*>; 
     for (uint32_t y = 0; y < lvl->at(0).size(); y++) {
         std::vector<TerrainElement*>* ligne = new std::vector<TerrainElement*>;
         for (uint32_t x = 0; x < lvl->size(); x++) {

@@ -6,6 +6,9 @@ void Univers::animate()
     float lastTime = 0;
     sf::Font font;
     font.loadFromFile("DS-DIGI.TTF");
+    auto currentMusic = RP->getLevelMusic(lvl - 1);
+    currentMusic->play();
+    currentMusic->setLoop(true);
     while (RW->isOpen()) {
         RW->clear();
         sf::Event event;
@@ -57,7 +60,6 @@ void Univers::animate()
         Bound.setPosition(0, 0);
         RW->draw(Bound);
         */
-        p->move(dir);
         for (auto ligne : *terrain) {
             for (TerrainElement* t : *ligne) {
                 switch (t->getType()) {
@@ -73,6 +75,7 @@ void Univers::animate()
         }
         bool listCollision[4] = { isCollidingWithGround (ter,p),isCollidingWithHead(ter,p),isCollidingWithSideRight(ter,p),isCollidingWithSideLeft(ter,p) };
         p->setCollide(listCollision);
+        p->move(dir);
         p->show(*RW);
         RW->display();
     }
@@ -170,6 +173,7 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     RP = rp;
     try {
         RP->generateImg("\\Ressources\\img");
+        RP->generateAudioData("\\Ressources\\audio");
     }
     catch (std::invalid_argument e) {
         std::cerr << e.what() << std::endl;

@@ -23,10 +23,17 @@ void Player::show(sf::RenderWindow& window)
 
 void Player::move(std::tuple<dir_t, dir_t>  &dir)
 {
+	if (yDelta > 0 && !collisionList[1]) {
+		y -= yDelta;
+		yDelta -= 0.2f;
+	}
+	else if(!collisionList[0]){
+		y += 1;
+	}
 	switch (std::get<0>(dir)) {
 	case UP :
-		if (y > 0 and !collisionList[1]) {
-			y--;
+		if (y > 0 and collisionList[0]) {
+			yDelta = ACCEL;
 			tex->loadFromImage(*listImg->at(RessourcePack::UP));
 		}
 		break;
