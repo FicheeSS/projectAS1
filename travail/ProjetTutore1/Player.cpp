@@ -13,12 +13,23 @@ Player::Player(int xp, int yp, sf::IntRect recte , std::vector<sf::Image*>& imge
 	sprite->setPosition(x, y);
 	maxX = 0;
 	maxY = 0;
+	sizeX = tex->getSize().x;
+	sizeY = tex->getSize().y;
+	delete(tex);
+}
+
+Player::~Player()
+{
+	delete(sprite);
 }
 
 void Player::show(sf::RenderWindow& window)
 {
 	window.draw(*sprite);
-
+	sf::RectangleShape Bound(sf::Vector2f(0, 0));
+	Bound.setSize(sf::Vector2f(sizeX,sizeY));
+	Bound.setPosition(x, y);
+	window.draw(Bound);
 }
 
 void Player::move(std::tuple<dir_t, dir_t>  &dir)

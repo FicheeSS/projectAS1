@@ -3,7 +3,7 @@
 #include "RessourcePack.h"
 #include <SFML/Audio.hpp>
 
-#define ACCEL 5
+#define ACCEL 3
 class Player{
 private:
 	int x;
@@ -18,6 +18,8 @@ private:
 	sf::SoundBuffer* sound;
 	float yDelta = 0;
 	bool canJump = true;
+	unsigned int sizeX;
+	unsigned int sizeY;
 
 public :
 	//Correspond aux différents sens dans lequel va se déplacer le player
@@ -31,4 +33,7 @@ public :
 	void move(std::tuple<dir_t,dir_t>&);
 	void setTerrainBoundaries(int, int);
 	inline void setCollide(bool *col) { collisionList = col; }
+	inline void setSize(int x, int y) { sizeX = x; sizeY = y; };
+	inline int getSizeX() { return sizeX; };
+	inline int getSizeY() { return sizeY; };
 };

@@ -10,6 +10,7 @@ public:
 		std::string className = "Element";
 		//Constructeur std
 		Block(int x, int y, sf::IntRect recte, const sf::Image& img);
+		~Block();
 		//Affichage de l'élément
 		void show(sf::RenderWindow &window);
 		//Renvoie un tuple avec la collision des deux éléments : revoie <-1,-1> si il n'y a pas de collision 

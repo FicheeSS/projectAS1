@@ -13,6 +13,7 @@ public :
 	Terrain(RessourcePack* RP);
 	//Charge le terrain selon le niveau dans l'objet
 	void loadTerrain(int level);
+	~Terrain();
 	//
 	inline std::vector<std::vector<TerrainElement*>*>* getTerrain() { return terrain; }
 	inline Player* getPlayer() {return TC.getPlayer();}

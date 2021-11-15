@@ -7,8 +7,13 @@ void Univers::animate()
     sf::Font font;
     font.loadFromFile("DS-DIGI.TTF");
     auto currentMusic = RP->getLevelMusic(lvl - 1);
+    try{
     currentMusic->play();
     currentMusic->setLoop(true);
+    }
+    catch(std::exception e){
+        currentMusic->stop();
+    }
     while (RW->isOpen()) {
         RW->clear();
         sf::Event event;
@@ -73,7 +78,11 @@ void Univers::animate()
                 }
             }
         }
-        bool listCollision[4] = { isCollidingWithGround (ter,p),isCollidingWithHead(ter,p),isCollidingWithSideRight(ter,p),isCollidingWithSideLeft(ter,p) };
+        bool listCollision[4] = { 
+            isCollidingWithGround (ter,p) || isCollidingWithSideRight(ter,p),
+            isCollidingWithHead(ter,p) && !isCollidingWithSideLeft(ter,p),
+            isCollidingWithSideRight(ter,p),
+            isCollidingWithSideLeft(ter,p) };
         p->setCollide(listCollision);
         p->move(dir);
         p->show(*RW);
@@ -83,8 +92,8 @@ void Univers::animate()
 bool isCollidingWithGround(Terrain* t, Player *p)
 {
     sf::IntRect rec = p->getRect();
-    int x = ceil(rec.left / BLOCKWIDTH);
-    int y = ceil(rec.top / BLOCKHEIGHT);
+    int x = floor((rec.left + BLOCKWIDTH/2)/ BLOCKWIDTH);
+    int y = ceil((rec.top + BLOCKHEIGHT/2)/ BLOCKHEIGHT );
     TerrainElement* tE = nullptr;
     int maxY = t->getSizeofY();
     if (y < t->getSizeofY() -1 ) {
@@ -126,11 +135,11 @@ bool isCollidingWithHead(Terrain* t, Player *p)
 bool isCollidingWithSideRight(Terrain* t, Player *p)
 {
     sf::IntRect rec = p->getRect();
-    int x = ceil(rec.left / BLOCKWIDTH);
+    int x = ceil(rec.left  / BLOCKWIDTH);
     int y = ceil(rec.top / BLOCKHEIGHT);
     TerrainElement* tE = nullptr;
     int maxY = t->getSizeofY();
-    if (x < t->getSizeofX() -1 )  {
+    if (x < t->getSizeofX() - 1) {
         x++;
     }
     try {
@@ -149,7 +158,7 @@ bool isCollidingWithSideRight(Terrain* t, Player *p)
 bool isCollidingWithSideLeft(Terrain* t, Player *p)
 {
     sf::IntRect rec = p->getRect();
-    int x = ceil(rec.left / BLOCKWIDTH);
+    int x = ceil(rec.left  / BLOCKWIDTH);
     int y = ceil(rec.top / BLOCKHEIGHT);
     TerrainElement* tE = nullptr;
     int maxY = t->getSizeofY();
@@ -183,5 +192,5 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     ter->loadTerrain(1);
     terrain = ter->getTerrain();
     p = ter->getPlayer();
-    p->setTerrainBoundaries(ter->getSizeofX() * BLOCKWIDTH, ter->getSizeofY()* BLOCKHEIGHT);
+    p->setTerrainBoundaries(ter->getSizeofX() * BLOCKWIDTH, ter->getSizeofY() * BLOCKHEIGHT);
 }

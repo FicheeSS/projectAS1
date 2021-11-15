@@ -12,3 +12,12 @@ void Terrain::loadTerrain(int level)
 	
 }
 
+Terrain::~Terrain()
+{
+	for (auto line : *terrain) {
+		for (auto elem : *line) {
+			delete(elem);
+		}
+	}
+}
+

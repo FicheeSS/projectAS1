@@ -17,7 +17,10 @@ void Block::show(sf::RenderWindow& window)
 	window.draw(*sprite);
 
 }
-
+Block::~Block ()
+{
+	delete(sprite);
+}
 
 
 std::tuple<int, int> Block::collide(sf::IntRect e)
