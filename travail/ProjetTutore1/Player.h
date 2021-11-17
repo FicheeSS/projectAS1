@@ -36,4 +36,5 @@ public :
 	inline void setSize(int x, int y) { sizeX = x; sizeY = y; };
 	inline int getSizeX() { return sizeX; };
 	inline int getSizeY() { return sizeY; };
+	~Player();
 };
