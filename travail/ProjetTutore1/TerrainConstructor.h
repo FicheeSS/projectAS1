@@ -2,19 +2,17 @@
 #include <string>
 #include <vector>
 #include "RessourcePack.h"
-#include "Element.h"
-#include "Tile.h"
 #include <fstream>
 #include <filesystem>
-#include "TerrainElement.h"
 #include "Levels.h"
+#include "Block.h"
+#include "Commons.h"
 #include "Player.h"
-#define BLOCKWIDTH 50
-#define BLOCKHEIGHT 40
 class TerrainConstructor {
 private:
 	Player* p;
-	std::vector<std::vector<TerrainElement*>*>* Terrain ;
+	std::vector<Block*>* Terrain ;
+
 public:
 	TerrainConstructor();
 	/*
@@ -24,6 +22,8 @@ public:
 		return p;
 	}
 	//Renvoie le Terrain construit à l'aide du numéro du niveau
-	std::vector<std::vector<TerrainElement*>*>* ConstructTerrainFromLevelFile(int level,  RessourcePack& RP);
+	std::vector<Block*>* ConstructTerrainFromLevelFile(int level,  RessourcePack& RP);
 	~TerrainConstructor();
+	unsigned int sizeX;
+	unsigned int sizeY;
 };

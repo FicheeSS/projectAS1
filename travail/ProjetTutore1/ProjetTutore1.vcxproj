@@ -150,24 +150,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Element.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProjetTutore1.cpp" />
     <ClCompile Include="RessourcePack.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainConstructor.cpp" />
-    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Univers.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Element.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Commons.h" />
     <ClInclude Include="Levels.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="RessourcePack.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainConstructor.h" />
-    <ClInclude Include="TerrainElement.h" />
-    <ClInclude Include="Tile.h" />
     <ClInclude Include="Univers.h" />
   </ItemGroup>
   <ItemGroup>

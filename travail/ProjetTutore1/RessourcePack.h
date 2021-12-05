@@ -30,7 +30,7 @@ public:
 	sf::Image* getImg(int n);
 	//On vide les tableaux déclarés dans le HEAP
 	~RessourcePack();
-	inline std::vector<sf::Image*>* getPlayerImg() { return imgLocPlayer; };
+	sf::Image* getPlayerImg() { return imgLocPlayer->at(0); };
 	//comme generateImg pour le son
 	void generateAudioData(std::string path);
 	//Va chercher le sound qui correspond au nom qu'on lui à donner comme fichier

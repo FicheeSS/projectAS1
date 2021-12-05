@@ -1,5 +1,7 @@
 #include "Univers.h"
 
+
+
 void Univers::animate()
 {
     sf::Clock clock;
@@ -8,10 +10,9 @@ void Univers::animate()
     font.loadFromFile("DS-DIGI.TTF");
     auto currentMusic = RP->getLevelMusic(lvl - 1);
     try{
-    currentMusic->play();
-    currentMusic->setLoop(true);
-    }
-    catch(std::exception e){
+        currentMusic->play();
+        currentMusic->setLoop(true);
+    }catch(std::exception e){
         currentMusic->stop();
     }
     while (RW->isOpen()) {
@@ -24,157 +25,86 @@ void Univers::animate()
                 RW->close();
                 break;
             }
-        if (event.type == sf::Event::KeyPressed) {
-            switch (event.key.code) {
-            case sf::Keyboard::Left:
-                dir = std::make_tuple(std::get<0>(dir), Player::LEFT);
-                break;
-            case sf::Keyboard::Right:
-                dir = std::make_tuple(std::get<0>(dir), Player::RIGHT);
-                break;
-            case sf::Keyboard::Up:
-                dir = std::make_tuple(Player::UP, std::get<1>(dir));
-                break;
-            case sf::Keyboard::Down:
-                dir = std::make_tuple(Player::DOWN, std::get<1>(dir));
-                break;
-            }
-        }
-
-        else if (event.type == sf::Event::KeyReleased) {
-            switch (event.key.code) {
-            case sf::Keyboard::Left:
-                dir = std::make_tuple(std::get<0>(dir), Player::NONE);
-                break;
-            case sf::Keyboard::Right:
-                dir = std::make_tuple(std::get<0>(dir), Player::NONE);
-                break;
-            case sf::Keyboard::Up:
-                dir = std::make_tuple(Player::NONE, std::get<1>(dir));
-                break;
-            case sf::Keyboard::Down:
-                dir = std::make_tuple(Player::NONE, std::get<1>(dir));
-                break;
-
-            }
-        }
-    }
-        /*
-        sf::RectangleShape Bound(sf::Vector2f(0, 0));
-        Bound.setSize(sf::Vector2f(ter->getSizeofX() * BLOCKWIDTH, ter->getSizeofY() * BLOCKHEIGHT));
-        Bound.setPosition(0, 0);
-        RW->draw(Bound);
-        */
-        for (auto ligne : *terrain) {
-            for (TerrainElement* t : *ligne) {
-                switch (t->getType()) {
-                case TerrainElement::Tile:
+            if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                case sf::Keyboard::Left:
+                    dir = std::make_tuple(std::get<0>(dir), DIRDEP::LEFT);
                     break;
-                case TerrainElement::Element:
-                    Block* e = static_cast<Block*>(t);
-                    e->show(*RW);
+                case sf::Keyboard::Right:
+                    dir = std::make_tuple(std::get<0>(dir), DIRDEP::RIGHT);
+                    break;
+                case sf::Keyboard::Up:
+                    dir = std::make_tuple(DIRDEP::UP, std::get<1>(dir));
+                    break;
+                case sf::Keyboard::Down:
+                    dir = std::make_tuple(DIRDEP::DOWN, std::get<1>(dir));
+                    break;
+                }
+            }
+            else if (event.type == sf::Event::KeyReleased) {
+                switch (event.key.code) {
+                case sf::Keyboard::Left:
+                    dir = std::make_tuple(std::get<0>(dir), DIRDEP::NONE);
+                    break;
+                case sf::Keyboard::Right:
+                    dir = std::make_tuple(std::get<0>(dir), DIRDEP::NONE);
+                    break;
+                case sf::Keyboard::Up:
+                    dir = std::make_tuple(DIRDEP::NONE, std::get<1>(dir));
+                    break;
+                case sf::Keyboard::Down:
+                    dir = std::make_tuple(DIRDEP::NONE, std::get<1>(dir));
                     break;
 
                 }
             }
         }
-        bool listCollision[4] = { 
-            isCollidingWithGround (ter,p) || isCollidingWithSideRight(ter,p),
-            isCollidingWithHead(ter,p) && !isCollidingWithSideLeft(ter,p),
-            isCollidingWithSideRight(ter,p),
-            isCollidingWithSideLeft(ter,p) };
-        p->setCollide(listCollision);
-        p->move(dir);
-        p->show(*RW);
+        for (auto t : *ter->getTerrain()) {
+            t->show(RW);
+        }
+            
+        std::vector<bool>* listCollision = collision(p);
+        p->move(dir,*listCollision);
+        p->show(RW);
         RW->display();
     }
 }
-bool isCollidingWithGround(Terrain* t, Player *p)
-{
-    sf::IntRect rec = p->getRect();
-    int x = floor((rec.left + BLOCKWIDTH/2)/ BLOCKWIDTH);
-    int y = ceil((rec.top + BLOCKHEIGHT/2)/ BLOCKHEIGHT );
-    TerrainElement* tE = nullptr;
-    int maxY = t->getSizeofY();
-    if (y < t->getSizeofY() -1 ) {
-        y++;
-    }
-    try {
-        tE = t->getElementAtPos(x, y); 
-    }
-    catch (std::out_of_range e) {
-        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
-        return false;
-    }
-    if (tE->getType() == TerrainElement::Element) {
-        return true;
-       }
-    return false;
 
-}
-bool isCollidingWithHead(Terrain* t, Player *p)
-{
-    sf::IntRect rec = p->getRect();
-    int x = ceil(rec.left / BLOCKWIDTH);
-    int y = ceil(rec.top / BLOCKHEIGHT);
-    TerrainElement* tE = nullptr;
-    int maxY = t->getSizeofY();
-    try {
-        tE = t->getElementAtPos(x, y); 
+std::vector<bool>* Univers::collision(Player* p) {
+    for (uint32_t i = 0; i < res->size(); i++) {
+        res->at(i) = false;
     }
-    catch (std::out_of_range e) {
-        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
-        return false;
-    }
-    if (tE->getType() == TerrainElement::Element) {
-        return true;
-       }
-    return false;
+    for (auto t : *ter->getTerrain()) {
+        Block* e = static_cast<Block*>(t);
+        if (e->collide(p->getRect())) {
+            //On suppose que tous les obj font la même taille
+            int xb = e->getX();
+            int yb = e->getY();
+            int xp = p->getX();
+            int yp = p->getY();
+            if (xp > xb + BLOCKWIDTH/2) {
+                res->at(COLDIR::RIGHT) = true;
+            }
+            else if (xp+ BLOCKWIDTH <= xb + BLOCKWIDTH/2 ) {
+                res->at(COLDIR::LEFT) = true;
+            }
+            else if (yb + BLOCKHEIGHT <= yp +BLOCKHEIGHT/2) {
+                res->at(COLDIR::TOP) = true;
+            }
+            else if (yb  >= yp + BLOCKHEIGHT/2) {
+                res->at(COLDIR::BOTTOM) = true;
+            }
+            else {
+            std:printf("WHY GOD\n");
 
+            }
+        }
+    }
+        std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(BOTTOM) ? "true" : "false", res->at(UP) ? "true" : "false", res->at(ATLEFT) ? "true" : "false", res->at(ATRIGHT) ? "true" : "false");
+        return res;
+  
 }
-bool isCollidingWithSideRight(Terrain* t, Player *p)
-{
-    sf::IntRect rec = p->getRect();
-    int x = ceil(rec.left  / BLOCKWIDTH);
-    int y = ceil(rec.top / BLOCKHEIGHT);
-    TerrainElement* tE = nullptr;
-    int maxY = t->getSizeofY();
-    if (x < t->getSizeofX() - 1) {
-        x++;
-    }
-    try {
-        tE = t->getElementAtPos(x, y); 
-    }
-    catch (std::out_of_range e) {
-        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
-        return false;
-    }
-    if (tE->getType() == TerrainElement::Element) {
-        return true;
-       }
-    return false;
 
-}
-bool isCollidingWithSideLeft(Terrain* t, Player *p)
-{
-    sf::IntRect rec = p->getRect();
-    int x = ceil(rec.left  / BLOCKWIDTH);
-    int y = ceil(rec.top / BLOCKHEIGHT);
-    TerrainElement* tE = nullptr;
-    int maxY = t->getSizeofY();
-    try {
-        tE = t->getElementAtPos(x, y); 
-    }
-    catch (std::out_of_range e) {
-        std::cerr << e.what() << " at values "<< x <<" , "<< y  << std::endl;
-        return false;
-    }
-    if (tE->getType() == TerrainElement::Element) {
-        return true;
-       }
-    return false;
-
-}
 
 Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
 {   
@@ -190,7 +120,5 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     }
     ter = new Terrain(RP);
     ter->loadTerrain(1);
-    terrain = ter->getTerrain();
     p = ter->getPlayer();
-    p->setTerrainBoundaries(ter->getSizeofX() * BLOCKWIDTH, ter->getSizeofY() * BLOCKHEIGHT);
 }

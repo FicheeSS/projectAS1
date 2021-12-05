@@ -1,86 +1,56 @@
 #include "Player.h"
 
-Player::Player(int xp, int yp, sf::IntRect recte , std::vector<sf::Image*>& imge)
+Player::Player(int x, int y, sf::Image* img)
 {
-	rect = recte;
-	x = yp;
-	y = xp;
-	tex = new sf::Texture();//Attention à l'allocation random
-	listImg = &imge;
-	tex->loadFromImage(*listImg->at(RessourcePack::RIGHT));
-	sprite = new sf::Sprite(*tex, rect);
-	sprite->setTexture(*tex);
-	sprite->setPosition(x, y);
-	maxX = 0;
-	maxY = 0;
-	sizeX = tex->getSize().x;
-	sizeY = tex->getSize().y;
-	delete(tex);
+	_x = x;
+	_y = y;
+	_rect = new sf::IntRect(x, y, BLOCKWIDTH, BLOCKHEIGHT);
+	sf::IntRect* texrect = new sf::IntRect(0, 0, BLOCKWIDTH, BLOCKHEIGHT);
+	_tex = new sf::Texture();
+	_tex->loadFromImage(*img);
+	_sprite = new sf::Sprite(*_tex ,* texrect);
+
+}
+
+void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
+{
+	if (cols.at(COLDIR::BOTTOM)) { //On est sur le sol 
+		_accel = 0; // On verifie que l'accelération est bien nul
+	}else {
+		_y += _accel; // sinon on accelere vers le sol
+		_accel += DECEL;
+	}
+	switch (std::get<0>(dir)) {
+	case DIRDEP::UP:
+		if (cols[COLDIR::BOTTOM] && !cols[COLDIR::TOP]) {//on est sur le sol et il n'y a pas de mur au dessus
+			_accel = -MAXACC;
+			_y += _accel;
+		}
+		break;
+	case DIRDEP::DOWN:
+ 		break;
+
+	}switch (std::get<1>(dir)) {
+	case DIRDEP::LEFT:
+		if (_x > 0 && !cols[COLDIR::LEFT]) {
+			_x--;
+		}
+		break;
+	case DIRDEP::RIGHT:
+		if (!cols[COLDIR::RIGHT]) { //TODO : Ajouter la vérification du max 
+			_x++;
+		}
+		break;
+	}
+	_sprite->setPosition(_x, _y);
+	_rect->top = _y;
+	_rect->left = _x;
+
 }
 
 Player::~Player()
 {
-	delete(sprite);
+	delete(_sprite);
+	delete(_tex);
+	delete(_rect);
 }
-
-void Player::show(sf::RenderWindow& window)
-{
-	window.draw(*sprite);
-	sf::RectangleShape Bound(sf::Vector2f(0, 0));
-	Bound.setSize(sf::Vector2f(sizeX,sizeY));
-	Bound.setPosition(x, y);
-	window.draw(Bound);
-}
-
-void Player::move(std::tuple<dir_t, dir_t>  &dir)
-{
-	if (yDelta > 0 && !collisionList[1]) {
-		y -= yDelta;
-		yDelta -= 0.2f;
-	}
-	else if(!collisionList[0]){
-		y += 1;
-	}
-	switch (std::get<0>(dir)) {
-	case UP :
-		if (y > 0 and collisionList[0]) {
-			yDelta = ACCEL;
-			tex->loadFromImage(*listImg->at(RessourcePack::UP));
-		}
-		break;
-	case DOWN:
-		if (y < maxY - rect.height and !collisionList[0]) {
-			y++;
-			tex->loadFromImage(*listImg->at(RessourcePack::DOWN));
-
-		}
-		break;
-	}
-	switch (std::get<1>(dir)) {
-	case LEFT:
-		if(x>0 and !collisionList[3]){
-		x--;
-		tex->loadFromImage(*listImg->at(RessourcePack::LEFT));
-
-		}
-		break;
-	case RIGHT:
-		if (x < maxX - rect.width and !collisionList[2]) {
-
-			x++;
-			tex->loadFromImage(*listImg->at(RessourcePack::RIGHT));
-
-		}
-		break;
-	}
-	sprite->setTexture(*tex);
-	sprite->setPosition(x, y);
-	rect = sf::IntRect(x, y, rect.width, rect.height);
-}
-
-void Player::setTerrainBoundaries(int xb, int yb)
-{
-	maxX = xb;
-	maxY = yb;
-}
-
