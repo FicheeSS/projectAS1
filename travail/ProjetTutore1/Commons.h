@@ -1,8 +1,9 @@
 #pragma once
 #define BLOCKWIDTH 50
 #define BLOCKHEIGHT 40
-#define MAXACC 4
+#define MAXACC 5
 #define DECEL 0.2f
+#define DEBUG true
 
  enum class DIRDEP {LEFT,RIGHT,UP,DOWN,NONE};
 

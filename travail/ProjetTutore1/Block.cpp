@@ -16,11 +16,17 @@ Block::Block(int x, int y, sf::Image* img)
 void Block::show(sf::RenderWindow* rw) {
 	// définit un rectangle de 120x50
 	/*
-	sf::RectangleShape rectangle(sf::Vector2f(BLOCKWIDTH, BLOCKHEIGHT));
 
-	rectangle.setPosition(sf::Vector2f(_x, _y));
-	rw->draw(rectangle);
 	*/
+	#ifdef DEBUG
+	if (colliding) {
+		sf::RectangleShape rectangle(sf::Vector2f(BLOCKWIDTH, BLOCKHEIGHT));
+		rectangle.setPosition(sf::Vector2f(_x, _y));
+		rw->draw(rectangle);
+		colliding = false;
+		return;
+	}
+	#endif // DEBUG
 	rw->draw(*_sprite);
 }
 

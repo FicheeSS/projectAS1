@@ -23,6 +23,7 @@ void Univers::animate()
             switch (event.type) {
             case sf::Event::Closed: [[unlikely]];
                 RW->close();
+                currentMusic->stop();
                 break;
             }
             if (event.type == sf::Event::KeyPressed) {
@@ -75,32 +76,37 @@ std::vector<bool>* Univers::collision(Player* p) {
         res->at(i) = false;
     }
     for (auto t : *ter->getTerrain()) {
+
         Block* e = static_cast<Block*>(t);
         if (e->collide(p->getRect())) {
+            #ifdef DEBUG
+            e->colliding = true;
+            #endif // DEBUG
             //On suppose que tous les obj font la même taille
             int xb = e->getX();
             int yb = e->getY();
             int xp = p->getX();
             int yp = p->getY();
-            if (xp > xb + BLOCKWIDTH/2) {
-                res->at(COLDIR::RIGHT) = true;
-            }
-            else if (xp+ BLOCKWIDTH <= xb + BLOCKWIDTH/2 ) {
-                res->at(COLDIR::LEFT) = true;
-            }
-            else if (yb + BLOCKHEIGHT <= yp +BLOCKHEIGHT/2) {
+             if (yb + BLOCKHEIGHT <= yp + BLOCKHEIGHT / 4 ) {
                 res->at(COLDIR::TOP) = true;
-            }
-            else if (yb  >= yp + BLOCKHEIGHT/2) {
+             }
+            else if (yb >= yp + BLOCKHEIGHT / 4 ) {
                 res->at(COLDIR::BOTTOM) = true;
             }
+            else if (xp > xb + BLOCKWIDTH/4) {
+                res->at(COLDIR::LEFT) = true;
+            }
+            else if (xp+ BLOCKWIDTH <= xb + BLOCKWIDTH/4 ) {
+                res->at(COLDIR::RIGHT) = true;
+            }
+
             else {
-            std:printf("WHY GOD\n");
+                 res->at(COLDIR::TOP) = true;
 
             }
         }
     }
-        std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(BOTTOM) ? "true" : "false", res->at(UP) ? "true" : "false", res->at(ATLEFT) ? "true" : "false", res->at(ATRIGHT) ? "true" : "false");
+        std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
         return res;
   
 }

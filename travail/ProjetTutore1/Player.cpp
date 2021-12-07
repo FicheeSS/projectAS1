@@ -14,10 +14,15 @@ Player::Player(int x, int y, sf::Image* img)
 
 void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 {
-	if (cols.at(COLDIR::BOTTOM)) { //On est sur le sol 
+	if (cols.at(COLDIR::BOTTOM) ) { //On est sur le sol 
 		_accel = 0; // On verifie que l'accelération est bien nul
+		_y-=0.5f; // On remonte légérement vers le plafond pour eviter de fusionner avec le sol
 	}else {
 		_y += _accel; // sinon on accelere vers le sol
+		_accel += DECEL;
+	}
+	if (cols.at(COLDIR::TOP)) {
+		_y += _accel +2; // si on se tape la tête dans le plafond
 		_accel += DECEL;
 	}
 	switch (std::get<0>(dir)) {
