@@ -11,6 +11,8 @@ private:
 	Player* p;
 	int lvl = 1 ;
 	std::vector<bool>* res = new std::vector<bool>(4);
+	sf::Sprite* background = nullptr;
+	sf::Texture* backgroundTex = nullptr;
 	
 public:
 	//Constructeur par defaut pour l'univers

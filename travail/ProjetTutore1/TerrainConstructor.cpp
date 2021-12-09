@@ -21,7 +21,7 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
                 Terrain->push_back(e);
             }
             else if (line[x] == -1) {
-                p = new Player(x * BLOCKWIDTH, y * BLOCKHEIGHT, RP.getPlayerImg());
+                p = new Player(x * BLOCKWIDTH, y * BLOCKHEIGHT, RP.getPlayerImgList());
             }
         }
         }

@@ -3,7 +3,8 @@
 #define BLOCKHEIGHT 40
 #define MAXACC 5
 #define DECEL 0.2f
-#define DEBUG true
+//#define DEBUG
+
 
  enum class DIRDEP {LEFT,RIGHT,UP,DOWN,NONE};
 

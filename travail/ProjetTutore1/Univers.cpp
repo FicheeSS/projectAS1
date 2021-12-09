@@ -7,7 +7,7 @@ void Univers::animate()
     sf::Clock clock;
     float lastTime = 0;
     sf::Font font;
-    font.loadFromFile("DS-DIGI.TTF");
+    font.loadFromFile("\\Ressources\\DS-DIGI.TTF");
     auto currentMusic = RP->getLevelMusic(lvl - 1);
     try{
         currentMusic->play();
@@ -17,6 +17,9 @@ void Univers::animate()
     }
     while (RW->isOpen()) {
         RW->clear();
+        if (background != nullptr) {
+            RW->draw(*background);
+        }
         sf::Event event;
         while (RW->pollEvent(event))
         {
@@ -120,6 +123,7 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     try {
         RP->generateImg("\\Ressources\\img");
         RP->generateAudioData("\\Ressources\\audio");
+        RP->generateBackgrounds("\\Ressources\\img\\backgrounds");
     }
     catch (std::invalid_argument e) {
         std::cerr << e.what() << std::endl;
@@ -128,6 +132,9 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     ter = new Terrain(RP);
     ter->loadTerrain(1);
     p = ter->getPlayer();
+    backgroundTex = new sf::Texture();
+    backgroundTex->loadFromImage(*RP->getImgBackground(1));
+    background = new sf::Sprite(*backgroundTex);
     sf::View View(sf::FloatRect(0, 0, ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT));
     std::printf("Current Viewport : %d x %d", ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
     rw->setView(View);

@@ -8,15 +8,17 @@ private:
 	int _x = 0;
 	int _y = 0;
 	sf::IntRect* _rect;
-	sf::Sprite* _sprite;
-	sf::Texture* _tex;
+	std::vector <sf::Sprite*>* _sprite;
+	std::vector<sf::Texture*>* _tex;
 	float _accel = 0;
 	int _maxX;
+	enum places { LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3 };
+	int _place = 0;
 	
 public:
-	Player(int x, int y, sf::Image*);
+	Player(int x, int y, std::vector<sf::Image*>* imgs);
 	void move(std::tuple<DIRDEP, DIRDEP>, std::vector<bool>);
-	inline void show(sf::RenderWindow* rw) {rw->draw(*_sprite);};	
+	inline void show(sf::RenderWindow* rw) {rw->draw(*_sprite->at(_place));};	
 	~Player();
 	inline sf::IntRect getRect() { return *_rect; };
 	inline int getX() { return _x; };
