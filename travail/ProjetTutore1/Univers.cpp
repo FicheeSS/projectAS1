@@ -106,7 +106,7 @@ std::vector<bool>* Univers::collision(Player* p) {
             }
         }
     }
-        std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
+       // std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
         return res;
   
 }
@@ -116,6 +116,7 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
 {   
     RW = rw;
     RP = rp;
+
     try {
         RP->generateImg("\\Ressources\\img");
         RP->generateAudioData("\\Ressources\\audio");
@@ -127,4 +128,8 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     ter = new Terrain(RP);
     ter->loadTerrain(1);
     p = ter->getPlayer();
+    sf::View View(sf::FloatRect(0, 0, ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT));
+    std::printf("Current Viewport : %d x %d", ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
+    rw->setView(View);
+    p->setMaxX(ter->getSizeY() * BLOCKWIDTH);
 }

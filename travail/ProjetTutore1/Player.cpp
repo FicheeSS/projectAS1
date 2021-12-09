@@ -9,6 +9,7 @@ Player::Player(int x, int y, sf::Image* img)
 	_tex = new sf::Texture();
 	_tex->loadFromImage(*img);
 	_sprite = new sf::Sprite(*_tex ,* texrect);
+	_maxX = 0;
 
 }
 
@@ -42,7 +43,7 @@ void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 		}
 		break;
 	case DIRDEP::RIGHT:
-		if (!cols[COLDIR::RIGHT]) { //TODO : Ajouter la vérification du max 
+		if (!cols[COLDIR::RIGHT] && _x + BLOCKWIDTH < _maxX) { //TODO : Ajouter la vérification du max 
 			_x++;
 		}
 		break;

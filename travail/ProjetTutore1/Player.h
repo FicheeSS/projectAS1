@@ -11,6 +11,7 @@ private:
 	sf::Sprite* _sprite;
 	sf::Texture* _tex;
 	float _accel = 0;
+	int _maxX;
 	
 public:
 	Player(int x, int y, sf::Image*);
@@ -20,4 +21,5 @@ public:
 	inline sf::IntRect getRect() { return *_rect; };
 	inline int getX() { return _x; };
 	inline int getY() { return _y; };
+	inline void setMaxX(int x) { _maxX = x; };
 };
