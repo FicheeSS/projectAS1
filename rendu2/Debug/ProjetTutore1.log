@@ -1,0 +1,24 @@
+﻿  ProjetTutore1.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(1,13): warning C4081: attendu 'newline' ; rencontré '*'
+  Terrain.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+  TerrainConstructor.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+  Univers.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(1,13): warning C4081: attendu 'newline' ; rencontré '*'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(97,25): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(100,25): warning C4018: '>' : incompatibilité signed/unsigned
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(132,85): warning C4244: 'argument' : conversion de 'unsigned int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(132,55): warning C4244: 'argument' : conversion de 'unsigned int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+  Génération de code en cours...
+  ProjetTutore1.vcxproj -> C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Debug\ProjetTutore1.exe

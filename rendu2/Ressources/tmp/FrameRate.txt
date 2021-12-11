@@ -1,0 +1,5 @@
+colonne 1: 6 fps
+colonne 2: 6 fps
+colonne 3: 4 fps
+colonne 4: //a definir en fonction de la durée du saut
+colonne 5: 2 fps
