@@ -1,0 +1,39 @@
+﻿  ProjetTutore1.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(1,13): warning C4081: attendu 'newline' ; rencontré '*'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,9): error C2062: type 'void' inattendu
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,34): error C2238: jetons inattendus avant ';'
+  Terrain.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+  Univers.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(1,13): warning C4081: attendu 'newline' ; rencontré '*'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,9): error C2062: type 'void' inattendu
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,34): error C2238: jetons inattendus avant ';'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(117,15): error C2039: 'loadTerrain' n'est pas membre de 'Univers'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(5): message : voir la déclaration de 'Univers'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(119,9): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(120,16): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(120,20): error C2541: 'delete' : impossible de détruire des objets qui ne sont pas des pointeurs
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(122,5): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(122,23): error C2065: 'RP' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(123,5): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(124,5): error C2065: 'p' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(124,9): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(125,5): error C2065: 'backgroundTex' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(126,5): error C2065: 'backgroundTex' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(126,35): error C2065: 'RP' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(127,5): error C2065: 'background' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(127,34): error C2065: 'backgroundTex' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,39): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,69): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,32): error C2440: '<function-style-cast>' : impossible de convertir de 'initializer list' en 'sf::FloatRect'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,32): message : Aucun constructeur n'a pu prendre le type de source, ou la résolution de la surcharge du constructeur était ambiguë
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,47): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,77): error C2065: 'ter' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,17): warning C4473: 'printf' : nombre insuffisant d'arguments passés pour la chaîne de format
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,17): message : les espaces réservés et leurs paramètres attendent des arguments 2 variadiques, mais des arguments 0 ont été fournis
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,17): message : l'argument variadique manquant 1 est demandé par la chaîne de format '%d'
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(130,5): error C2065: 'RW' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(131,5): error C2065: 'p' : identificateur non déclaré
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(131,16): error C2065: 'ter' : identificateur non déclaré
