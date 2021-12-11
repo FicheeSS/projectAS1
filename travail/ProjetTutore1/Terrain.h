@@ -17,9 +17,9 @@ public :
 	void loadTerrain(int level);
 	~Terrain();
 	//
-	inline std::vector<Block*>* getTerrain() { return terrain; }
-	inline Player* getPlayer() {return TC.getPlayer();}
-	inline Block* getElementAtPos(int x) { return terrain->at(x); }
+	inline std::vector<Block*>* getTerrain() { return terrain; };
+	inline Player* getPlayer() { return TC.getPlayer(); };
+	inline Block* getElementAtPos(int x) { return terrain->at(x); };
 	inline unsigned int getSize() { return terrain->size(); };
 	inline unsigned int getSizeX() { return TC.sizeX; };
 	inline unsigned int getSizeY() { return TC.sizeY; };

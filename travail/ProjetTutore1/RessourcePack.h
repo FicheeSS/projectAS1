@@ -22,6 +22,7 @@ private:
 	std::vector<std::tuple<std::string,sf::SoundBuffer*>>* soundList;
 	std::vector<sf::Music*>* musicList;
 	std::vector<sf::Image*> *backgroundImages;
+	std::string defaultFolder = "";
 	
 public:
 	enum places {LEFT=0,RIGHT=1,UP=2,DOWN=3};
@@ -43,5 +44,5 @@ public:
 	//renvoie la music pour le niveau donner en paramètre ou si le niveau est en dehors du tableau la music la plus proche
 	inline sf::Music* getLevelMusic(int lvl) 
 	{ return (lvl >= musicList->size()) ? musicList->at(musicList->size() - 1) : musicList->at(lvl); };
-
+	inline void setDefaultFolder(std::string fold) { defaultFolder = fold; };
 };

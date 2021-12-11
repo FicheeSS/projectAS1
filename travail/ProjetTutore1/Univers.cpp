@@ -6,8 +6,8 @@ void Univers::animate()
 {
     sf::Clock clock;
     float lastTime = 0;
-    sf::Font font;
-    font.loadFromFile("\\Ressources\\DS-DIGI.TTF");
+    //sf::Font font;
+    //font.loadFromFile("\\Ressources\\DS-DIGI.TTF");
     auto currentMusic = RP->getLevelMusic(lvl - 1);
     try{
         currentMusic->play();
@@ -90,16 +90,17 @@ std::vector<bool>* Univers::collision(Player* p) {
             int yb = e->getY();
             int xp = p->getX();
             int yp = p->getY();
-             if (yb + BLOCKHEIGHT <= yp + BLOCKHEIGHT / 4 ) {
+            sf::Vector2u size = p->getSize();
+             if (yb + size.y <= yp + size.y / 4 ) {
                 res->at(COLDIR::TOP) = true;
              }
-            else if (yb >= yp + BLOCKHEIGHT / 4 ) {
+            else if (yb >= yp + size.y / 4 ) {
                 res->at(COLDIR::BOTTOM) = true;
             }
-            else if (xp > xb + BLOCKWIDTH/4) {
+            else if (xp > xb + size.x/4) {
                 res->at(COLDIR::LEFT) = true;
             }
-            else if (xp+ BLOCKWIDTH <= xb + BLOCKWIDTH/4 ) {
+            else if (xp+ size.x <= xb + size.x /4 ) {
                 res->at(COLDIR::RIGHT) = true;
             }
 
@@ -112,6 +113,26 @@ std::vector<bool>* Univers::collision(Player* p) {
        // std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
         return res;
   
+}
+
+void Univers::loadTerrain(int lvl)
+{
+    if (ter != nullptr) {
+        delete(ter);
+    }
+    ter = new Terrain(RP);
+    ter->loadTerrain(1);
+    p = ter->getPlayer();
+    backgroundTex = new sf::Texture();
+    sf::Vector2i si = sf::Vector2i(ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
+    backgroundTex->setSmooth(true);
+    backgroundTex->setRepeated(true);
+    backgroundTex->loadFromImage(*RP->getImgBackground(1), sf::IntRect(sf::Vector2i(0,0),si));
+    background = new sf::Sprite(*backgroundTex);
+    sf::View View(sf::FloatRect(0, 0, ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT));
+    std::printf("Current Viewport : %d x %d", ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
+    RW->setView(View);
+    p->setMaxX(ter->getSizeY() * BLOCKWIDTH);
 }
 
 
@@ -129,14 +150,6 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
         std::cerr << e.what() << std::endl;
         return;
     }
-    ter = new Terrain(RP);
-    ter->loadTerrain(1);
-    p = ter->getPlayer();
-    backgroundTex = new sf::Texture();
-    backgroundTex->loadFromImage(*RP->getImgBackground(1));
-    background = new sf::Sprite(*backgroundTex);
-    sf::View View(sf::FloatRect(0, 0, ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT));
-    std::printf("Current Viewport : %d x %d", ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
-    rw->setView(View);
-    p->setMaxX(ter->getSizeY() * BLOCKWIDTH);
+    loadTerrain(1);
+
 }

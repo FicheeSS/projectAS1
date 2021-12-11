@@ -4,13 +4,15 @@ Player::Player(int x, int y, std::vector<sf::Image*>* imgs)
 {
 	_x = x;
 	_y = y;
-	_rect = new sf::IntRect(x, y, BLOCKWIDTH, BLOCKHEIGHT);
-	sf::IntRect* texrect = new sf::IntRect(0, 0, BLOCKWIDTH, BLOCKHEIGHT);
+	_size = imgs->at(0)->getSize();
+	_rect = new sf::IntRect(x, y,_size.x, _size.y);
+	sf::IntRect* texrect = new sf::IntRect(0, 0, _size.x, _size.y);
 	 _tex = new std::vector<sf::Texture*>;
 	_sprite = new std::vector <sf::Sprite*>(4);
 	for (uint32_t i = 0; i < imgs->size(); i++) {
 		sf::Texture *tex = new sf::Texture();
 		tex->loadFromImage(*imgs->at(i));
+		tex->setSmooth(true);
 		_tex->push_back(tex);
 		_sprite->at(i) = new sf::Sprite(*tex, *texrect);
 	}
@@ -23,7 +25,7 @@ void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 
 	if (cols.at(COLDIR::BOTTOM) ) { //On est sur le sol 
 		_accel = 0; // On verifie que l'accelération est bien nul
-		_y-=0.5f; // On remonte légérement vers le plafond pour eviter de fusionner avec le sol
+		_y-=0.1f; // On remonte légérement vers le plafond pour eviter de fusionner avec le sol
 		_place = DOWN;
 	}else {
 		_y += _accel; // sinon on accelere vers le sol
@@ -32,7 +34,7 @@ void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 
 	}
 	if (cols.at(COLDIR::TOP)) {
-		_y += _accel +2; // si on se tape la tête dans le plafond
+		_y += _accel +5; // si on se tape la tête dans le plafond
 		_accel += DECEL;
 		_place = UP;
 	}

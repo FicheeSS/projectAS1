@@ -1,6 +1,6 @@
+#pragma once*
 #include "Terrain.h"
 #include "TerrainConstructor.h"
-#pragma once
 #include<cmath>
 class Univers {
 private:
@@ -8,6 +8,7 @@ private:
 	Terrain* ter;
 	RessourcePack* RP;
 	sf::RenderWindow* RW;
+	
 	Player* p;
 	int lvl = 1 ;
 	std::vector<bool>* res = new std::vector<bool>(4);
@@ -19,5 +20,6 @@ public:
 	Univers(RessourcePack* rp, sf::RenderWindow*);
 	void animate();
 	std::vector<bool>* collision(Player* p);
+	void loadTerrain(int lvl);
 	enum posCol { BOTTOM =0,UP=1,ATLEFT=2,ATRIGHT=3 };
 };

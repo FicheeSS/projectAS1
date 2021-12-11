@@ -5,10 +5,15 @@
 void RessourcePack::generateImg(std::string path)
 {
     //Rechercher et charger les images dans le HEAP
+    if (defaultFolder.empty()) {
+        boost::filesystem::path full_path(boost::filesystem::current_path());
+        //std::cout << "Current path is : " << full_path << std::endl;
+        path = full_path.string() + path;
+    }
+    else {
+        path = defaultFolder + path;
+    }
     std::vector< boost::filesystem::path> paths;
-    boost::filesystem::path full_path(boost::filesystem::current_path());
-    //std::cout << "Current path is : " << full_path << std::endl;
-    path =   full_path.string() + path;
 
     if ( boost::filesystem::exists(path) &&  boost::filesystem::is_directory(path)) {
 
@@ -49,10 +54,15 @@ void RessourcePack::generateImg(std::string path)
 void RessourcePack::generateBackgrounds(std::string path)
 {
     //Rechercher et charger les images dans le HEAP
+    if (defaultFolder.empty()) {
+        boost::filesystem::path full_path(boost::filesystem::current_path());
+        //std::cout << "Current path is : " << full_path << std::endl;
+        path = full_path.string() + path;
+    }
+    else {
+        path = defaultFolder + path;
+    }
     std::vector< boost::filesystem::path> paths;
-    boost::filesystem::path full_path(boost::filesystem::current_path());
-    //std::cout << "Current path is : " << full_path << std::endl;
-    path = full_path.string() + path;
 
     if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
 
@@ -77,11 +87,15 @@ void RessourcePack::generateBackgrounds(std::string path)
 }
 void RessourcePack::generateAudioData(std::string path)
 {
-    //Rechercher et charger les images dans le HEAP
+    if (defaultFolder.empty()) {
+        boost::filesystem::path full_path(boost::filesystem::current_path());
+        //std::cout << "Current path is : " << full_path << std::endl;
+        path = full_path.string() + path;
+    }
+    else {
+        path = defaultFolder + path;
+    }
     std::vector< boost::filesystem::path> paths;
-    boost::filesystem::path full_path(boost::filesystem::current_path());
-    //std::cout << "Current path is : " << full_path << std::endl;
-    path = full_path.string() + path;
 
     if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
 

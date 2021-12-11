@@ -8,6 +8,7 @@ Block::Block(int x, int y, sf::Image* img)
 	sf::IntRect *texrect = new sf::IntRect(0, 0, BLOCKWIDTH, BLOCKHEIGHT);
 	_tex = new sf::Texture();
 	_tex->loadFromImage(*img);
+	_tex->setSmooth(true);
 	_sprite = new sf::Sprite(*_tex, *texrect);
 	//_sprite->setTexture(*_tex);
 	_sprite->setPosition(x, y);

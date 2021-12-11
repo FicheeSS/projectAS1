@@ -14,6 +14,7 @@ private:
 	int _maxX;
 	enum places { LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3 };
 	int _place = 0;
+	sf::Vector2u _size;
 	
 public:
 	Player(int x, int y, std::vector<sf::Image*>* imgs);
@@ -24,4 +25,5 @@ public:
 	inline int getX() { return _x; };
 	inline int getY() { return _y; };
 	inline void setMaxX(int x) { _maxX = x; };
+	inline sf::Vector2u getSize() { return _size; };
 };
