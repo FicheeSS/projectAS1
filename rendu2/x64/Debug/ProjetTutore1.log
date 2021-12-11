@@ -1,0 +1,5 @@
+﻿  Installing vcpkg dependencies to C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\rendu2\vcpkg_installed\x64-windows\
+  "C:\dev\vcpkg\vcpkg.exe" install  --x-wait-for-lock --triplet "x64-windows" --vcpkg-root "C:\dev\vcpkg\\" "--x-manifest-root=C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\rendu2\\" "--x-install-root=C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\rendu2\vcpkg_installed\x64-windows\\" 
+  Detecting compiler hash for triplet x64-windows...
+C:\dev\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets(155,5): warning MSB5021: Arrêt de la tâche exécutable "cmd" et de ses processus enfants, car la génération a été annulée.
+C:\dev\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets(155,5): error MSB4181: la tâche "Exec" a retourné false mais n'a pas journalisé d'erreur.
