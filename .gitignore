@@ -1,3 +1,8 @@
 *.o
 travail/ProjetTutore1/.vs/
 travail/ProjetTutore1/Debug/
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
++.obj
++.cod
++.pdb

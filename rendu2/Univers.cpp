@@ -91,7 +91,7 @@ std::vector<bool>* Univers::collision(Player* p) {
             int xp = p->getX();
             int yp = p->getY();
             sf::Vector2u size = p->getSize();
-             if (yb + size.y <= yp + size.y / 4 ) {
+             if (yb + size.y <= yp + size.y / 3 ) {
                 res->at(COLDIR::TOP) = true;
              }
             else if (yb >= yp + size.y / 4 ) {
