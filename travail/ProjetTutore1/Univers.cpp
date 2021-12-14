@@ -82,37 +82,51 @@ std::vector<bool>* Univers::collision(Player* p) {
 
         Block* e = static_cast<Block*>(t);
         if (e->collide(p->getRect())) {
-            #ifdef DEBUG
-            e->colliding = true;
-            #endif // DEBUG
-            //On suppose que tous les obj font la même taille
-            int xb = e->getX();
-            int yb = e->getY();
-            int xp = p->getX();
-            int yp = p->getY();
-            sf::Vector2u size = p->getSize();
-             if (yb + size.y <= yp + size.y / 4 ) {
-                res->at(COLDIR::TOP) = true;
-             }
-            else if (yb >= yp + size.y / 4 ) {
-                res->at(COLDIR::BOTTOM) = true;
-            }
-            else if (xp > xb + size.x/4) {
-                res->at(COLDIR::LEFT) = true;
-            }
-            else if (xp+ size.x <= xb + size.x /4 ) {
-                res->at(COLDIR::RIGHT) = true;
-            }
+                #ifdef DEBUG
+                e->colliding = true;
+                #endif // DEBUG
+  
+                InteractiveObject* it = dynamic_cast<InteractiveObject*>(e);
+                if (it != nullptr) {
+                    if (it->effectPlayer(p)) {
+                        for (uint32_t i = 0; i < ter->getTerrain()->size();i++) {
+                            if (ter->getElementAtPos(i) == it) {
+                                ter->getTerrain()->erase(ter->getTerrain()->begin() + i);
+                                break;
+                            }
+                        }
+                    }
+                    continue;
 
-            else {
-                 res->at(COLDIR::TOP) = true;
+                }
 
+                int xb = e->getX();
+                int yb = e->getY();
+                int xp = p->getX();
+                int yp = p->getY();
+                sf::Vector2u size = p->getSize();
+                if (yb + size.y <= yp + size.y / 3) {
+                    res->at(COLDIR::TOP) = true;
+                }
+                else if (yb >= yp + size.y / 4) {
+                    res->at(COLDIR::BOTTOM) = true;
+                }
+                else if (xp > xb + size.x / 4) {
+                    res->at(COLDIR::LEFT) = true;
+                }
+                else if (xp + size.x <= xb + size.x / 4) {
+                    res->at(COLDIR::RIGHT) = true;
+                }
+
+                else {
+                    res->at(COLDIR::TOP) = true;
+
+                }
             }
         }
-    }
-       // std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
+        // std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
         return res;
-  
+
 }
 
 void Univers::loadTerrain(int lvl)
@@ -151,5 +165,6 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
         return;
     }
     loadTerrain(1);
+
 
 }

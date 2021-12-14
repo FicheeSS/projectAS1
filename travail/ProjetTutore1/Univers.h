@@ -22,4 +22,5 @@ public:
 	std::vector<bool>* collision(Player* p);
 	void loadTerrain(int lvl);
 	enum posCol { BOTTOM =0,UP=1,ATLEFT=2,ATRIGHT=3 };
+
 };

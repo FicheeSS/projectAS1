@@ -34,6 +34,9 @@ void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 
 	}
 	if (cols.at(COLDIR::TOP)) {
+		if (_accel < 0) {
+			_accel = 0;
+		}
 		_y += _accel +5; // si on se tape la tête dans le plafond
 		_accel += DECEL;
 		_place = UP;

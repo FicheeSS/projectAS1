@@ -8,6 +8,7 @@
 #include "Block.h"
 #include "Commons.h"
 #include "Player.h"
+#include "InteractiveObject.h"
 class TerrainConstructor {
 private:
 	Player* p;

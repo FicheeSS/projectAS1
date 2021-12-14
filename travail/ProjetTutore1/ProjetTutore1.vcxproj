@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="InteractiveObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProjetTutore1.cpp" />
     <ClCompile Include="RessourcePack.cpp" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Commons.h" />
+    <ClInclude Include="InteractiveObject.h" />
     <ClInclude Include="Levels.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RessourcePack.h" />
@@ -174,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="vcpkg.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
