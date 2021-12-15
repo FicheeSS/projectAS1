@@ -19,7 +19,7 @@ public:
 	//Constructeur par defaut pour l'univers
 	Univers(RessourcePack* rp, sf::RenderWindow*);
 	void animate();
-	std::vector<bool>* collision(Player* p);
+	std::vector<bool>* collision(Character* p);
 	void loadTerrain(int lvl);
 	enum posCol { BOTTOM =0,UP=1,ATLEFT=2,ATRIGHT=3 };
 

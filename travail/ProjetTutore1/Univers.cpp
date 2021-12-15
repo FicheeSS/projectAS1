@@ -74,7 +74,7 @@ void Univers::animate()
     }
 }
 
-std::vector<bool>* Univers::collision(Player* p) {
+std::vector<bool>* Univers::collision(Character* p) {
     for (uint32_t i = 0; i < res->size(); i++) {
         res->at(i) = false;
     }
@@ -88,7 +88,7 @@ std::vector<bool>* Univers::collision(Player* p) {
   
                 InteractiveObject* it = dynamic_cast<InteractiveObject*>(e);
                 if (it != nullptr) {
-                    if (it->effectPlayer(p)) {
+                    if (it->effectPlayer((Player *)p)) {
                         for (uint32_t i = 0; i < ter->getTerrain()->size();i++) {
                             if (ter->getElementAtPos(i) == it) {
                                 ter->getTerrain()->erase(ter->getTerrain()->begin() + i);
