@@ -7,11 +7,11 @@ InteractiveObject::InteractiveObject(int x, int y, sf::Image* img, int h)
 	_h = h;
 }
 
-bool InteractiveObject::effectPlayer(Player* p)
+bool InteractiveObject::effectPlayer(Player *p)
 {
 	switch (_h) {
 	case(100):
-		std::cout<<p->getX();
+		p->setDoubleJump(true);
 		return true;
 		break;
 	}

@@ -1,6 +1,8 @@
 #pragma once
 #include "Block.h"
 #include "Player.h"
+#include <any>
+
 class InteractiveObject : public Block {
 private :
 	int _h;

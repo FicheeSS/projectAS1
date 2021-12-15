@@ -27,6 +27,8 @@ void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 		_accel = 0; // On verifie que l'accelération est bien nul
 		_y-=0.1f; // On remonte légérement vers le plafond pour eviter de fusionner avec le sol
 		_place = DOWN;
+		_hasJumped = false;
+		_hasDoubleJumped = false;
 	}else {
 		_y += _accel; // sinon on accelere vers le sol
 		_accel += DECEL;
@@ -44,6 +46,14 @@ void Player::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 	switch (std::get<0>(dir)) {
 	case DIRDEP::UP:
 		if (cols[COLDIR::BOTTOM] && !cols[COLDIR::TOP]) {//on est sur le sol et il n'y a pas de mur au dessus
+			_accel = -MAXACC;
+			_y += _accel;
+			_place = UP;
+			_hasJumped = true;
+
+		}
+		else if (_hasJumped && _canDoubleJump && !cols[COLDIR::TOP] && _accel >= -1 && !_hasDoubleJumped) {
+			_hasDoubleJumped = true;
 			_accel = -MAXACC;
 			_y += _accel;
 			_place = UP;
