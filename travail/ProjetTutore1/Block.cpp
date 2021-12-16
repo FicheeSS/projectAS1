@@ -1,6 +1,6 @@
 #include "Block.h"
 
-Block::Block(int x, int y, sf::Image* img)
+Block::Block(float x, float y, sf::Image* img)
 {
 	_x = x;
 	_y = y;

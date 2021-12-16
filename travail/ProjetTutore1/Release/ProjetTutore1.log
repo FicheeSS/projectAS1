@@ -1,39 +1,50 @@
-﻿  ProjetTutore1.cpp
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(1,13): warning C4081: attendu 'newline' ; rencontré '*'
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,9): error C2062: type 'void' inattendu
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,34): error C2238: jetons inattendus avant ';'
+﻿  Block.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Block.cpp(7,29): warning C4244: 'argument' : conversion de 'float' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Block.cpp(7,26): warning C4244: 'argument' : conversion de 'float' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Block.cpp(21,34): warning C4244: 'argument' : conversion de 'float' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Block.cpp(21,27): warning C4244: 'argument' : conversion de 'float' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+  Character.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Character.cpp(61,15): warning C4244: '=' : conversion de 'float' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Character.cpp(62,16): warning C4244: '=' : conversion de 'float' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+  InteractiveObject.cpp
+  Player.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Player.cpp(5,7): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Player.cpp(6,7): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  ProjetTutore1.cpp
+  RessourcePack.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.cpp(128,23): warning C4129: 'd' : caractère de séquence d'échappement non reconnu
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.cpp(128,23): warning C4129: '.' : caractère de séquence d'échappement non reconnu
   Terrain.cpp
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
+  TerrainConstructor.cpp
   Univers.cpp
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(1,13): warning C4081: attendu 'newline' ; rencontré '*'
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\RessourcePack.h(45,16): warning C4018: '>=' : incompatibilité signed/unsigned
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,9): error C2062: type 'void' inattendu
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(22,34): error C2238: jetons inattendus avant ';'
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(117,15): error C2039: 'loadTerrain' n'est pas membre de 'Univers'
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.h(5): message : voir la déclaration de 'Univers'
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(119,9): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(120,16): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(120,20): error C2541: 'delete' : impossible de détruire des objets qui ne sont pas des pointeurs
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(122,5): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(122,23): error C2065: 'RP' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(123,5): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(124,5): error C2065: 'p' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(124,9): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(125,5): error C2065: 'backgroundTex' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(126,5): error C2065: 'backgroundTex' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(126,35): error C2065: 'RP' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(127,5): error C2065: 'background' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(127,34): error C2065: 'backgroundTex' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,39): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,69): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,32): error C2440: '<function-style-cast>' : impossible de convertir de 'initializer list' en 'sf::FloatRect'
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(128,32): message : Aucun constructeur n'a pu prendre le type de source, ou la résolution de la surcharge du constructeur était ambiguë
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,47): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,77): error C2065: 'ter' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,17): warning C4473: 'printf' : nombre insuffisant d'arguments passés pour la chaîne de format
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,17): message : les espaces réservés et leurs paramètres attendent des arguments 2 variadiques, mais des arguments 0 ont été fournis
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(129,17): message : l'argument variadique manquant 1 est demandé par la chaîne de format '%d'
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(130,5): error C2065: 'RW' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(131,5): error C2065: 'p' : identificateur non déclaré
-C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Univers.cpp(131,16): error C2065: 'ter' : identificateur non déclaré
+  Génération de code en cours
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\InteractiveObject.cpp(18): warning C4715: 'InteractiveObject::effectPlayer' : les chemins de contrôle ne retournent pas tous une valeur
+  311 of 3516 functions ( 8.8%) were compiled, the rest were copied from previous compilation.
+    47 functions were new in current compilation
+    279 functions had inline decision re-evaluated but remain unchanged
+  Fin de la génération du code
+  ProjetTutore1.vcxproj -> C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Release\ProjetTutore1.exe

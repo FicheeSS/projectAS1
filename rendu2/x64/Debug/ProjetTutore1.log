@@ -1,5 +1,47 @@
-﻿  Installing vcpkg dependencies to C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\rendu2\vcpkg_installed\x64-windows\
-  "C:\dev\vcpkg\vcpkg.exe" install  --x-wait-for-lock --triplet "x64-windows" --vcpkg-root "C:\dev\vcpkg\\" "--x-manifest-root=C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\rendu2\\" "--x-install-root=C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\rendu2\vcpkg_installed\x64-windows\\" 
-  Detecting compiler hash for triplet x64-windows...
-C:\dev\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets(155,5): warning MSB5021: Arrêt de la tâche exécutable "cmd" et de ses processus enfants, car la génération a été annulée.
-C:\dev\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets(155,5): error MSB4181: la tâche "Exec" a retourné false mais n'a pas journalisé d'erreur.
+﻿  Element.cpp
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Element.cpp(12,25): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Element.cpp(12,22): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  Player.cpp
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(13,25): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(13,22): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(30,35): warning C4244: 'argument' : conversion de 'unsigned int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(30,29): warning C4244: 'argument' : conversion de 'unsigned int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(31,23): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(31,20): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(38,14): warning C4244: '-=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(77,25): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Player.cpp(77,22): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  ProjetTutore1.cpp
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Terrain.h(21,35): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Terrain.h(22,35): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+  RessourcePack.cpp
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\RessourcePack.cpp(68,23): warning C4129: 'd' : caractère de séquence d'échappement non reconnu
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\RessourcePack.cpp(68,23): warning C4129: '.' : caractère de séquence d'échappement non reconnu
+  Terrain.cpp
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Terrain.h(21,35): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Terrain.h(22,35): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+  TerrainConstructor.cpp
+  Tile.cpp
+  Univers.cpp
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Terrain.h(21,35): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Terrain.h(22,35): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(95,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(96,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(99,11): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(118,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(119,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(138,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(139,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(142,11): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(161,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\Univers.cpp(162,11): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+  Génération de code en cours...
+  ProjetTutore1.vcxproj -> C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\travail\ProjetTutore1\x64\Debug\ProjetTutore1.exe

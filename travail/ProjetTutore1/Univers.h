@@ -1,4 +1,4 @@
-#pragma once*
+#pragma once
 #include "Terrain.h"
 #include "TerrainConstructor.h"
 #include<cmath>

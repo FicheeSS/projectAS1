@@ -100,18 +100,18 @@ std::vector<bool>* Univers::collision(Character* p) {
 
                 }
 
-                int xb = e->getX();
-                int yb = e->getY();
-                int xp = p->getX();
-                int yp = p->getY();
+                int xb = static_cast<int>(e->getX());
+                int yb = static_cast<int>(e->getY());
+                int xp = static_cast<int>(p->getX());
+                int yp = static_cast<int>(p->getY());
                 sf::Vector2u size = p->getSize();
                 if (yb + size.y <= yp + size.y / 3) {
                     res->at(COLDIR::TOP) = true;
                 }
-                else if (yb >= yp + size.y / 4) {
+                else if ((unsigned int)yb >= yp + size.y / 4) {
                     res->at(COLDIR::BOTTOM) = true;
                 }
-                else if (xp > xb + size.x / 4) {
+                else if ((unsigned int)xp > xb + size.x / 4) {
                     res->at(COLDIR::LEFT) = true;
                 }
                 else if (xp + size.x <= xb + size.x / 4) {
@@ -143,7 +143,11 @@ void Univers::loadTerrain(int lvl)
     backgroundTex->setRepeated(true);
     backgroundTex->loadFromImage(*RP->getImgBackground(1), sf::IntRect(sf::Vector2i(0,0),si));
     background = new sf::Sprite(*backgroundTex);
+    #pragma warning( push ) 
+    #pragma warning( disable : 4244)
     sf::View View(sf::FloatRect(0, 0, ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT));
+    #pragma warning( pop ) 
+
     std::printf("Current Viewport : %d x %d", ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
     RW->setView(View);
     p->setMaxX(ter->getSizeY() * BLOCKWIDTH);

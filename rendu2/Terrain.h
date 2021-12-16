@@ -7,9 +7,9 @@
 
 class Terrain {
 private:
-	std::vector<Block*>* terrain;
-	RessourcePack* RP;
-	TerrainConstructor TC;
+	std::vector<Block*>* terrain = nullptr;
+	RessourcePack* RP = nullptr;
+	TerrainConstructor *TC = new TerrainConstructor();
 
 public :
 	Terrain(RessourcePack* RP);
@@ -18,9 +18,9 @@ public :
 	~Terrain();
 	//
 	inline std::vector<Block*>* getTerrain() { return terrain; };
-	inline Player* getPlayer() { return TC.getPlayer(); };
+	inline Player* getPlayer() { return TC->getPlayer(); };
 	inline Block* getElementAtPos(int x) { return terrain->at(x); };
 	inline unsigned int getSize() { return terrain->size(); };
-	inline unsigned int getSizeX() { return TC.sizeX; };
-	inline unsigned int getSizeY() { return TC.sizeY; };
+	inline unsigned int getSizeX() { return TC->sizeX; };
+	inline unsigned int getSizeY() { return TC->sizeY; };
 };

@@ -11,8 +11,8 @@
 #include "InteractiveObject.h"
 class TerrainConstructor {
 private:
-	Player* p;
-	std::vector<Block*>* Terrain ;
+	Player* p = nullptr;
+	std::vector<Block*>* Terrain = nullptr;
 
 public:
 	TerrainConstructor();
@@ -25,6 +25,6 @@ public:
 	//Renvoie le Terrain construit à l'aide du numéro du niveau
 	std::vector<Block*>* ConstructTerrainFromLevelFile(int level,  RessourcePack& RP);
 	~TerrainConstructor();
-	unsigned int sizeX;
-	unsigned int sizeY;
+	unsigned int sizeX ;
+	unsigned int sizeY = 0;
 };

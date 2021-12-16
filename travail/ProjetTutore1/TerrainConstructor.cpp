@@ -17,11 +17,11 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
         std::vector<int> line = lvl->at(y);
         for (uint32_t x = 0; x < line.size(); x++) {
             if (line[x] > 0 && line[x]<100) {
-                Block* e = new Block(x * BLOCKWIDTH, y * BLOCKHEIGHT, RP.getImg(line[x]));
+                Block* e = new Block(static_cast<float>(x * BLOCKWIDTH), static_cast<float>(y * BLOCKHEIGHT), RP.getImg(line[x]));
                 Terrain->push_back(e);
             }
             else if(line[x] >= 100){ //si interactive object
-                InteractiveObject *it = new InteractiveObject(x * BLOCKWIDTH, y * BLOCKHEIGHT, RP.getImg(line[x]), line[x]);
+                InteractiveObject *it = new InteractiveObject(static_cast<float>(x * BLOCKWIDTH), static_cast<float>(y * BLOCKHEIGHT), RP.getImg(line[x]), line[x]);
                 Terrain->push_back(it);
             }
             else if (line[x] == -1) {
@@ -34,9 +34,13 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
 
 TerrainConstructor::TerrainConstructor()
 {
-
+    sizeX = 0;
+    sizeY = 0;
 }
 
 TerrainConstructor::~TerrainConstructor() {
+    for (auto t : *Terrain) {
+        delete(t);
+    }
 	delete(Terrain);
 }

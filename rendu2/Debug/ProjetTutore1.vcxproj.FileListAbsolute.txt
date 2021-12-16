@@ -27,9 +27,8 @@ C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Debug\bz2d.dll
 C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Debug\libpng16d.dll
 C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Debug\brotlidec.dll
 C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Debug\brotlicommon.dll
-C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\rendu2\Debug\ProjetTutore1.exe
-C:\Users\theob\Documents\GitHub\as-pts1\rendu2\Debug\ProjetTutore1.exe
 C:\Users\theob\Documents\GitHub\as-pts1\rendu2\Debug\ProjetTutore1.vcxproj.CopyComplete
+C:\Users\theob\Documents\GitHub\as-pts1\rendu2\Debug\ProjetTutore1.exe
 C:\Users\theob\Documents\GitHub\as-pts1\rendu2\Debug\boost_filesystem-vc142-mt-gd-x32-1_77.dll
 C:\Users\theob\Documents\GitHub\as-pts1\rendu2\Debug\sfml-audio-d-2.dll
 C:\Users\theob\Documents\GitHub\as-pts1\rendu2\Debug\sfml-system-d-2.dll

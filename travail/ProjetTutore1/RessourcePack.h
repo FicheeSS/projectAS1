@@ -1,5 +1,7 @@
 #pragma once
+#pragma warning(push, 0)        
 #include <boost/filesystem.hpp>
+#pragma warning(pop)
 #include <string>
 #include <vector>
 #include <SFML/Graphics/Image.hpp>
@@ -43,6 +45,6 @@ public:
 	inline sf::Image* getImgBackground(int n) { return backgroundImages->at(n - 1); };
 	//renvoie la music pour le niveau donner en paramètre ou si le niveau est en dehors du tableau la music la plus proche
 	inline sf::Music* getLevelMusic(int lvl) 
-	{ return (lvl >= musicList->size()) ? musicList->at(musicList->size() - 1) : musicList->at(lvl); };
+	{ return ((unsigned int)lvl >= musicList->size()) ? musicList->at(musicList->size() - 1) : musicList->at(lvl); };
 	inline void setDefaultFolder(std::string fold) { defaultFolder = fold; };
 };
