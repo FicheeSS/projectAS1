@@ -8,12 +8,15 @@ private:
 	Terrain* ter;
 	RessourcePack* RP;
 	sf::RenderWindow* RW;
-	
+	bool ctrlIsInUse = false;
+	bool tabIsUse = false;
 	Player* p;
 	int lvl = 1 ;
 	std::vector<bool>* res = new std::vector<bool>(4);
 	sf::Sprite* background = nullptr;
 	sf::Texture* backgroundTex = nullptr;
+	sf::Music *currentMusic = nullptr;
+
 	
 public:
 	//Constructeur par defaut pour l'univers
@@ -22,5 +25,6 @@ public:
 	std::vector<bool>* collision(Character* p);
 	void loadTerrain(int lvl);
 	enum posCol { BOTTOM =0,UP=1,ATLEFT=2,ATRIGHT=3 };
+	void shutdown();
 
 };

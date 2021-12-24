@@ -14,5 +14,7 @@ bool InteractiveObject::effectPlayer(Player *p)
 		p->setDoubleJump(true);
 		return true;
 		break;
+	default:
+		break;
 	}
 }

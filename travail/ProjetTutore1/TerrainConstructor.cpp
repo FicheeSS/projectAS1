@@ -7,6 +7,9 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
     case 1 :
         lvl = &level1;
         break;
+    case 2:
+        lvl = &level2;
+        break;
     default:       //Ajouter ici si ils ont veux d'autres niveaux
         throw std::invalid_argument("Le niveau demandé n'existe pas");
     }

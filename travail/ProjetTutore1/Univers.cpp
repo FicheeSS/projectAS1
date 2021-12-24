@@ -5,10 +5,10 @@
 void Univers::animate()
 {
     sf::Clock clock;
-    float lastTime = 0;
+    //float lastTime = 0;
     //sf::Font font;
     //font.loadFromFile("\\Ressources\\DS-DIGI.TTF");
-    auto currentMusic = RP->getLevelMusic(lvl - 1);
+    currentMusic = RP->getLevelMusic(lvl - 1);
     try{
         currentMusic->play();
         currentMusic->setLoop(true);
@@ -25,8 +25,7 @@ void Univers::animate()
         {
             switch (event.type) {
             case sf::Event::Closed: [[unlikely]];
-                RW->close();
-                currentMusic->stop();
+                shutdown();
                 break;
             }
             if (event.type == sf::Event::KeyPressed) {
@@ -43,6 +42,15 @@ void Univers::animate()
                 case sf::Keyboard::Down:
                     dir = std::make_tuple(DIRDEP::DOWN, std::get<1>(dir));
                     break;
+                #ifdef DEBUG
+                case sf::Keyboard::LControl:
+                    ctrlIsInUse = true;
+                    break;
+                case sf::Keyboard::Tab:
+                    tabIsUse = true;
+                    break;
+                #endif
+
                 }
             }
             else if (event.type == sf::Event::KeyReleased) {
@@ -59,14 +67,32 @@ void Univers::animate()
                 case sf::Keyboard::Down:
                     dir = std::make_tuple(DIRDEP::NONE, std::get<1>(dir));
                     break;
-
+                #ifdef DEBUG
+                case sf::Keyboard::LControl:
+                    ctrlIsInUse = false;
+                    break;
+                case sf::Keyboard::Tab:
+                    tabIsUse = false;
+                    break;
+                #endif
                 }
             }
         }
         for (auto t : *ter->getTerrain()) {
             t->show(RW);
         }
-            
+        #ifdef DEBUG
+        if (ctrlIsInUse && tabIsUse) {
+            lvl++;
+            loadTerrain(lvl);
+            if (!RW->isOpen()) {
+                return;
+            }
+            ctrlIsInUse = false;
+            tabIsUse = false;
+        }
+        #endif // DEBUG
+
         std::vector<bool>* listCollision = collision(p);
         p->move(dir,*listCollision);
         p->show(RW);
@@ -135,8 +161,19 @@ void Univers::loadTerrain(int lvl)
         delete(ter);
     }
     ter = new Terrain(RP);
-    ter->loadTerrain(1);
+    try {
+        ter->loadTerrain(lvl);
+    }
+    catch (std::invalid_argument e) {
+        std::cerr << e.what() << std::endl;
+        shutdown();
+        return;
+    }
     p = ter->getPlayer();
+    if(backgroundTex != nullptr){
+        delete(backgroundTex);
+    }
+    delete(background);
     backgroundTex = new sf::Texture();
     sf::Vector2i si = sf::Vector2i(ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
     backgroundTex->setSmooth(true);
@@ -153,6 +190,12 @@ void Univers::loadTerrain(int lvl)
     p->setMaxX(ter->getSizeY() * BLOCKWIDTH);
 }
 
+void Univers::shutdown()
+{
+    RW->close();
+    currentMusic->stop();
+}
+
 
 Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
 {   
@@ -166,6 +209,7 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     }
     catch (std::invalid_argument e) {
         std::cerr << e.what() << std::endl;
+        shutdown();
         return;
     }
     loadTerrain(1);

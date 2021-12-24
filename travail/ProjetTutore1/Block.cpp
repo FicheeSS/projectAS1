@@ -19,7 +19,7 @@ Block::Block(Block* b)
 	_x = b->_x;
 	_y = b->_y;
 	_rect = new sf::IntRect(b->_x, b->_y, BLOCKWIDTH, BLOCKHEIGHT);
-	sf::IntRect* texrect = new sf::IntRect(0, 0, BLOCKWIDTH, BLOCKHEIGHT);
+	//sf::IntRect* texrect = new sf::IntRect(0, 0, BLOCKWIDTH, BLOCKHEIGHT);
 	_tex = b->_tex;
 	_sprite = b->_sprite;
 	//_sprite->setTexture(*_tex);
