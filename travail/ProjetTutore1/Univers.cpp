@@ -123,9 +123,7 @@ std::vector<bool>* Univers::collision(Character* p) {
                         }
                     }
                     continue;
-
                 }
-
                 int xb = static_cast<int>(e->getX());
                 int yb = static_cast<int>(e->getY());
                 int xp = static_cast<int>(p->getX());
@@ -159,6 +157,13 @@ void Univers::loadTerrain(int lvl)
 {
     if (ter != nullptr) {
         delete(ter);
+    }
+    if (currentMusic != nullptr) {
+        currentMusic->stop();
+        currentMusic = RP->getLevelMusic(lvl - 1);
+        currentMusic->setLoop(true);
+        currentMusic->play();
+
     }
     ter = new Terrain(RP);
     try {

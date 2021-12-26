@@ -170,13 +170,14 @@ RessourcePack::~RessourcePack() {
     for (uint32_t i = 0; i < imgLocPlayer->size(); i++) {
         delete(imgLocPlayer->at(i));
     }
+   
     for (uint32_t i = 0; i < musicList->size(); i++) {
         delete(musicList->at(i));
     }
     for (uint32_t i = 0; i < soundList->size(); i++) {
         delete(std::get<1>(soundList->at(i)));
     }
-    //delete(soundList);
+    delete(soundList);
     delete(musicList);
     delete(imgLocPlayer);
     delete(imgLoc);
