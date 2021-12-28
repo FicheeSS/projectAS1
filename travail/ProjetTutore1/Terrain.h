@@ -1,9 +1,11 @@
-#pragma once
+#ifndef TERRAIN_H
+#define TERRAIN_H
+
 #include<vector>
-#include <string>
-#include "RessourcePack.h"
-#include "Player.h"
 #include "TerrainConstructor.h"
+
+class Player;
+class RessourcePack;
 
 class Terrain {
 private:
@@ -24,3 +26,4 @@ public :
 	inline unsigned int getSizeX() { return TC->sizeX; };
 	inline unsigned int getSizeY() { return TC->sizeY; };
 };
+#endif

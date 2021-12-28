@@ -1,5 +1,10 @@
 #include "TerrainConstructor.h"
-
+#include "Player.h"
+#include "Block.h"
+#include "Commons.h"
+#include "Levels.h"
+#include "RessourcePack.h"
+#include "InteractiveObject.h"
 
 std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level, RessourcePack& RP) {
     std::vector<std::vector<int>>* lvl;
@@ -11,7 +16,7 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
         lvl = &level2;
         break;
     default:       //Ajouter ici si ils ont veux d'autres niveaux
-        throw std::invalid_argument("Le niveau demandé n'existe pas");
+        throw std::invalid_argument("Le niveau demande n'existe pas");
     }
     sizeX = lvl->size() ;
     sizeY = lvl->at(0).size();

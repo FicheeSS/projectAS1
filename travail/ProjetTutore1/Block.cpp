@@ -1,5 +1,5 @@
 #include "Block.h"
-
+#include "Commons.h"
 Block::Block(float x, float y, sf::Image* img)
 {
 	_x = x;
@@ -48,7 +48,7 @@ bool Block::collide(sf::IntRect rect)
 	return _rect->intersects(rect);
 }
 
-bool Block::effectPlayer(Player* p)
+bool Block::effectPlayer(std::any* a)
 {
 	return false;
 }

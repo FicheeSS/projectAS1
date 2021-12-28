@@ -1,8 +1,9 @@
-#pragma once
+#ifndef CHARACTER_H
+#define CHARACTER_H
 #include <tuple>
-#include "Commons.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "Commons.h"
 
 class Character {
 protected:
@@ -30,3 +31,4 @@ public :
 	inline void setDoubleJump(bool jmp) { _canDoubleJump = jmp; };
 
 };
+#endif

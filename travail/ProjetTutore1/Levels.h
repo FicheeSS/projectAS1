@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LEVELS_H
+#define LEVELS_H
 #include <vector>
 
 inline std::vector<std::vector<int>> level1 = {
@@ -32,5 +33,7 @@ inline std::vector<std::vector<int>> level2 = {
 	{0 , 0 , 5, 0 , 0 , 0, 4 , 3 , 0},
 	{0 , 0 , 3, 2 , 0 , 0, 0 , 2 , 0},
 	{0 , 0 , 2, 4 , 3 , 0, 100 , 4 , 0},
-	{2 , 2 , 3, 3 , 2 , 3, 3 , 2 , 4}
+	{2 , 2 , 3, 3 , 2 , 3, 3 , 2 , 4},
+	{2 , 2 , 3, 3 , 2 , 3, 3 , 2 , 4},
 };
+#endif

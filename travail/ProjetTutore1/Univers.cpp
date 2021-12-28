@@ -1,13 +1,12 @@
 #include "Univers.h"
-
-
-
+#include "Character.h"
+#include "RessourcePack.h"
+#include "Block.h"
+#include "InteractiveObject.h"
+#include "Player.h"
+#include <iostream>
 void Univers::animate()
 {
-    sf::Clock clock;
-    //float lastTime = 0;
-    //sf::Font font;
-    //font.loadFromFile("\\Ressources\\DS-DIGI.TTF");
     currentMusic = RP->getLevelMusic(lvl - 1);
     try{
         currentMusic->play();
@@ -114,7 +113,7 @@ std::vector<bool>* Univers::collision(Character* p) {
   
                 InteractiveObject* it = dynamic_cast<InteractiveObject*>(e);
                 if (it != nullptr) {
-                    if (it->effectPlayer((Player *)p)) {
+                    if (it->effectPlayer((std::any*)p)) {
                         for (uint32_t i = 0; i < ter->getTerrain()->size();i++) {
                             if (ter->getElementAtPos(i) == it) {
                                 ter->getTerrain()->erase(ter->getTerrain()->begin() + i);
@@ -155,9 +154,11 @@ std::vector<bool>* Univers::collision(Character* p) {
 
 void Univers::loadTerrain(int lvl)
 {
+    // on nettoie le terrain
     if (ter != nullptr) {
         delete(ter);
     }
+    // on arrete puis on selectionne la bonne musique pour le niveau actuel
     if (currentMusic != nullptr) {
         currentMusic->stop();
         currentMusic = RP->getLevelMusic(lvl - 1);
@@ -165,6 +166,7 @@ void Univers::loadTerrain(int lvl)
         currentMusic->play();
 
     }
+    //On charge le nouveau terrain
     ter = new Terrain(RP);
     try {
         ter->loadTerrain(lvl);
@@ -174,7 +176,10 @@ void Univers::loadTerrain(int lvl)
         shutdown();
         return;
     }
+    //On remplace le joueur
+    delete(p);
     p = ter->getPlayer();
+    //on charge le nouveau background
     if(backgroundTex != nullptr){
         delete(backgroundTex);
     }
@@ -189,7 +194,7 @@ void Univers::loadTerrain(int lvl)
     #pragma warning( disable : 4244)
     sf::View View(sf::FloatRect(0, 0, ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT));
     #pragma warning( pop ) 
-
+    //On met a jour le viewport en fonction de la nouvelle taille du terrain
     std::printf("Current Viewport : %d x %d", ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
     RW->setView(View);
     p->setMaxX(ter->getSizeY() * BLOCKWIDTH);

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Commons.h"
 
 Player::Player(int x, int y, std::vector<sf::Image*>* imgs)
 {

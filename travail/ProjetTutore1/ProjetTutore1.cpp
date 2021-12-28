@@ -6,7 +6,7 @@
 #include "Univers.h"
 int main(int argc, char* argv[])
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Projet Tutore Groupe 1");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Projet Tutore Groupe 1", sf::Style::Default);
     window.setFramerateLimit(144);
     sf::Image icon;
     if (icon.loadFromFile(".\\ico.png")) { // File/Image/Pixel

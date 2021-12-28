@@ -1,7 +1,8 @@
-#pragma once
+#ifndef BLOCK_H
+#define BLOCK_H
 #include <SFML/Graphics.hpp>
-//#include "Commons.h"
-#include "Player.h"
+#include <any>
+
 class Block {
 private:
 	float _x = 0;
@@ -22,6 +23,6 @@ public :
 	inline float getX() { return _x; };
 	inline float getY() { return _y; };
 	friend bool operator==(const Block& b1, const Block& b2);
-	virtual bool effectPlayer(Player* p);
+	virtual bool effectPlayer(std::any* a);
 };
-
+#endif

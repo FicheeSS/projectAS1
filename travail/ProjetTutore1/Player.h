@@ -1,6 +1,5 @@
-#pragma once
-#include <tuple>
-#include "Commons.h"
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Character.h"
@@ -12,3 +11,4 @@ public:
 	~Player();
 
 };
+#endif

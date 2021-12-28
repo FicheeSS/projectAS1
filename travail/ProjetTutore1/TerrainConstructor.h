@@ -1,14 +1,10 @@
-#pragma once
-#include <string>
+#ifndef TERRAINCONSTRUCTOR_H
+#define TERRAINCONSTRUCTOR_H
 #include <vector>
-#include "RessourcePack.h"
-#include <fstream>
-#include <filesystem>
-#include "Levels.h"
-#include "Block.h"
-#include "Commons.h"
-#include "Player.h"
-#include "InteractiveObject.h"
+
+class RessourcePack;
+class Block;
+class Player;
 class TerrainConstructor {
 private:
 	Player* p = nullptr;
@@ -28,3 +24,4 @@ public:
 	unsigned int sizeX ;
 	unsigned int sizeY = 0;
 };
+#endif

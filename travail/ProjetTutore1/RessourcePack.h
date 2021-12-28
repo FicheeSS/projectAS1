@@ -1,18 +1,10 @@
-#pragma once
-#pragma warning(push, 0)        
-#include <boost/filesystem.hpp>
-#pragma warning(pop)
+#ifndef RESSOURCEPACK_H
+#define RESSOURCEPACK_H
+
 #include <string>
 #include <vector>
 #include <SFML/Graphics/Image.hpp>
-#include <boost/algorithm/string.hpp>
-#include <filesystem>
-#include <stdexcept>
-#include <iostream>
-#include <regex>
 #include <SFML/Audio.hpp>
-#include <boost/regex.hpp>
-
 #define IMGEXT ".png"
 #define AUDEXT ".flac"
 
@@ -38,7 +30,7 @@ public:
 	//recupere dans le img celle à la position i 
 	//throw std::invalid_argument si l'image n'existe pas 
 	sf::Image* getImg(int n);
-	//On vide les tableaux déclarés dans le HEAP
+	//On vide les ressources déclarés dans le HEAP
 	~RessourcePack();
 	sf::Image* getPlayerImg() { return imgLocPlayer->at(0); };
 	std::vector<sf::Image*>* getPlayerImgList() { return imgLocPlayer; };
@@ -51,5 +43,7 @@ public:
 	//renvoie la music pour le niveau donner en paramètre ou si le niveau est en dehors du tableau la music la plus proche
 	inline sf::Music* getLevelMusic(int lvl) 
 	{ return ((unsigned int)lvl >= musicList->size()) ? musicList->at(musicList->size() - 1) : musicList->at(lvl); };
+	//sert dans le cas ou les ressources ne sont pas dans la même arborescence
 	inline void setDefaultFolder(std::string fold) { defaultFolder = fold; };
 };
+#endif

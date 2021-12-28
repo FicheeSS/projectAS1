@@ -1,4 +1,6 @@
-#pragma once
+#ifndef COMMONS_H
+#define COMMONS_H
+
 #define BLOCKWIDTH 50
 #define BLOCKHEIGHT 40
 #define MAXACC 5
@@ -10,3 +12,5 @@
  enum class DIRDEP {LEFT,RIGHT,UP,DOWN,NONE};
 
  enum COLDIR { TOP =0, BOTTOM=1 , LEFT =2,RIGHT=3 };
+
+#endif

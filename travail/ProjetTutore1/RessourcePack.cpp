@@ -1,4 +1,10 @@
 #include "RessourcePack.h"
+#pragma warning(push, 0)        
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/regex/v5/regex.hpp>
+#pragma warning(pop)
+#include <regex>
 
 int getMaxFromPathStem(std::vector< boost::filesystem::path>* path) {
     int  max = 0;
