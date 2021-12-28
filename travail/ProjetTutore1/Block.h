@@ -2,7 +2,7 @@
 #define BLOCK_H
 #include <SFML/Graphics.hpp>
 #include <any>
-
+#include "Commons.h"
 class Block {
 private:
 	float _x = 0;
@@ -13,8 +13,9 @@ private:
 protected:
 	Block();
 public :
-	//NEVER USE FOR DEBUG ONLY
+	#ifdef DEBUG
 	bool colliding = false;
+	#endif // DEBUG
 	Block(float x, float y, sf::Image*);
 	Block(Block *b);
 	~Block();

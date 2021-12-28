@@ -5,10 +5,7 @@
 #include "Character.h"
 class Player : public Character {
 private:
-	
 public:
-	Player(int x, int y, std::vector<sf::Image*>* imgs);
-	~Player();
-
+	inline Player(int x, int y, std::vector<sf::Image*>* imgs) :Character(x, y, imgs) {};
 };
 #endif

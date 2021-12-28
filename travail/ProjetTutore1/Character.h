@@ -21,6 +21,8 @@ protected:
 	bool _hasJumped = false;
 	bool _hasDoubleJumped = false;
 public : 
+	Character(int x, int y, std::vector<sf::Image*>* imgs);
+	~Character();
 	void move(std::tuple<DIRDEP, DIRDEP>, std::vector<bool>);
 	inline void show(sf::RenderWindow* rw) { rw->draw(*_sprite->at(_place)); };
 	inline sf::IntRect getRect() { return *_rect; };

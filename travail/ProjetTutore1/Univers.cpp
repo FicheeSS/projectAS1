@@ -25,7 +25,7 @@ void Univers::animate()
             switch (event.type) {
             case sf::Event::Closed: [[unlikely]];
                 shutdown();
-                break;
+                return;
             }
             if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
@@ -152,6 +152,7 @@ std::vector<bool>* Univers::collision(Character* p) {
 
 }
 
+
 void Univers::loadTerrain(int lvl)
 {
     // on nettoie le terrain
@@ -182,8 +183,8 @@ void Univers::loadTerrain(int lvl)
     //on charge le nouveau background
     if(backgroundTex != nullptr){
         delete(backgroundTex);
+        delete(background);
     }
-    delete(background);
     backgroundTex = new sf::Texture();
     sf::Vector2i si = sf::Vector2i(ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
     backgroundTex->setSmooth(true);
@@ -200,10 +201,34 @@ void Univers::loadTerrain(int lvl)
     p->setMaxX(ter->getSizeY() * BLOCKWIDTH);
 }
 
+void Univers::cleanup()
+{
+    // on nettoie le terrain
+    if (ter != nullptr) {
+        delete(ter);
+    }
+    if (currentMusic != nullptr) {
+        currentMusic->stop();
+        //delete(currentMusic);
+    }
+    if (p != nullptr) {
+        delete(p);
+    }
+    if (backgroundTex != nullptr) {
+        delete(backgroundTex);
+        delete(background);
+    }
+    //delete(RP);
+    delete(res);
+
+}
+
 void Univers::shutdown()
 {
+    cleanup();
     RW->close();
     currentMusic->stop();
+
 }
 
 
@@ -211,7 +236,6 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
 {   
     RW = rw;
     RP = rp;
-
     try {
         RP->generateImg("\\Ressources\\img");
         RP->generateAudioData("\\Ressources\\audio");

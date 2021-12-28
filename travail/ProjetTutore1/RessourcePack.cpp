@@ -183,8 +183,12 @@ RessourcePack::~RessourcePack() {
     for (uint32_t i = 0; i < soundList->size(); i++) {
         delete(std::get<1>(soundList->at(i)));
     }
+    for (uint32_t i = 0; i < backgroundImages->size(); i++) {
+        delete(backgroundImages->at(i));
+    }
     delete(soundList);
     delete(musicList);
     delete(imgLocPlayer);
     delete(imgLoc);
+    delete(backgroundImages);
 }

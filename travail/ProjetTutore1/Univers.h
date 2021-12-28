@@ -23,7 +23,7 @@ private:
 	sf::Texture* backgroundTex = nullptr;
 	sf::Music *currentMusic = nullptr;
 	void loadTerrain(int lvl);
-
+	void cleanup();
 	
 public:
 	//Constructeur par defaut pour l'univers

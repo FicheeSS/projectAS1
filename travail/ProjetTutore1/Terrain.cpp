@@ -14,7 +14,9 @@ void Terrain::loadTerrain(int level)
 
 Terrain::~Terrain()
 {
+	if(terrain != nullptr)
 	for (auto elem : *terrain) {
+		if(elem != nullptr)
 			delete(elem);
 		
 	}
