@@ -26,6 +26,7 @@ public:
 	void generateImg(std::string path);
 	//charges les images depuis le path specifié en paramètre en vu de leur utilsation en background 
 	//throw std::invalid_argument si le path est vide
+	[[deprecated]]
 	void generateBackgrounds(std::string path);
 	//recupere dans le img celle à la position i 
 	//throw std::invalid_argument si l'image n'existe pas 

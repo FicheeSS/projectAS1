@@ -5,6 +5,8 @@
 #include "InteractiveObject.h"
 #include "Player.h"
 #include <iostream>
+#include<cmath>
+
 void Univers::animate()
 {
     currentMusic = RP->getLevelMusic(lvl - 1);
@@ -218,7 +220,7 @@ void Univers::cleanup()
         delete(backgroundTex);
         delete(background);
     }
-    //delete(RP);
+    //delete(RP); //ne marche pas 
     delete(res);
 
 }
@@ -239,7 +241,7 @@ Univers::Univers(RessourcePack *rp, sf::RenderWindow* rw)
     try {
         RP->generateImg("\\Ressources\\img");
         RP->generateAudioData("\\Ressources\\audio");
-        RP->generateBackgrounds("\\Ressources\\img\\backgrounds");
+        //RP->generateBackgrounds("\\Ressources\\img\\backgrounds");
     }
     catch (std::invalid_argument e) {
         std::cerr << e.what() << std::endl;

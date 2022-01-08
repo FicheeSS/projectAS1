@@ -52,8 +52,14 @@ void RessourcePack::generateImg(std::string path)
         sf::Image *img = new sf::Image();
         if (!img->loadFromFile(path.string())) throw std::invalid_argument("File " + path.string() + "not found"); // on lance une exeption si on n'arrive pas a charger l'image
         boost::regex nb("[0-9]*");
-        if (boost::regex_match(path.stem().string(),nb) ) {
-            imgLoc->at(std::stoi(path.stem().string())) = img; // On charge l'image dans le tableau d'image
+        boost::regex background(".*backgrounds.*");
+        if (boost::regex_match(path.stem().string(), nb)) {
+            if (boost::regex_match(path.string(), background)){
+                backgroundImages->push_back(img); // On charge l'image dans le tableau d'image
+            }
+            else {
+                imgLoc->at(std::stoi(path.stem().string())) = img; // On charge l'image dans le tableau d'image
+            }
         }
         else {
             if (boost::algorithm::contains(path.string(),"left.png")) {
@@ -72,8 +78,10 @@ void RessourcePack::generateImg(std::string path)
         }
     }
 }
+[[deprecated]]
 void RessourcePack::generateBackgrounds(std::string path)
 {
+    //A fussioner avec generateIMG
     //Rechercher et charger les images dans le HEAP
     if (defaultFolder.empty()) {
         boost::filesystem::path full_path(boost::filesystem::current_path());

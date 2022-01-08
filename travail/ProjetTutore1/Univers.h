@@ -5,7 +5,6 @@
 #include "TerrainConstructor.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include<cmath>
 
 class Character;
 class Univers {
@@ -14,15 +13,19 @@ private:
 	Terrain* ter;
 	RessourcePack* RP;
 	sf::RenderWindow* RW;
+	#ifdef DEBUG
 	bool ctrlIsInUse = false;
 	bool tabIsUse = false;
+	#endif
 	Player* p;
 	int lvl = 1 ;
 	std::vector<bool>* res = new std::vector<bool>(4);
 	sf::Sprite* background = nullptr;
 	sf::Texture* backgroundTex = nullptr;
 	sf::Music *currentMusic = nullptr;
+	//Charge le terrain demander en parametre
 	void loadTerrain(int lvl);
+	//De-alloue les ressources utlisées par l'Univers
 	void cleanup();
 	
 public:
