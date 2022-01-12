@@ -3,11 +3,20 @@
 #include "Block.h"
 #include <any>
 
-class InteractiveObject : public Block {
+class InteractiveObject : public Block
+{
+protected:
 private :
 	int _h;
 public:
 	InteractiveObject(float x, float y, sf::Image* img, int h);
-	bool effectPlayer(std::any* p);
+	~InteractiveObject() = default;
+
+	/**
+	 * \brief Effect le player en fonction de _h 
+	 * \param p : Object a caster dans le bon type selon _h
+	 * \return : vrai - on doit supprimer le block | faux - on  doit le garder
+	 */
+	bool effectPlayer(std::any* p) override;
 };
 #endif

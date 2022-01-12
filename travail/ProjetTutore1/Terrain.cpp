@@ -1,10 +1,8 @@
 #include "Terrain.h"
+#include "InteractiveObject.h"
 
-Terrain::Terrain(RessourcePack* rp)
+Terrain::Terrain(RessourcePack* rp) : RP(rp)
 {
-	RP = rp;
-
-	
 }
 
 void Terrain::loadTerrain(int level)
@@ -14,11 +12,21 @@ void Terrain::loadTerrain(int level)
 
 Terrain::~Terrain()
 {
-	if(terrain != nullptr)
-	for (auto elem : *terrain) {
-		if(elem != nullptr)
-			delete(elem);
-		
-	}
+	if (terrain != nullptr)
+		for (const auto elem : *terrain)
+		{
+			if (elem != nullptr)
+			{
+				auto it = dynamic_cast<InteractiveObject*>(elem);
+				if (it != nullptr)
+				{
+					delete(it);
+				}
+				else
+				{
+					delete(elem);
+				}
+			}
+		}
+	delete(TC);
 }
-

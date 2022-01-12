@@ -7,23 +7,32 @@
 class Player;
 class RessourcePack;
 
-class Terrain {
+class Terrain
+{
 private:
 	std::vector<Block*>* terrain = nullptr;
 	RessourcePack* RP = nullptr;
-	TerrainConstructor *TC = new TerrainConstructor();
+	TerrainConstructor* TC = new TerrainConstructor();
 
 public :
 	Terrain(RessourcePack* RP);
-	//Charge le terrain selon le niveau dans l'objet
-	void loadTerrain(int level);
 	~Terrain();
-	//
-	inline std::vector<Block*>* getTerrain() { return terrain; };
-	inline Player* getPlayer() { return TC->getPlayer(); };
-	inline Block* getElementAtPos(int x) { return terrain->at(x); };
-	inline unsigned int getSize() { return terrain->size(); };
-	inline unsigned int getSizeX() { return TC->sizeX; };
-	inline unsigned int getSizeY() { return TC->sizeY; };
+
+	/**
+	 * \brief Charge le terrain du niveau passer en paramètre
+	 * \param level : int le numero du niveau à charger
+	 */
+	void loadTerrain(int level);
+
+
+	//-----------------------GETTER SETTER---------------------------//
+
+	std::vector<Ennemi*>* getEnnemiList() const { return TC->getEnnemiList(); };
+	std::vector<Block*>* getTerrain() const { return terrain; };
+	Player* getPlayer() const { return TC->getPlayer(); };
+	Block* getElementAtPos(int x) const { return terrain->at(x); };
+	unsigned int getSize() const { return terrain->size(); };
+	unsigned int getSizeX() const { return TC->sizeX; };
+	unsigned int getSizeY() const { return TC->sizeY; };
 };
 #endif
