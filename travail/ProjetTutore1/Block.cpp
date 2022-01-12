@@ -1,9 +1,10 @@
 #include "Block.h"
 #include "Commons.h"
 
-Block::Block(float x, float y, sf::Image* img) : _x(x), _y(y), _tex(new sf::Texture()), img_(img)
+Block::Block(float x, float y, sf::Image* img) : _x(x), _y(y),
+                                                 _rect(new sf::IntRect(static_cast<int>(x), static_cast<int>(y),
+                                                                       BLOCKWIDTH, BLOCKHEIGHT)), _tex(new sf::Texture()), img_(img)
 {
-	_rect = new sf::IntRect(static_cast<int>(x), static_cast<int>(y), BLOCKWIDTH, BLOCKHEIGHT);
 	const sf::IntRect* texrect = new sf::IntRect(0, 0, BLOCKWIDTH, BLOCKHEIGHT);
 	_tex->loadFromImage(*img);
 	_tex->setSmooth(true);

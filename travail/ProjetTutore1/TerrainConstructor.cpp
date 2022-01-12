@@ -82,10 +82,8 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
 	return Terrain;
 }
 
-TerrainConstructor::TerrainConstructor()
+TerrainConstructor::TerrainConstructor() 
 {
-	sizeX = 0;
-	sizeY = 0;
 }
 
 TerrainConstructor::~TerrainConstructor()

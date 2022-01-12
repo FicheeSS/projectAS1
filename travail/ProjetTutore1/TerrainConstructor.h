@@ -22,6 +22,9 @@ private:
  */
 	std::vector<sf::Image*>* generatePersoImgInPlace(std::string s, RessourcePack* RP) const;
 public:
+	unsigned int sizeX = 0;
+	unsigned int sizeY = 0;
+
 	TerrainConstructor();
 
 	Player* getPlayer() const
@@ -38,7 +41,10 @@ public:
 	std::vector<Block*>* ConstructTerrainFromLevelFile(int level, RessourcePack& RP);
 	~TerrainConstructor();
 	std::vector<Ennemi*>* getEnnemiList() const { return EnnemiList; };
-	unsigned int sizeX = 0;
-	unsigned int sizeY = 0;
+
+	//-----------------------GETTER SETTER---------------------------//
+
+
+
 };
 #endif
