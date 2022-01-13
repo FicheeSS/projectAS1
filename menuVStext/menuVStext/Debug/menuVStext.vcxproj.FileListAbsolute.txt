@@ -1,0 +1,2 @@
+C:\Users\alex6\OneDrive\Documents\IUT\C++\menuVStext\menuVStext\Debug\menuVStext.vcxproj.CopyComplete
+C:\Users\alex6\OneDrive\Documents\IUT\C++\ProjectC++\menuVStext\menuVStext\Debug\menuVStext.vcxproj.CopyComplete
