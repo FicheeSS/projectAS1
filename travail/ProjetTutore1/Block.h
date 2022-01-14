@@ -25,7 +25,7 @@ public :
 	 * \brief Affichage du Block
 	 * \param rw : sf::RenderWindow* la fenètre d'affichage 
 	 */
-	void show(sf::RenderWindow* rw);
+	void show(sf::RenderWindow* rw) const;
 	/**
 	 * \brief Si le Block est en collision avec le rect en argv
 	 * \param rect : sf::IntRect 
@@ -37,7 +37,7 @@ public :
 	 * \brief Redéfinnision de l'opérateur == pour simplifier la vie
 	 * \param b1 : &Block
 	 * \param b2 : &Block
-	 * \return bool
+	 * \return Si les deux block sont les mêmes
 	 */
 	friend bool operator==(const Block& b1, const Block& b2);
 	virtual bool effectPlayer(std::any* a);

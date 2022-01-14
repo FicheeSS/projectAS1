@@ -159,6 +159,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Ennemi.cpp" />
     <ClCompile Include="InteractiveObject.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProjetTutore1.cpp" />
     <ClCompile Include="RessourcePack.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Ennemi.h" />
     <ClInclude Include="InteractiveObject.h" />
     <ClInclude Include="Levels.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RessourcePack.h" />
     <ClInclude Include="Terrain.h" />

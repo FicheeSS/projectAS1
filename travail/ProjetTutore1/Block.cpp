@@ -13,15 +13,16 @@ Block::Block(float x, float y, sf::Image* img) : _x(x), _y(y),
 	_sprite->setPosition(x, y);
 }
 
-Block::Block(Block* b) : _x(b->_x), _y(b->_y), _sprite(b->_sprite), _tex(b->_tex)
+Block::Block(Block* b) : _x(b->_x), _y(b->_y),
+                         _rect(new sf::IntRect(static_cast<int>(b->_x), static_cast<int>(b->_y), BLOCKWIDTH,
+                                               BLOCKHEIGHT)), _sprite(b->_sprite), _tex(b->_tex)
 {
-	_rect = new sf::IntRect(b->_x, b->_y, BLOCKWIDTH, BLOCKHEIGHT);
 	//sf::IntRect* texrect = new sf::IntRect(0, 0, BLOCKWIDTH, BLOCKHEIGHT);
 	//_sprite->setTexture(*_tex);
 	_sprite->setPosition(b->_x, b->_y);
 }
 
-void Block::show(sf::RenderWindow* rw)
+void Block::show(sf::RenderWindow* rw) const
 {
 	// définit un rectangle de 120x50
 	/*

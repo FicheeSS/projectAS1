@@ -26,7 +26,6 @@ public:
 	unsigned int sizeY = 0;
 
 	TerrainConstructor();
-
 	Player* getPlayer() const
 	{
 		return p;
@@ -41,10 +40,6 @@ public:
 	std::vector<Block*>* ConstructTerrainFromLevelFile(int level, RessourcePack& RP);
 	~TerrainConstructor();
 	std::vector<Ennemi*>* getEnnemiList() const { return EnnemiList; };
-
-	//-----------------------GETTER SETTER---------------------------//
-
-
 
 };
 #endif

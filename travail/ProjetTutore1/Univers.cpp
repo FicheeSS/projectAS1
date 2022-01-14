@@ -7,7 +7,7 @@
 #include <iostream>
 #include "Ennemi.h"
 
-void Univers::animate()
+int Univers::animate()
 {
 	currentMusic = RP->getLevelMusic(lvl - 1);
 	try
@@ -19,6 +19,7 @@ void Univers::animate()
 	{
 		std::cerr << e.what() << std::endl;
 		currentMusic->stop();
+		return 1;
 	}
 	while (RW->isOpen())
 	{
@@ -34,7 +35,7 @@ void Univers::animate()
 			{
 			case sf::Event::Closed: [[unlikely]];
 				shutdown();
-				return;
+				return 0;
 			}
 			if (event.type == sf::Event::KeyPressed)
 			{
@@ -96,13 +97,13 @@ void Univers::animate()
 			loadTerrain(lvl);
 			if (!RW->isOpen())
 			{
-				return;
+				return 0;
 			}
 			ctrlIsInUse = false;
 			tabIsUse = false;
 		}
 #endif // DEBUG
-		for (auto en : *EnnemiList)
+		for (const auto en : *EnnemiList)
 		{
 			const std::vector<bool>* listCollision = collision(en);
 			en->moveWithIa(*listCollision, sf::Vector2i(static_cast<int>(p->getX()), static_cast<int>(p->getY())));
@@ -113,9 +114,10 @@ void Univers::animate()
 		p->show(RW);
 		RW->display();
 	}
+	return 0;
 }
 
-std::vector<bool>* Univers::collision(Character* p) const
+std::vector<bool>* Univers::collision(Character* c) const
 {
 	for (auto&& re : *res)
 	{
@@ -124,7 +126,7 @@ std::vector<bool>* Univers::collision(Character* p) const
 	for (const auto t : *ter->getTerrain())
 	{
 		const auto e = static_cast<Block*>(t);
-		if (e->collide(p->getRect()))
+		if (e->collide(c->getRect()))
 		{
 #ifdef DEBUG
 			e->colliding = true;
@@ -133,14 +135,14 @@ std::vector<bool>* Univers::collision(Character* p) const
 			const auto it = dynamic_cast<InteractiveObject*>(e);
 			if (it != nullptr)
 			{
-				if (it->effectPlayer(reinterpret_cast<std::any*>(p)))
+				if (it->effectPlayer(reinterpret_cast<std::any*>(c)))
 				{
 					//On supprime le block si besoin
 					for (uint32_t i = 0; i < ter->getTerrain()->size(); i++) 
 					{//On le cherche dans la liste du Terrain
-						if (ter->getElementAtPos(i) == it)
+						if (ter->getElementAtPos(static_cast<int>(i)) == it)
 						{
-							ter->getTerrain()->erase(ter->getTerrain()->begin() + i);
+							ter->getTerrain()->erase(ter->getTerrain()->begin() + static_cast<int>(i));
 							break;
 						}
 					}
@@ -149,30 +151,19 @@ std::vector<bool>* Univers::collision(Character* p) const
 			}
 			const int xb = static_cast<int>(e->getX());
 			const int yb = static_cast<int>(e->getY());
-			const int xp = static_cast<int>(p->getX());
-			const int yp = static_cast<int>(p->getY());
-			const sf::Vector2u size = p->getSize();
+			const int xp = static_cast<int>(c->getX());
+			const int yp = static_cast<int>(c->getY());
+			const sf::Vector2u size = c->getSize();
 			if (yb + size.y <= yp + size.y / 3)
-			{
 				res->at(TOP) = true;
-			}
 			else if (static_cast<unsigned>(yb) >= yp + size.y / 4)
-			{
 				res->at(COLDIR::BOTTOM) = true;
-			}
 			else if (static_cast<unsigned>(xp) > xb + size.x / 4)
-			{
 				res->at(LEFT) = true;
-			}
 			else if (xp + size.x <= xb + size.x / 4)
-			{
 				res->at(RIGHT) = true;
-			}
-
 			else
-			{
 				res->at(TOP) = true;
-			}
 		}
 	}
 	// std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
@@ -230,15 +221,15 @@ void Univers::loadTerrain(int lvl)
 	background = new sf::Sprite(*backgroundTex);
 #pragma warning( push )
 #pragma warning( disable : 4244)
-	const sf::View View(sf::FloatRect(0, 0, ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT));
+	const sf::View View(sf::FloatRect(0, 0, static_cast<float>(ter->getSizeY()) * BLOCKWIDTH, static_cast<float>(ter->getSizeX()) * BLOCKHEIGHT));
 #pragma warning( pop )
 	//On met a jour le viewport en fonction de la nouvelle taille du terrain
 	std::printf("Current Viewport : %d x %d \n", ter->getSizeY() * BLOCKWIDTH, ter->getSizeX() * BLOCKHEIGHT);
 	RW->setView(View);
-	p->setMaxX(ter->getSizeY() * BLOCKWIDTH);
+	p->setMaxX(static_cast<int>(ter->getSizeY()) * BLOCKWIDTH);
 }
 
-void Univers::cleanup()
+void Univers::cleanup() const
 {
 	// on nettoie le terrain
 	delete(ter);
@@ -254,7 +245,7 @@ void Univers::cleanup()
 	delete(res);
 }
 
-void Univers::shutdown()
+void Univers::shutdown() const
 {
 	cleanup();
 	RW->close();
@@ -262,17 +253,15 @@ void Univers::shutdown()
 }
 
 
-Univers::Univers(RessourcePack* rp, sf::RenderWindow* rw)
+Univers::Univers(RessourcePack* rp, sf::RenderWindow* rw) : RP(rp), RW(rw)
 {
-	RW = rw;
-	RP = rp;
 	try
 	{
 		RP->generateImg("\\Ressources\\img");
 		RP->generateAudioData("\\Ressources\\audio");
 		//RP->generateBackgrounds("\\Ressources\\img\\backgrounds");
 	}
-	catch (std::invalid_argument e)
+	catch (std::invalid_argument &e)
 	{
 		std::cerr << e.what() << std::endl;
 		shutdown();

@@ -49,7 +49,7 @@ public:
 	 * \param path : String vers les ressources
 	 * \throws std::invalid_argument lors d'une erreur accès ou si le path est vide
 	 */
-	void generateAudioData(std::string path);
+	void generateAudioData(std::string path) const;
 	/**
 	 * \brief Va chercher le sound qui correspond au nom qu'on lui à donner comme fichier
 	 * EX : fichier "boing.flac" -> boing

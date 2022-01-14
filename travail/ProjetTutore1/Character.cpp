@@ -3,8 +3,8 @@
 Character::Character(int x, int y, std::vector<sf::Image*>* imgs) : _x(x), _y(y), _tex(new std::vector<sf::Texture*>)
 {
 	_size = imgs->at(0)->getSize();
-	_rect = new sf::IntRect(x, y, _size.x, _size.y);
-	const auto texrect = new sf::IntRect(0, 0, _size.x, _size.y);
+	_rect = new sf::IntRect(x, y, static_cast<int>(_size.x), static_cast<int>(_size.y));
+	const auto texrect = new sf::IntRect(0, 0, static_cast<int>(_size.x), static_cast<int>(_size.y));
 	_sprite = new std::vector<sf::Sprite*>(4);
 	for (uint32_t i = 0; i < imgs->size(); i++)
 	{

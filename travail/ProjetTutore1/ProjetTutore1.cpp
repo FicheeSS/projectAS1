@@ -1,8 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
+
+#include "Menu.h"
 #include "RessourcePack.h"
-#include <stdexcept>
-#include <errno.h>
 #include "Univers.h"
 int main(int argc, char* argv[])
 {
@@ -13,12 +12,19 @@ int main(int argc, char* argv[])
         sf::Vector2u s = icon.getSize();
         window.setIcon(s.x, s.y, icon.getPixelsPtr());
     }
+    Menu* m = new Menu("\\ressources\\menu\\");
     RessourcePack RP;
     Univers Univ(&RP,&window);
     if (argc > 0) {
         RP.setDefaultFolder(argv[0]);
     }
-    Univ.animate();
+    if(m->menu())
+    {
+        delete(m);
+        return Univ.animate();
+    }else
+    {
+        return 0;
+    }
     
-    return EXIT_SUCCESS;
 }

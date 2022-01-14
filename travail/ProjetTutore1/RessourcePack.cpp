@@ -18,7 +18,7 @@ int getMaxFromPathStem(std::vector<boost::filesystem::path>* path)
 				max = std::stoi(p.stem().string());
 			}
 		}
-		catch (std::exception e)
+		catch (std::exception &e)
 		{
 		}
 	}
@@ -51,7 +51,7 @@ void RessourcePack::generateImg(std::string path)
 			}
 		}
 	}
-	if (paths.empty()) throw std::invalid_argument("Aucune image n'été trouve");
+	if (paths.empty()) throw std::invalid_argument("Aucune image n'ete trouve");
 	std::sort(paths.begin(), paths.end());
 
 	imgLoc = new std::vector<sf::Image*>(getMaxFromPathStem(&paths) + 1);
@@ -111,7 +111,7 @@ void RessourcePack::generateBackgrounds(std::string path)
 			}
 		}
 	}
-	if (paths.empty()) throw std::invalid_argument("Aucune image n'été trouve");
+	if (paths.empty()) throw std::invalid_argument("Aucune image n'ete trouve");
 	std::sort(paths.begin(), paths.end());
 	for (boost::filesystem::path path : paths)
 	{
@@ -126,7 +126,7 @@ void RessourcePack::generateBackgrounds(std::string path)
 	}
 }
 
-void RessourcePack::generateAudioData(std::string path)
+void RessourcePack::generateAudioData(std::string path) const
 {
 	if (defaultFolder.empty())
 	{
@@ -151,7 +151,7 @@ void RessourcePack::generateAudioData(std::string path)
 			}
 		}
 	}
-	if (paths.empty()) throw std::invalid_argument("Aucune image n'été trouve");
+	if (paths.empty()) throw std::invalid_argument("Aucune image n'ete trouve");
 	std::sort(paths.begin(), paths.end());
 	for (auto path : paths)
 	{
@@ -160,14 +160,14 @@ void RessourcePack::generateAudioData(std::string path)
 		{
 			auto music = new sf::Music;
 			if (!music->openFromFile(path.string())) throw std::invalid_argument(
-				"La musique " + path.string() + " n'a pas été trouvé");
+				"La musique " + path.string() + " n'a pas ete trouvé");
 			musicList->push_back(music);
 		}
 		else
 		{
 			auto buffer = new sf::SoundBuffer;
 			if (!buffer->loadFromFile(path.string()))throw std::invalid_argument(
-				"Le fichier audio " + path.string() + " n'a pas été trouvé");
+				"Le fichier audio " + path.string() + " n'a pas ete trouvé");
 			soundList->push_back(std::make_tuple(path.stem().string(), buffer));
 		}
 	}
@@ -196,7 +196,7 @@ RessourcePack::RessourcePack()
 
 sf::Image* RessourcePack::getImg(int n)
 {
-	if (imgLoc->at(n) == nullptr) throw std::invalid_argument("L'image n'a pas été charger");
+	if (imgLoc->at(n) == nullptr) throw std::invalid_argument("L'image n'a pas ete charger");
 	return imgLoc->at(n);
 };
 
@@ -239,5 +239,5 @@ sf::Image* RessourcePack::getPlayerImg(std::string s)
 			return std::get<1>(t);
 		}
 	}
-	throw new std::invalid_argument("L'image n'a pas été trouvé");
+	throw new std::invalid_argument("L'image n'a pas ete trouvé");
 }

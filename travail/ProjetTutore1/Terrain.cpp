@@ -17,15 +17,9 @@ Terrain::~Terrain()
 		{
 			if (elem != nullptr)
 			{
+				//selon le type d'élément on appel le bon destructeur
 				auto it = dynamic_cast<InteractiveObject*>(elem);
-				if (it != nullptr)
-				{
-					delete(it);
-				}
-				else
-				{
-					delete(elem);
-				}
+				delete(it != nullptr ? it : elem);
 			}
 		}
 	delete(TC);

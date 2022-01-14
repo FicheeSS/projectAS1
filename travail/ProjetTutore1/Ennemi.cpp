@@ -4,7 +4,7 @@ void Ennemi::moveWithIa(std::vector<bool> cols, sf::Vector2i pos_j)
 {
 	int xJ = pos_j.x;
 	std::tuple<DIRDEP, DIRDEP> dir;
-	if (xJ > _x)
+	if (xJ > static_cast<int>(_x))
 	{
 		// le Joueur est a droite de l'ennemi
 		dir = std::make_tuple(std::get<0>(dir), DIRDEP::RIGHT);

@@ -34,7 +34,7 @@ private:
 	 */
 	void loadTerrain(int lvl);
 	//De-alloue les ressources utlisées par l'Univers
-	void cleanup();
+	void cleanup() const;
 
 public:
 	//Constructeur par defaut pour l'univers
@@ -47,8 +47,9 @@ public:
 
 	/**
 	 * \brief Boucle principale d'animation
+	 * \return int : exit code
 	 */
-	void animate();
+	int animate();
 
 	/**
 	 * \brief Incrémente le niveau courant et charge le suivant
@@ -71,6 +72,6 @@ public:
 	/**
 	 * \brief Ferme tous et nettoie les ressources du programme
 	 */
-	void shutdown();
+	void shutdown() const;
 };
 #endif
