@@ -10,7 +10,7 @@ Menu::Menu(std::string path) : _path(std::move(path))
 	_path = full_path.string() + _path;
 
 
-	if(!music->openFromFile(full_path.string()+"\\Ressources\\audio\\menu.flac"))
+	if(!music->openFromFile(full_path.string()+R"(\Ressources\audio\menu.flac)"))
 		throw new std::invalid_argument("La musique n'a pas été charger");
 	//icon pour la barre des taches (logo du jeu)
 	if (!icon->loadFromFile(_path + "img.png"))

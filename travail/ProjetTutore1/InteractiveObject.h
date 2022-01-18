@@ -17,6 +17,6 @@ public:
 	 * \param p : Object a caster dans le bon type selon _h
 	 * \return : vrai - on doit supprimer le block | faux - on  doit le garder
 	 */
-	bool effectPlayer(std::any* p) override;
+	bool effect( std::any* p) ;
 };
 #endif

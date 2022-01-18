@@ -18,6 +18,7 @@ private:
 	RessourcePack* RP = nullptr;
 	sf::RenderWindow* RW = nullptr;
 	std::vector<Bullet*>* bullets = nullptr;
+	Ennemi* EnnemiToBeDeleted = nullptr;
 
 #ifdef DEBUG
 	bool ctrlIsInUse = false;
@@ -42,9 +43,14 @@ private:
  * \param p : Character* un personnage avec lequel on veut check les collisions
  * \return std::vector<bool>* liste des collisions selon posCol
  */
-	std::vector<bool>* collision(Character* p) const;
+	std::vector<bool>* collision(Character* p);
 
+	/**
+	 * \brief Gestion des collisions des Bullets avec le Terrain
+	 */
 	void collision_bullet() const;
+
+
 public:
 	//Constructeur par defaut pour l'univers
 	/**

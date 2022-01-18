@@ -19,7 +19,7 @@ int Univers::animate()
 	{
 		std::cerr << e.what() << std::endl;
 		currentMusic->stop();
-		return 1;
+		return EXIT_FAILURE;
 	}
 	while (RW->isOpen())
 	{
@@ -35,7 +35,7 @@ int Univers::animate()
 			{
 			case sf::Event::Closed: [[unlikely]];
 				shutdown();
-				return 0;
+				return EXIT_SUCCESS;
 			}
 			if (event.type == sf::Event::KeyPressed)
 			{
@@ -124,13 +124,24 @@ int Univers::animate()
 			en->moveWithIa(*listCollision, sf::Vector2i(static_cast<int>(p->getX()), static_cast<int>(p->getY())));
 			en->show(RW);
 		}
+		if (EnnemiToBeDeleted != nullptr) {
+			for (uint32_t i = 0; i < EnnemiList->size(); i++)
+			{
+				if (EnnemiList->at(i) == EnnemiToBeDeleted)
+				{
+					EnnemiList->erase(i + EnnemiList->begin());
+					EnnemiToBeDeleted = nullptr;
+					break;
+				}
+			}
+		}
 		collision_bullet();
 		for(auto b : *bullets)
 		{
 			b->update();
 			b->render(RW);
 		}
-		std::vector<bool>* listCollision = collision(p);
+		const std::vector<bool>* listCollision = collision(p);
 		p->move(dir, *listCollision);
 		p->show(RW);
 		RW->display();
@@ -138,11 +149,18 @@ int Univers::animate()
 	return 0;
 }
 
-std::vector<bool>* Univers::collision(Character* c) const
+std::vector<bool>* Univers::collision(Character* c)
 {
 	for (auto&& re : *res)
 	{
 		re = false;
+	}
+	for(auto b : *bullets)
+	{
+		if(b->getBounds().intersects(sf::Rect<float>(c->getRect())))
+		{
+			EnnemiToBeDeleted = reinterpret_cast<Ennemi*>(c);
+		}
 	}
 	for (const auto t : *ter->getTerrain())
 	{
@@ -154,9 +172,10 @@ std::vector<bool>* Univers::collision(Character* c) const
 #endif // DEBUG
 
 			const auto it = dynamic_cast<InteractiveObject*>(e);
+			
 			if (it != nullptr)
 			{
-				if (it->effectPlayer(reinterpret_cast<std::any*>(c)))
+				if (it->effect(reinterpret_cast<std::any*>(c))|| it->effect(reinterpret_cast<std::any*>(const_cast<Univers*>(this))))
 				{
 					//On supprime le block si besoin
 					for (uint32_t i = 0; i < ter->getTerrain()->size(); i++) 
@@ -189,35 +208,39 @@ std::vector<bool>* Univers::collision(Character* c) const
 	}
 	// std::printf("Collision BOTTOM : %s, UP : %s ,LEFT : %s , RIGHT %s\n", res->at(COLDIR::BOTTOM) ? "true" : "false", res->at(COLDIR::TOP) ? "true" : "false", res->at(COLDIR::LEFT) ? "true" : "false", res->at(COLDIR::RIGHT) ? "true" : "false");
 	return res;
+
 }
 
 void Univers::collision_bullet() const
 {
-	const auto toBeDeleted = new std::vector<uint32_t>();
+	uint32_t toBeDeleted = -1;
 	for(uint32_t i = 0 ; i < bullets->size();i++)
 	{
 		if(bullets->at(i)->getBounds().left  + bullets->at(i)->getBounds().width <= 0 || bullets->at(i)->getBounds().top + bullets->at(i)->getBounds().height <= 0 
-			|| bullets->at(i)->getBounds().left >= ter->getSizeX()*BLOCKWIDTH || bullets->at(i)->getBounds().top >= ter->getSizeY()*BLOCKHEIGHT)
+			|| bullets->at(i)->getBounds().left >= ter->getSizeX() * BLOCKWIDTH || bullets->at(i)->getBounds().top >=
+			ter->getSizeY() * BLOCKHEIGHT)
 		{
-			toBeDeleted->push_back(i);
-			continue;
+			toBeDeleted = i;
+			goto del;
+			
 		}
 		for (const auto t : *ter->getTerrain())
 		{
 			if (t->collide(sf::IntRect(bullets->at(i)->getBounds())))
 			{
-				toBeDeleted->push_back(i);
+				toBeDeleted = i ;
+				goto del;
 			}
 		}
 
 	}
-	for(const auto tbd : *toBeDeleted)
+del: 
+	if(toBeDeleted != -1)
 	{
-		delete(bullets->at(tbd));
-		bullets->erase(bullets->begin() + tbd);
+		delete(bullets->at(toBeDeleted));
+		bullets->erase(bullets->begin() + toBeDeleted);
 		bullets->shrink_to_fit();
 	}
-	delete(toBeDeleted);
 }
 
 

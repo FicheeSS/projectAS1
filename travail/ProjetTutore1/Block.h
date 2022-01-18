@@ -40,7 +40,7 @@ public :
 	 * \return Si les deux block sont les mêmes
 	 */
 	friend bool operator==(const Block& b1, const Block& b2);
-	virtual bool effectPlayer(std::any* a);
+	virtual bool effect(std::any* a);
 
 
 	//-----------------------GETTER SETTER---------------------------//

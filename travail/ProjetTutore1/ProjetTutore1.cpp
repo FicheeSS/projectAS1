@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
         return Univ.animate();
     }else
     {
-        return 0;
+        return EXIT_SUCCESS;
     }
     
 }

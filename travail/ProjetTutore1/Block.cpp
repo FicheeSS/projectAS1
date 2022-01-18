@@ -46,7 +46,7 @@ bool Block::collide(sf::IntRect rect) const
 	return _rect->intersects(rect);
 }
 
-bool Block::effectPlayer(std::any* a)
+bool Block::effect(std::any* a)
 {
 	return false;
 }
