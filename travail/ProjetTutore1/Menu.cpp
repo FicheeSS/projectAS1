@@ -2,6 +2,7 @@
 
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <SFML/Audio/Music.hpp>
 
 Menu::Menu(std::string path) : _path(std::move(path))
 {
@@ -9,7 +10,8 @@ Menu::Menu(std::string path) : _path(std::move(path))
 	_path = full_path.string() + _path;
 
 
-
+	if(!music->openFromFile(full_path.string()+"\\Ressources\\audio\\menu.flac"))
+		throw new std::invalid_argument("La musique n'a pas été charger");
 	//icon pour la barre des taches (logo du jeu)
 	if (!icon->loadFromFile(_path + "img.png"))
 		throw new std::invalid_argument("L'image n'a pas été charger");
@@ -55,7 +57,8 @@ bool Menu::menu() const
 	sf::RenderWindow window(sf::VideoMode(1200, 700), "Menu",sf::Style::Titlebar);
 	window.setIcon(256,256,icon->getPixelsPtr());
 
-	
+	music->setLoop(true);
+	music->play();
 	//creation des sprites
 	//sprite du background
 	sf::Sprite bk;
@@ -102,6 +105,7 @@ bool Menu::menu() const
 				containJouer = true; // pour afficher le bon bouton dans le draw plus loin
 				//si il click
 				if(event.type == sf::Event::MouseButtonPressed){
+					music->stop();
                     return true;
                 }
             }else {
@@ -111,6 +115,7 @@ bool Menu::menu() const
             if(qbound.contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))){
 				containQuitter = true;
                 if(event.type == sf::Event::MouseButtonPressed){
+					music->stop();
                     return false;
                 }
             }else{

@@ -17,7 +17,8 @@ private:
 	std::vector<std::tuple<std::string, sf::SoundBuffer*>>* soundList;
 	std::vector<sf::Music*>* musicList;
 	std::vector<sf::Image*>* backgroundImages;
-	std::string defaultFolder = "";
+	std::string defaultFolder ;
+	sf::Image* imgBullet;
 
 public:
 	RessourcePack();
@@ -30,7 +31,7 @@ public:
 	 */
 	void generateImg(std::string path);
 	[[deprecated]]
-	void generateBackgrounds(std::string path);
+	void generateBackgrounds(std::string path) const;
 	/**
 	 * \brief recupere dans le img celle à la position n
 	 * \throws std::invalid_argument si l'image n'existe pas 
@@ -43,7 +44,7 @@ public:
 	 * \param s : String le nom de l'image
 	 * \return sf::Image*
 	 */
-	sf::Image* getPlayerImg(std::string s);
+	sf::Image* getPlayerImg(std::string s) const;
 	/**
 	 * \brief Charge les fichier audio depuis le path specifié en paramètre
 	 * \param path : String vers les ressources
@@ -79,5 +80,11 @@ public:
 	 * \param fold : String path vers le fichier de ressources
 	 */
 	void setDefaultFolder(std::string fold) { defaultFolder = fold; };
+
+	/**
+	 * \brief Retourne le pointeur vers l'image du bullet 
+	 * \return  sf::Image*
+	 */
+	inline sf::Image* getBulletImg() const { return imgBullet; };
 };
 #endif

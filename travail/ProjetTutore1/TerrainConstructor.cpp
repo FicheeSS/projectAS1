@@ -8,7 +8,7 @@
 #include <iostream>
 #include "Ennemi.h"
 
-std::vector<sf::Image*>* TerrainConstructor::generatePersoImgInPlace(std::string s, RessourcePack* RP) const
+std::vector<sf::Image*>* TerrainConstructor::generatePersoImgInPlace(const std::string& s, RessourcePack* RP) const
 {
 	const auto img = new std::vector<sf::Image*>(4);
 	imageVectorMemory->push_back(img);

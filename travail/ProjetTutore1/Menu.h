@@ -2,6 +2,7 @@
 #define MENU_H
 #include<iostream>
 #include<SFML/Graphics.hpp>
+#include <SFML/Audio/Music.hpp>
 
 class Menu
 {
@@ -24,6 +25,8 @@ class Menu
         sf::Texture* boutonquitter = new sf::Texture();
         sf::Texture* boutonquitterclick = new sf::Texture();
         std::string _path;
+        sf::Music* music = new sf::Music;
+
 };
 
 #endif // MENU_H

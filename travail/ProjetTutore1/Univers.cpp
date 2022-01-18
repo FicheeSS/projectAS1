@@ -6,7 +6,7 @@
 #include "Player.h"
 #include <iostream>
 #include "Ennemi.h"
-
+#include "Bullet.h"
 int Univers::animate()
 {
 	currentMusic = RP->getLevelMusic(lvl - 1);
@@ -52,6 +52,21 @@ int Univers::animate()
 					break;
 				case sf::Keyboard::Down:
 					dir = std::make_tuple(DIRDEP::DOWN, std::get<1>(dir));
+					break;
+				case sf::Keyboard::Space :
+					if (std::get<1>(dir) != DIRDEP::NONE) {
+						float dirX = 1;
+						if (std::get<1>(dir) == DIRDEP::LEFT)
+						{
+							dirX = -1.f;
+						}
+						else if (std::get<1>(dir) == DIRDEP::RIGHT)
+						{
+							dirX = 1.f;
+
+						}
+						bullets->push_back(new Bullet(RP->getBulletImg(), p->getX(), p->getY(), dirX, 0.f));
+					}
 					break;
 #ifdef DEBUG
 				case sf::Keyboard::LControl:
@@ -108,6 +123,12 @@ int Univers::animate()
 			const std::vector<bool>* listCollision = collision(en);
 			en->moveWithIa(*listCollision, sf::Vector2i(static_cast<int>(p->getX()), static_cast<int>(p->getY())));
 			en->show(RW);
+		}
+		collision_bullet();
+		for(auto b : *bullets)
+		{
+			b->update();
+			b->render(RW);
 		}
 		std::vector<bool>* listCollision = collision(p);
 		p->move(dir, *listCollision);
@@ -170,6 +191,35 @@ std::vector<bool>* Univers::collision(Character* c) const
 	return res;
 }
 
+void Univers::collision_bullet() const
+{
+	const auto toBeDeleted = new std::vector<uint32_t>();
+	for(uint32_t i = 0 ; i < bullets->size();i++)
+	{
+		if(bullets->at(i)->getBounds().left  + bullets->at(i)->getBounds().width <= 0 || bullets->at(i)->getBounds().top + bullets->at(i)->getBounds().height <= 0 
+			|| bullets->at(i)->getBounds().left >= ter->getSizeX()*BLOCKWIDTH || bullets->at(i)->getBounds().top >= ter->getSizeY()*BLOCKHEIGHT)
+		{
+			toBeDeleted->push_back(i);
+			continue;
+		}
+		for (const auto t : *ter->getTerrain())
+		{
+			if (t->collide(sf::IntRect(bullets->at(i)->getBounds())))
+			{
+				toBeDeleted->push_back(i);
+			}
+		}
+
+	}
+	for(const auto tbd : *toBeDeleted)
+	{
+		delete(bullets->at(tbd));
+		bullets->erase(bullets->begin() + tbd);
+		bullets->shrink_to_fit();
+	}
+	delete(toBeDeleted);
+}
+
 
 void Univers::loadTerrain(int lvl)
 {
@@ -212,6 +262,14 @@ void Univers::loadTerrain(int lvl)
 		delete(EnnemiList);
 	}
 	EnnemiList = ter->getEnnemiList();
+	if (bullets != nullptr) {
+		for (auto b : *bullets)
+		{
+			delete(b);
+		}
+		delete(bullets);
+	}
+	bullets = new std::vector<Bullet*>();
 	backgroundTex = new sf::Texture();
 	const auto si = sf::Vector2i(static_cast<int>(ter->getSizeY()) * BLOCKWIDTH,
 	                             static_cast<int>(ter->getSizeX()) * BLOCKHEIGHT);
@@ -249,7 +307,9 @@ void Univers::shutdown() const
 {
 	cleanup();
 	RW->close();
+	if(currentMusic !=nullptr){
 	currentMusic->stop();
+	}
 }
 
 

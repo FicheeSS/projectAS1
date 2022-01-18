@@ -62,6 +62,7 @@ void RessourcePack::generateImg(std::string path)
 		// on lance une exeption si on n'arrive pas a charger l'image
 		boost::regex nb("[0-9]*");
 		boost::regex background(".*backgrounds.*");
+		boost::regex bullet(".*bullet*.");
 		if (boost::regex_match(path.stem().string(), nb))
 		{
 			//C'est un block ou un bakcground
@@ -77,14 +78,19 @@ void RessourcePack::generateImg(std::string path)
 		}
 		else
 		{
-			//C'est une image de personnage
-			imgLocPerso->push_back(std::make_tuple(path.stem().string(), img));
+			if(boost::regex_match(path.stem().string(), bullet)){
+				imgBullet = img; 
+			}
+			else {
+				//C'est une image de personnage
+				imgLocPerso->push_back(std::make_tuple(path.stem().string(), img));
+			}
 		}
 	}
 }
 
 [[deprecated]]
-void RessourcePack::generateBackgrounds(std::string path)
+void RessourcePack::generateBackgrounds(std::string path) const
 {
 	//A fussioner avec generateIMG
 	//Rechercher et charger les images dans le HEAP
@@ -151,7 +157,7 @@ void RessourcePack::generateAudioData(std::string path) const
 			}
 		}
 	}
-	if (paths.empty()) throw std::invalid_argument("Aucune image n'ete trouve");
+	if (paths.empty()) throw std::invalid_argument("Aucun Fichier Audio n'a été trouvé");
 	std::sort(paths.begin(), paths.end());
 	for (auto path : paths)
 	{
@@ -192,6 +198,7 @@ RessourcePack::RessourcePack()
 	soundList = new std::vector<std::tuple<std::string, sf::SoundBuffer*>>;
 	musicList = new std::vector<sf::Music*>;
 	backgroundImages = new std::vector<sf::Image*>;
+	imgBullet = new sf::Image();
 }
 
 sf::Image* RessourcePack::getImg(int n)
@@ -228,9 +235,10 @@ RessourcePack::~RessourcePack()
 	delete(imgLocPerso);
 	delete(imgLoc);
 	delete(backgroundImages);
+	delete(imgBullet);
 }
 
-sf::Image* RessourcePack::getPlayerImg(std::string s)
+sf::Image* RessourcePack::getPlayerImg(std::string s) const
 {
 	for (auto t : *imgLocPerso)
 	{

@@ -8,7 +8,7 @@
 
 class Character;
 class Ennemi;
-
+class Bullet;
 class Univers
 {
 private:
@@ -17,6 +17,8 @@ private:
 	Terrain* ter = nullptr;
 	RessourcePack* RP = nullptr;
 	sf::RenderWindow* RW = nullptr;
+	std::vector<Bullet*>* bullets = nullptr;
+
 #ifdef DEBUG
 	bool ctrlIsInUse = false;
 	bool tabIsUse = false;
@@ -35,7 +37,14 @@ private:
 	void loadTerrain(int lvl);
 	//De-alloue les ressources utlisées par l'Univers
 	void cleanup() const;
+	/**
+ * \brief Calcul les collisions avec le Terrain
+ * \param p : Character* un personnage avec lequel on veut check les collisions
+ * \return std::vector<bool>* liste des collisions selon posCol
+ */
+	std::vector<bool>* collision(Character* p) const;
 
+	void collision_bullet() const;
 public:
 	//Constructeur par defaut pour l'univers
 	/**
@@ -60,12 +69,7 @@ public:
 		loadTerrain(lvl);
 	};
 
-	/**
-	 * \brief Calcul les collisions avec le Terrain 
-	 * \param p : Character* un personnage avec lequel on veut check les collisions
-	 * \return std::vector<bool>* liste des collisions selon posCol
-	 */
-	std::vector<bool>* collision(Character* p) const;
+
 
 	enum posCol { BOTTOM =0, UP=1, ATLEFT=2, ATRIGHT=3 };
 

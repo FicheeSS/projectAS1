@@ -20,7 +20,7 @@ private:
  * \param RP : RessourcePack
  * \return std::vector<sf::Image*>* ptr vers tableau de ptr d'image
  */
-	std::vector<sf::Image*>* generatePersoImgInPlace(std::string s, RessourcePack* RP) const;
+	std::vector<sf::Image*>* generatePersoImgInPlace(const std::string& s, RessourcePack* RP) const;
 public:
 	unsigned int sizeX = 0;
 	unsigned int sizeY = 0;
