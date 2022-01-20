@@ -97,8 +97,9 @@ bool Menu::menu() const
 		sf::Event event{};
 		while (window.pollEvent(event)) {
 			//si on press escape alors on ferme le jeu
-			if (event.key.code == sf::Keyboard::Escape) {
-				window.close();
+			if(event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Escape)
+			{
+				return false;
 			}
 			//si la souris est sur le bouton jouer
             if (jbound.contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)))) {

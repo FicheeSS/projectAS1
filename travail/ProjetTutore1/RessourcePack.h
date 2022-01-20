@@ -59,15 +59,21 @@ public:
 	 * \return sf::SoundBuffer*
 	 */
 	sf::SoundBuffer* getSoundBufferByName(std::string name);
+
 	/**
-	 * \brief Recupère l'image qui correspond à l'image de background
-	 * \param n : int le niveau 
-	 * \return sf::SoundBuffer*
+	 * \brief Recupère l'image qui correspond à l'image de hud
+	 * \param n : int de l'image de HUD
+	 * \return sf::Image*
 	 */
 	sf::Image* getImgHud(int n) const
 	{
 		return hudImage->at(n);
 	}
+	/**
+	 * \brief Recupère l'image qui correspond à l'image de background
+	 * \param n : int le niveau
+	 * \return sf::Image*
+	 */
 	sf::Image* getImgBackground(int n) const
 	{
 		return (static_cast<unsigned>(n) >= backgroundImages->size()) ?
