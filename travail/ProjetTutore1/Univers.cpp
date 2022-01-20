@@ -22,6 +22,10 @@ int Univers::animate()
 		currentMusic->stop();
 		return EXIT_FAILURE;
 	}
+	
+
+	//auto r = RP->generateText("text12", 10, 10);
+
 
 	while (RW->isOpen())
 	{
@@ -30,6 +34,11 @@ int Univers::animate()
 		{
 			RW->draw(*background);
 		}
+		/*for (auto s : *r)
+		{
+			RW->draw(*s);
+		}
+		*/
 		sf::Event event{};
 		while (RW->pollEvent(event))
 		{

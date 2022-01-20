@@ -68,6 +68,7 @@ void RessourcePack::generateImg(std::string path)
 		boost::regex bullet(".*bullet*.");
 		boost::regex hud(".*hud*.");
 		boost::regex font(".*font*.");
+		boost::regex nont(".*nont*.");
 		if (boost::regex_match(path.stem().string(), nb))
 		{
 			//C'est un block ou un bakcground
@@ -92,13 +93,17 @@ void RessourcePack::generateImg(std::string path)
 			else if(boost::regex_match(path.stem().string(),font))
 			{
 				generate_font(img);
+			}else if(boost::regex_match(path.stem().string(),nont))
+			{
+				generate_nont(img);
 			}
-		else {
+			else {
 				//C'est une image de personnage
 				imgLocPerso->push_back(std::make_tuple(path.stem().string(), img));
 			}
 		}
 	}
+	return;
 }
 
 [[deprecated]]
@@ -208,13 +213,13 @@ void RessourcePack::generate_font(sf::Image* imgFont)
 	int x = 14;
 	int y = 18;
 	char c = 'A';
-	auto tex = new sf::Texture(); //Fuite memoire a gerer maybe
+	const auto tex = new sf::Texture(); //Fuite memoire a gerer maybe
 	tex->loadFromImage(*imgFont);
 	for (int z = 0; z < 2; z++) {
 		for (int i = 0; i < 14; i++)
 		{
 			tex->setSmooth(true);
-			auto rec = new sf::IntRect(x, y, sizeXChar, sizeYChar);
+			const auto rec = new sf::IntRect(x, y, sizeXChar, sizeYChar);
 			auto sp = new sf::Sprite(*tex, *rec);
 			fontSprite->insert({ c, sp });
 			c++;
@@ -222,6 +227,24 @@ void RessourcePack::generate_font(sf::Image* imgFont)
 		}
 		y += 902;
 		x = 14;
+	}
+}
+
+void RessourcePack::generate_nont(sf::Image* imgFont)
+{
+	int x = 14;
+	int y = 18;
+	char c = '0';
+	const auto tex = new sf::Texture(); //Fuite memoire a gerer maybe
+	tex->loadFromImage(*imgFont);
+		for (int i = 0; i < 10; i++)
+		{
+			tex->setSmooth(true);
+			const auto rec = new sf::IntRect(x, y, sizeXChar, sizeYChar);
+			auto sp = new sf::Sprite(*tex, *rec);
+			fontSprite->insert({ c, sp });
+			c++;
+			x += 66;
 	}
 }
 

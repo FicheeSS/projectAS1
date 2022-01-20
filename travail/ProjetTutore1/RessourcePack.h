@@ -28,6 +28,7 @@ private:
 	std::vector<sf::Image*>* hudImage;
 	std::map<char, sf::Sprite*>* fontSprite = new std::map<char, sf::Sprite*>();
 	void generate_font(sf::Image* imgFont);
+	void generate_nont(sf::Image* imgFont);
 	int const sizeXChar = 44;
 	int const sizeYChar = 42;
 
