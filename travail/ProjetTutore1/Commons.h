@@ -13,4 +13,5 @@
 
  enum COLDIR { TOP =0, BOTTOM=1 , LEFT =2,RIGHT=3 };
 
+enum ACTION {ND,DEL,NEXTLEVEL};
 #endif

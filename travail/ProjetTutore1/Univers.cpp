@@ -142,9 +142,15 @@ int Univers::animate()
 			b->render(RW);
 		}
 		const std::vector<bool>* listCollision = collision(p);
-		p->move(dir, *listCollision);
-		p->show(RW);
+		if (listCollision != nullptr) {
+			p->move(dir, *listCollision);
+			p->show(RW);
+		}else
+		{
+			nextLevel();
+		}
 		RW->display();
+
 	}
 	return 0;
 }
@@ -175,17 +181,22 @@ std::vector<bool>* Univers::collision(Character* c)
 			
 			if (it != nullptr)
 			{
-				if (it->effect(reinterpret_cast<std::any*>(c))|| it->effect(reinterpret_cast<std::any*>(const_cast<Univers*>(this))))
+				ACTION action = it->effect(reinterpret_cast<std::any*>(c));
+				if (action == DEL)
 				{
 					//On supprime le block si besoin
 					for (uint32_t i = 0; i < ter->getTerrain()->size(); i++) 
 					{//On le cherche dans la liste du Terrain
+
 						if (ter->getElementAtPos(static_cast<int>(i)) == it)
 						{
 							ter->getTerrain()->erase(ter->getTerrain()->begin() + static_cast<int>(i));
 							break;
 						}
 					}
+				}else if(action == NEXTLEVEL)
+				{
+					return nullptr;
 				}
 				continue;
 			}

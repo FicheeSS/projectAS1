@@ -9,7 +9,7 @@ class Block
 private:
 	float _x = 0;
 	float _y = 0;
-	sf::IntRect* _rect = nullptr;
+	//sf::IntRect* _rect = nullptr;
 	sf::Sprite* _sprite = nullptr;
 	sf::Texture* _tex = nullptr;
 	sf::Image* img_ = nullptr;
@@ -40,7 +40,7 @@ public :
 	 * \return Si les deux block sont les mêmes
 	 */
 	friend bool operator==(const Block& b1, const Block& b2);
-	virtual bool effect(std::any* a);
+	virtual ACTION effect(std::any* a);
 
 
 	//-----------------------GETTER SETTER---------------------------//

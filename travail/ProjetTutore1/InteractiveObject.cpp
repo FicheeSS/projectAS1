@@ -7,27 +7,21 @@ InteractiveObject::InteractiveObject(float x, float y, sf::Image* img, int h)
 {
 }
 
-bool InteractiveObject::effect( std::any *a )
+ACTION InteractiveObject::effect(std::any* a)
 {
 	Player* p;
-	Univers* u;
 	switch (_h) {
 	case(100):
 		 p = reinterpret_cast< Player*>(a);
 		if (p != nullptr) {
 			p->setDoubleJump(true);
-			return true;
+			return DEL;
 		}
-		break;
+		return ND;
 	case(101):
-		 u = reinterpret_cast< Univers*>(a);
-		if (u != nullptr) {
-			u->nextLevel();
-			return false;
-		}
-		break;
+		return NEXTLEVEL;
 	default:
-		return false;
+		return ND;
 	}
 }
 
