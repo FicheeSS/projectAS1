@@ -257,8 +257,8 @@ void Univers::collision_bullet() const
 	for(uint32_t i = 0 ; i < bullets->size();i++)
 	{
 		if(bullets->at(i)->getBounds().left  + bullets->at(i)->getBounds().width <= 0 || bullets->at(i)->getBounds().top + bullets->at(i)->getBounds().height <= 0 
-			|| bullets->at(i)->getBounds().left >= ter->getSizeX() * BLOCKWIDTH || bullets->at(i)->getBounds().top >=
-			ter->getSizeY() * BLOCKHEIGHT)
+			|| bullets->at(i)->getBounds().left >= ter->getSizeX() * BLOCKHEIGHT || bullets->at(i)->getBounds().top >=
+			ter->getSizeY() * BLOCKWIDTH)
 		{
 			toBeDeleted = i;
 			goto del;
