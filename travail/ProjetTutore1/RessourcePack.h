@@ -1,6 +1,7 @@
 #ifndef RESSOURCEPACK_H
 #define RESSOURCEPACK_H
 
+#include <map>
 #include <string>
 #include <vector>
 #include <SFML/Graphics/Image.hpp>
@@ -8,6 +9,11 @@
 #define IMGEXT ".png"
 #define AUDEXT ".flac"
 
+
+namespace sf
+{
+	class Sprite;
+}
 
 class RessourcePack
 {
@@ -20,10 +26,16 @@ private:
 	std::string defaultFolder ;
 	sf::Image* imgBullet;
 	std::vector<sf::Image*>* hudImage;
+	std::map<char, sf::Sprite*>* fontSprite = new std::map<char, sf::Sprite*>();
+	void generate_font(sf::Image* imgFont);
+	int const sizeXChar = 44;
+	int const sizeYChar = 42;
 
 public:
 	RessourcePack();
 	~RessourcePack();
+
+	std::vector<sf::Sprite*>* generateText(std::string s, int x, int y);
 
 	/**
 	 * \brief Charge les images depuis le path specifié en paramètre 

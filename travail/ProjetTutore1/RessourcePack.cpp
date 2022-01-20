@@ -4,7 +4,10 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/regex/v5/regex.hpp>
 #pragma warning(pop)
+#include <iostream>
 #include <regex>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 int getMaxFromPathStem(std::vector<boost::filesystem::path>* path)
 {
@@ -64,6 +67,7 @@ void RessourcePack::generateImg(std::string path)
 		boost::regex background(".*backgrounds.*");
 		boost::regex bullet(".*bullet*.");
 		boost::regex hud(".*hud*.");
+		boost::regex font(".*font*.");
 		if (boost::regex_match(path.stem().string(), nb))
 		{
 			//C'est un block ou un bakcground
@@ -84,7 +88,12 @@ void RessourcePack::generateImg(std::string path)
 			}
 			else if (boost::regex_match(path.stem().string(), hud)) {
 				hudImage->push_back(img);
-			}else {
+			}
+			else if(boost::regex_match(path.stem().string(),font))
+			{
+				generate_font(img);
+			}
+		else {
 				//C'est une image de personnage
 				imgLocPerso->push_back(std::make_tuple(path.stem().string(), img));
 			}
@@ -194,6 +203,28 @@ sf::SoundBuffer* RessourcePack::getSoundBufferByName(std::string name)
 	return nullptr;
 }
 
+void RessourcePack::generate_font(sf::Image* imgFont)
+{
+	int x = 14;
+	int y = 18;
+	char c = 'A';
+	auto tex = new sf::Texture(); //Fuite memoire a gerer maybe
+	tex->loadFromImage(*imgFont);
+	for (int z = 0; z < 2; z++) {
+		for (int i = 0; i < 14; i++)
+		{
+			tex->setSmooth(true);
+			auto rec = new sf::IntRect(x, y, sizeXChar, sizeYChar);
+			auto sp = new sf::Sprite(*tex, *rec);
+			fontSprite->insert({ c, sp });
+			c++;
+			x += 68;
+		}
+		y += 902;
+		x = 14;
+	}
+}
+
 RessourcePack::RessourcePack()
 {
 	imgLoc = new std::vector<sf::Image*>;
@@ -240,6 +271,29 @@ RessourcePack::~RessourcePack()
 	delete(imgLoc);
 	delete(backgroundImages);
 	delete(imgBullet);
+}
+
+std::vector<sf::Sprite*>* RessourcePack::generateText(std::string s, int x, int y)
+{
+	auto result = new std::vector<sf::Sprite*>();
+	for(auto c : s )
+	{
+		c  = std::toupper(c);
+		try
+		{
+			auto s = fontSprite->at(c);
+			auto sp = new sf::Sprite(*s);
+			sp->setPosition(x, y);
+			result->push_back(sp);
+		}
+		catch (std::out_of_range)
+		{
+			std::cerr << c << " out of range" << std::endl;
+		}
+		x += sizeXChar - 5;
+	}
+	return  result;
+
 }
 
 sf::Image* RessourcePack::getPlayerImg(std::string s) const

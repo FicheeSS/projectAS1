@@ -9,6 +9,7 @@
 #include "Bullet.h"
 int Univers::animate()
 {
+	//Lancement de la musique
 	currentMusic = RP->getLevelMusic(lvl - 1);
 	try
 	{
@@ -21,6 +22,7 @@ int Univers::animate()
 		currentMusic->stop();
 		return EXIT_FAILURE;
 	}
+
 	while (RW->isOpen())
 	{
 		RW->clear();
@@ -54,7 +56,7 @@ int Univers::animate()
 					dir = std::make_tuple(DIRDEP::DOWN, std::get<1>(dir));
 					break;
 				case sf::Keyboard::Space :
-
+					//gestion du lancement du tir
 					if (std::get<1>(dir) != DIRDEP::NONE && p->getcanShoot()) {
 						float dirX = 1;
 						if (std::get<1>(dir) == DIRDEP::LEFT)
@@ -102,6 +104,7 @@ int Univers::animate()
 				}
 			}
 		}
+		//Affichage du Terrain
 		for (auto t : *ter->getTerrain())
 		{
 			t->show(RW);
@@ -119,6 +122,7 @@ int Univers::animate()
 			tabIsUse = false;
 		}
 #endif // DEBUG
+		//---------------Déplacement et affichage des ennemis-----------------//
 		for (const auto en : *EnnemiList)
 		{
 			const std::vector<bool>* listCollision = collision(en);
@@ -136,12 +140,18 @@ int Univers::animate()
 				}
 			}
 		}
+		//------------------------------------------------------------------//
+
+		//-------------Gestion des bullets----------------------------------//
 		collision_bullet();
 		for(auto b : *bullets)
 		{
 			b->update();
 			b->render(RW);
 		}
+		//----------------------------------------------------------------//
+
+		//-------------Gestion de l'HUD-----------------------------------//
 		for(auto hud : *hudList)
 		{
 			RW->draw(*hud);
