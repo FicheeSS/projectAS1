@@ -161,8 +161,8 @@ void RessourcePack::generateAudioData(std::string path) const
 	std::sort(paths.begin(), paths.end());
 	for (auto path : paths)
 	{
-		std::regex nb(".*\\\d*\.flac");
-		if (std::regex_search(path.string(), nb))
+		boost::regex nb("[0-9]*");
+		if (boost::regex_match(path.stem().string(), nb))
 		{
 			auto music = new sf::Music;
 			if (!music->openFromFile(path.string())) throw std::invalid_argument(

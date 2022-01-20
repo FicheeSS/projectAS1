@@ -63,7 +63,12 @@ public:
 	 * \param n : int le niveau 
 	 * \return sf::SoundBuffer*
 	 */
-	sf::Image* getImgBackground(int n) { return backgroundImages->at(n - 1); };
+	sf::Image* getImgBackground(int n)
+	{
+		return (static_cast<unsigned>(n) >= backgroundImages->size()) ?
+			backgroundImages->at(backgroundImages->size() -1)
+			:backgroundImages->at(n);
+	};
 	/**
 	 * \brief renvoie la music pour le niveau donner en paramètre ou si le niveau est en dehors du tableau la music la plus proche
 	 * \param lvl : int le niveau pour la musique
