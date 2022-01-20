@@ -223,7 +223,7 @@ std::vector<bool>* Univers::collision(Character* c)
 					hudList->push_back(sp);
 					garbage.push_back(tex);
 					garbage.push_back(rec);
-					sp->setPosition(10, 10 + RP->getImgHud(0)->getSize().y);
+					sp->setPosition(10 + RP->getImgHud(0)->getSize().x, 10 );
 					p->setCanShoot(true);
 					goto remove_elem;
 				}
