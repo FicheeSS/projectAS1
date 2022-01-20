@@ -54,7 +54,8 @@ int Univers::animate()
 					dir = std::make_tuple(DIRDEP::DOWN, std::get<1>(dir));
 					break;
 				case sf::Keyboard::Space :
-					if (std::get<1>(dir) != DIRDEP::NONE) {
+
+					if (std::get<1>(dir) != DIRDEP::NONE && p->getcanShoot()) {
 						float dirX = 1;
 						if (std::get<1>(dir) == DIRDEP::LEFT)
 						{
@@ -184,10 +185,10 @@ std::vector<bool>* Univers::collision(Character* c)
 				ACTION action = it->effect(reinterpret_cast<std::any*>(c));
 				if (action == DEL)
 				{
+				remove_elem:
 					//On supprime le block si besoin
 					for (uint32_t i = 0; i < ter->getTerrain()->size(); i++) 
 					{//On le cherche dans la liste du Terrain
-
 						if (ter->getElementAtPos(static_cast<int>(i)) == it)
 						{
 							ter->getTerrain()->erase(ter->getTerrain()->begin() + static_cast<int>(i));
@@ -197,6 +198,11 @@ std::vector<bool>* Univers::collision(Character* c)
 				}else if(action == NEXTLEVEL)
 				{
 					return nullptr;
+				}else if (action == CANSHOOT)
+				{
+					p->setCanShoot(true);
+					goto remove_elem;
+					break;
 				}
 				continue;
 			}
@@ -273,7 +279,7 @@ void Univers::loadTerrain(int lvl)
 	ter = new Terrain(RP);
 	try
 	{
-		ter->loadTerrain(lvl);
+		ter->loadTerrain(lvl,p);
 	}
 	catch (std::invalid_argument& e)
 	{

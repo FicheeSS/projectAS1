@@ -46,5 +46,6 @@ public :
 	void setMaxX(int x) { _maxX = x; };
 	sf::Vector2u getSize() { return _size; };
 	void setDoubleJump(bool jmp) { _canDoubleJump = jmp; };
+	bool getDoubleJump() { return _canDoubleJump; };
 };
 #endif

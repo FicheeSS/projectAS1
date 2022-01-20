@@ -1,7 +1,17 @@
-﻿  Univers.cpp
+﻿  Block.cpp
+  Character.cpp
+  Ennemi.cpp
+  InteractiveObject.cpp
+  Player.cpp
+  ProjetTutore1.cpp
+  Terrain.cpp
+  TerrainConstructor.cpp
+  Univers.cpp
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Character.cpp(3,71): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Character.cpp(3,78): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
   Génération de code en cours
-  12 of 3528 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
+  20 of 3801 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
     12 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
   ProjetTutore1.vcxproj -> C:\Users\theob\Documents\GitHub\as-pts1\travail\ProjetTutore1\Release\ProjetTutore1.exe
