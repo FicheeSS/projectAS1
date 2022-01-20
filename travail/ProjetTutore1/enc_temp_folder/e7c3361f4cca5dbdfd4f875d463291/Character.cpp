@@ -47,11 +47,6 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 		_x--;
 		_place = RIGHT;
 	}
-	if(cols.at(LEFT))
-	{
-		_x++;
-		_place = LEFT;
-	}
 	if (cols.at(TOP))
 	{
 		if (_accel < 0)

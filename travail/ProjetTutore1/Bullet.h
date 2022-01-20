@@ -7,7 +7,7 @@ class Bullet
 {
 private:
 	sf::Vector2f* direction=nullptr;
-	float vitesseTir = 1 ;
+	float vitesseTir = 2.f ;
 	float _x = 0;
 	float _y = 0;
 	sf::Sprite* _sprite = nullptr;
