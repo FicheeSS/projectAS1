@@ -315,7 +315,7 @@ void Univers::loadTerrain(int lvl)
 	                             static_cast<int>(ter->getSizeX()) * BLOCKHEIGHT);
 	backgroundTex->setSmooth(true);
 	backgroundTex->setRepeated(true);
-	backgroundTex->loadFromImage(*RP->getImgBackground(1), sf::IntRect(sf::Vector2i(0, 0), si));
+	backgroundTex->loadFromImage(*RP->getImgBackground(lvl), sf::IntRect(sf::Vector2i(0, 0), si));
 	background = new sf::Sprite(*backgroundTex);
 #pragma warning( push )
 #pragma warning( disable : 4244)
