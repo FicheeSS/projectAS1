@@ -234,9 +234,10 @@ std::vector<bool>* Univers::collision(Character* c)//block 50 fait tomber ds la 
 			const int xp = static_cast<int>(c->getX());
 			const int yp = static_cast<int>(c->getY());
 			const sf::Vector2u size = c->getSize();
+			/*
 			if (yb + size.y <= yp + size.y / 3)
 				res->at(TOP) = true;
-			else if (static_cast<unsigned>(yb) >= yp + size.y / 4)
+			else*/ if (static_cast<unsigned>(yb) >= yp + size.y / 4)
 				res->at(COLDIR::BOTTOM) = true;
 			else if (static_cast<unsigned>(xp) > xb + size.x / 4)
 				res->at(LEFT) = true;
