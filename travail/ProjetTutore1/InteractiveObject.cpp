@@ -20,6 +20,8 @@ ACTION InteractiveObject::effect(std::any* a)
 		return ND;
 	case(101):
 		return NEXTLEVEL;
+	case(102):
+		return CANSHOOT;
 	default:
 		return ND;
 	}

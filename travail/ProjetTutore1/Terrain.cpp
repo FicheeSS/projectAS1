@@ -5,9 +5,9 @@ Terrain::Terrain(RessourcePack* rp) : RP(rp)
 {
 }
 
-void Terrain::loadTerrain(int level)
+void Terrain::loadTerrain(int level, Player* p)
 {
-	terrain = TC->ConstructTerrainFromLevelFile(level, *RP);
+	terrain = TC->ConstructTerrainFromLevelFile(level, *RP,p);
 }
 
 Terrain::~Terrain()

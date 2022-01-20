@@ -30,7 +30,7 @@ std::vector<sf::Image*>* TerrainConstructor::generatePersoImgInPlace(const std::
 	return img;
 }
 
-std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level, RessourcePack& RP)
+std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level, RessourcePack& RP, Player* oldp)
 {
 	std::vector<std::vector<int>>* lvl;
 	imageVectorMemory = new std::vector<std::vector<sf::Image*>*>();
@@ -72,8 +72,9 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
 			}
 			else if (line[x] == -1)
 			{
+				
 				p = new Player(static_cast<int>(x) * BLOCKWIDTH, static_cast<int>(y) * BLOCKHEIGHT,
-				               generatePersoImgInPlace("p", &RP));
+						generatePersoImgInPlace("p", &RP), oldp);
 			}
 			else if (line[x] == -2)
 			{

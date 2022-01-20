@@ -22,7 +22,7 @@ public :
 	 * \brief Charge le terrain du niveau passer en paramètre
 	 * \param level : int le numero du niveau à charger
 	 */
-	void loadTerrain(int level);
+	void loadTerrain(int level, Player* p);
 
 
 	//-----------------------GETTER SETTER---------------------------//

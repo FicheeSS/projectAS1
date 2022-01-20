@@ -37,7 +37,7 @@ public:
 	 * \param RP : RessourePack
 	 * \return std::vector<Block*>* le Terrain ainsi généré
 	 */
-	std::vector<Block*>* ConstructTerrainFromLevelFile(int level, RessourcePack& RP);
+	std::vector<Block*>* ConstructTerrainFromLevelFile(int level, RessourcePack& RP, Player* p);
 	~TerrainConstructor();
 	std::vector<Ennemi*>* getEnnemiList() const { return EnnemiList; };
 
