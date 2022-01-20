@@ -63,6 +63,7 @@ void RessourcePack::generateImg(std::string path)
 		boost::regex nb("[0-9]*");
 		boost::regex background(".*backgrounds.*");
 		boost::regex bullet(".*bullet*.");
+		boost::regex hud(".*hud*.");
 		if (boost::regex_match(path.stem().string(), nb))
 		{
 			//C'est un block ou un bakcground
@@ -81,7 +82,9 @@ void RessourcePack::generateImg(std::string path)
 			if(boost::regex_match(path.stem().string(), bullet)){
 				imgBullet = img; 
 			}
-			else {
+			else if (boost::regex_match(path.stem().string(), hud)) {
+				hudImage->push_back(img);
+			}else {
 				//C'est une image de personnage
 				imgLocPerso->push_back(std::make_tuple(path.stem().string(), img));
 			}
@@ -199,6 +202,7 @@ RessourcePack::RessourcePack()
 	musicList = new std::vector<sf::Music*>;
 	backgroundImages = new std::vector<sf::Image*>;
 	imgBullet = new sf::Image();
+	hudImage = new std::vector<sf::Image*>;
 }
 
 sf::Image* RessourcePack::getImg(int n)

@@ -19,6 +19,7 @@ private:
 	std::vector<sf::Image*>* backgroundImages;
 	std::string defaultFolder ;
 	sf::Image* imgBullet;
+	std::vector<sf::Image*>* hudImage;
 
 public:
 	RessourcePack();
@@ -63,11 +64,15 @@ public:
 	 * \param n : int le niveau 
 	 * \return sf::SoundBuffer*
 	 */
-	sf::Image* getImgBackground(int n)
+	sf::Image* getImgHud(int n) const
+	{
+		return hudImage->at(n);
+	}
+	sf::Image* getImgBackground(int n) const
 	{
 		return (static_cast<unsigned>(n) >= backgroundImages->size()) ?
 			backgroundImages->at(backgroundImages->size() -1)
-			:backgroundImages->at(n);
+			:backgroundImages->at(n-1);
 	};
 	/**
 	 * \brief renvoie la music pour le niveau donner en paramètre ou si le niveau est en dehors du tableau la music la plus proche

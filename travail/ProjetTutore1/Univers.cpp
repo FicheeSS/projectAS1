@@ -142,6 +142,10 @@ int Univers::animate()
 			b->update();
 			b->render(RW);
 		}
+		for(auto hud : *hudList)
+		{
+			RW->draw(*hud);
+		}
 		const std::vector<bool>* listCollision = collision(p);
 		if (listCollision != nullptr) {
 			p->move(dir, *listCollision);
@@ -195,14 +199,33 @@ std::vector<bool>* Univers::collision(Character* c)
 							break;
 						}
 					}
-				}else if(action == NEXTLEVEL)
-				{
+
+				}else if(action == JUMP){
+					auto tex = new sf::Texture();
+					tex->loadFromImage(*RP->getImgHud(0));
+					tex->setSmooth(true);
+					auto rec = new sf::IntRect(0,0,RP->getImgHud(0)->getSize().x, RP->getImgHud(0)->getSize().y);
+					auto sp = new sf::Sprite(*tex,*rec);
+					sp->setPosition(10, 10);
+					hudList->push_back(sp);
+					garbage.push_back(tex);
+					garbage.push_back(rec);
+					goto remove_elem;
+				}else if(action == NEXTLEVEL){
 					return nullptr;
 				}else if (action == CANSHOOT)
 				{
+					auto tex = new sf::Texture();
+					tex->loadFromImage(*RP->getImgHud(1));
+					tex->setSmooth(true);
+					auto rec = new sf::IntRect(0, 0, RP->getImgHud(0)->getSize().x, RP->getImgHud(0)->getSize().y);
+					auto sp = new sf::Sprite(*tex, *rec);
+					hudList->push_back(sp);
+					garbage.push_back(tex);
+					garbage.push_back(rec);
+					sp->setPosition(10, 10 + RP->getImgHud(0)->getSize().y);
 					p->setCanShoot(true);
 					goto remove_elem;
-					break;
 				}
 				continue;
 			}
@@ -367,5 +390,6 @@ Univers::Univers(RessourcePack* rp, sf::RenderWindow* rw) : RP(rp), RW(rw)
 		shutdown();
 		return;
 	}
+	hudList = new std::vector<sf::Sprite*>();
 	loadTerrain(1);
 }

@@ -15,7 +15,7 @@ ACTION InteractiveObject::effect(std::any* a)
 		 p = reinterpret_cast< Player*>(a);
 		if (p != nullptr) {
 			p->setDoubleJump(true);
-			return DEL;
+			return JUMP;
 		}
 		return ND;
 	case(101):
