@@ -25,7 +25,7 @@ public :
 	 * \brief Affichage du Block
 	 * \param rw : sf::RenderWindow* la fenètre d'affichage 
 	 */
-	void show(sf::RenderWindow* rw) const;
+	void show(sf::RenderWindow* rw) ;
 	/**
 	 * \brief Si le Block est en collision avec le rect en argv
 	 * \param rect : sf::IntRect 

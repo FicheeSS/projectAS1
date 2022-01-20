@@ -160,7 +160,7 @@ int Univers::animate()
 	return 0;
 }
 
-std::vector<bool>* Univers::collision(Character* c)
+std::vector<bool>* Univers::collision(Character* c)//block 50 fait tomber ds la map
 {
 	for (auto&& re : *res)
 	{

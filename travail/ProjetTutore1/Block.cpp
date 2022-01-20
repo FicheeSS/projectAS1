@@ -20,7 +20,7 @@ Block::Block(Block* b) : _x(b->_x), _y(b->_y),
 	_sprite->setPosition(b->_x, b->_y);
 }
 
-void Block::show(sf::RenderWindow* rw) const
+void Block::show(sf::RenderWindow* rw) 
 {
 	// définit un rectangle de 120x50
 
