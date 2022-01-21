@@ -216,7 +216,7 @@ void RessourcePack::generate_font(sf::Image* imgFont)
 	const auto tex = new sf::Texture(); //Fuite memoire a gerer maybe
 	tex->loadFromImage(*imgFont);
 	for (int z = 0; z < 2; z++) {
-		for (int i = 0; i < 14; i++)
+		for (int i = 0; i < 13; i++)
 		{
 			tex->setSmooth(true);
 			const auto rec = new sf::IntRect(x, y, sizeXChar, sizeYChar);
@@ -225,7 +225,7 @@ void RessourcePack::generate_font(sf::Image* imgFont)
 			c++;
 			x += 68;
 		}
-		y += 902;
+		y += 80;
 		x = 14;
 	}
 }
