@@ -317,7 +317,7 @@ void Univers::loadTerrain(int lvl)
 
 	switch (lvl) {
 	case 1:
-		text = RP->generateText("test", 100, 100);
+		text = RP->generateText("se deplacer", 30, 520);
 		break;
 	default:
 		break;

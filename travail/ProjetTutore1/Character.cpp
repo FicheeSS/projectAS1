@@ -89,7 +89,7 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 	case DIRDEP::LEFT:
 		if (_x > 0 && !cols[COLDIR::LEFT])
 		{
-			_x--;
+			_x-=VITESSE;
 			_place = LEFT;
 		}
 		break;
@@ -97,7 +97,7 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 		if (!cols[COLDIR::RIGHT] && _x + BLOCKWIDTH < _maxX)
 		{
 			//TODO : Ajouter la vérification du max 
-			_x++;
+			_x+=VITESSE;
 			_place = RIGHT;
 		}
 		break;
