@@ -65,7 +65,9 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 	switch (std::get<0>(dir))
 	{
 	case DIRDEP::UP:
-		if (cols[BOTTOM] && !cols[TOP])
+		if (cols[BOTTOM] && !cols[TOP] 
+			&& !(std::get<1>(dir) == DIRDEP::LEFT && cols[LEFT])
+			&& !(std::get<1>(dir) == DIRDEP::RIGHT && cols[RIGHT]))
 		{
 			//on est sur le sol et il n'y a pas de mur au dessus
 			_accel = -MAXACC;
