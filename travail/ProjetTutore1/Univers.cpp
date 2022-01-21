@@ -319,6 +319,12 @@ void Univers::loadTerrain(int lvl)
 	case 1:
 		text = RP->generateText("se deplacer", 30, 520);
 		break;
+	case 2:
+		text = RP->generateText("double saut", 30, 520);
+		break;
+	case 3:
+		text = RP->generateText("attaquer", 30, 520);
+		break;
 	default:
 		break;
 	}
