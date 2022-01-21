@@ -19,6 +19,7 @@ private:
 	sf::RenderWindow* RW = nullptr;
 	std::vector<Bullet*>* bullets = nullptr;
 	Ennemi* EnnemiToBeDeleted = nullptr;
+	std::vector<sf::Sprite*>* text;
 
 #ifdef DEBUG
 	bool ctrlIsInUse = false;

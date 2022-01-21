@@ -24,7 +24,7 @@ int Univers::animate()
 	}
 	
 
-	//auto r = RP->generateText("text12", 10, 10);
+	//auto r = RP->generateText("caca", 10, 10);
 
 
 	while (RW->isOpen())
@@ -159,6 +159,11 @@ int Univers::animate()
 			b->render(RW);
 		}
 		//----------------------------------------------------------------//
+
+		//draw du text
+		for (auto i : *text) { 
+			RW->draw(*i); 
+		}
 
 		//-------------Gestion de l'HUD-----------------------------------//
 		for(auto hud : *hudList)
@@ -309,6 +314,14 @@ void Univers::loadTerrain(int lvl)
 	// on nettoie le terrain
 
 	delete(ter);
+
+	switch (lvl) {
+	case 1:
+		text = RP->generateText("test", 100, 100);
+		break;
+	default:
+		break;
+	}
 
 	// on arrete puis on selectionne la bonne musique pour le niveau actuel
 	if (currentMusic != nullptr)
