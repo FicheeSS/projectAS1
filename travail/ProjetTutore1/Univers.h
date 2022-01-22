@@ -34,6 +34,8 @@ private:
 	std::vector<Ennemi*>* EnnemiList = nullptr;
 	std::vector<sf::Sprite*> *hudList = nullptr;
 	std::vector<void*> garbage = std::vector<void*>();
+	sf::Sprite* currentDidac = nullptr;
+	void playerEndWithMessage(std::string mess);
 	/**
 	 * \brief Charge le niveau dans l'Univers, exit si le niveau ne peut être charger
 	 * \param lvl : int le niveau

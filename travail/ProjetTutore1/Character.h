@@ -9,7 +9,7 @@ class Character
 {
 protected:
 	
-	const float VITESSE = 1.5;
+	float VITESSE = 1.5;
 
 	float _x = 0.0f;
 	float _y = 0.0f;

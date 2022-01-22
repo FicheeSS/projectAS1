@@ -136,6 +136,11 @@ int Univers::animate()
 		{
 			const std::vector<bool>* listCollision = collision(en);
 			en->moveWithIa(*listCollision, sf::Vector2i(static_cast<int>(p->getX()), static_cast<int>(p->getY())));
+			if(en->getRect().intersects(p->getRect()))
+			{
+				playerEndWithMessage("Vous avez Perdu");
+					return EXIT_SUCCESS;
+			}
 			en->show(RW);
 		}
 		if (EnnemiToBeDeleted != nullptr) {
@@ -183,6 +188,48 @@ int Univers::animate()
 	}
 	return 0;
 }
+void Univers::playerEndWithMessage(std::string mess)
+{
+	auto r = RP->generateText(mess, 10, 400);
+	auto r2 =  RP->generateText("Appuiez sur Entrer ", 10, 500);
+
+	while(RW->isOpen())
+	{
+		RW->clear();
+		if (background != nullptr)
+		{
+			RW->draw(*background);
+		}
+		for (auto s : *r)
+		{
+			RW->draw(*s);
+		}
+		for (auto s : *r2)
+		{
+			RW->draw(*s);
+		}
+		
+		sf::Event event{};
+		while (RW->pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				shutdown();
+				return ;
+			}
+			if (event.type == sf::Event::KeyPressed)
+			{
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Enter :
+					return;
+				}
+			}
+		}
+		RW->display();
+	}
+}
 
 std::vector<bool>* Univers::collision(Character* c)//block 50 fait tomber ds la map
 {
@@ -228,7 +275,12 @@ std::vector<bool>* Univers::collision(Character* c)//block 50 fait tomber ds la 
 					auto sp = loadSprite(RP->getImgHud(0));
 					sp->setPosition(10, 10);
 					hudList->push_back(sp);
+					sp = loadSprite(RP->getImgHud(4));
+					sp->setPosition(350, 500);
+					currentDidac = sp;
+					text->push_back(sp);
 					goto remove_elem;
+
 				}else if(action == NEXTLEVEL){
 					return nullptr;
 				}else if (action == CANSHOOT)
@@ -237,6 +289,10 @@ std::vector<bool>* Univers::collision(Character* c)//block 50 fait tomber ds la 
 					sp->setPosition(10 + RP->getImgHud(0)->getSize().x, 10 );
 					hudList->push_back(sp);
 					p->setCanShoot(true);
+					sp = loadSprite(RP->getImgHud(3));
+					sp->setPosition(350, 500);
+					currentDidac = sp;
+					text->push_back(sp);
 					goto remove_elem;
 				}
 				continue;
@@ -319,8 +375,26 @@ void Univers::loadTerrain(int lvl)
 	case 1:
 		sp = loadSprite(RP->getImgHud(2));
 		sp->setPosition(350, 500);
+		currentDidac = sp;
 		text->push_back(sp);
 		break;
+	case 2:
+	case 3:
+		default:
+			if(currentDidac != nullptr)
+			{
+				for (uint32_t i = 0; i < text->size(); i++)
+				{
+					if (text->at(i) == currentDidac)
+					{
+						text->erase(text->begin() + i);
+						break;
+					}
+				}
+				delete(currentDidac);
+				currentDidac = nullptr;
+			}
+			break;
 	}
 
 	// on arrete puis on selectionne la bonne musique pour le niveau actuel
@@ -340,6 +414,7 @@ void Univers::loadTerrain(int lvl)
 	catch (std::invalid_argument& e)
 	{
 		std::cerr << e.what() << std::endl;
+		playerEndWithMessage("Vous avez Gagnez");
 		shutdown();
 		return;
 	}
@@ -358,6 +433,10 @@ void Univers::loadTerrain(int lvl)
 		delete(EnnemiList);
 	}
 	EnnemiList = ter->getEnnemiList();
+	for(auto enem : *EnnemiList)
+	{
+		enem->setMaxX(ter->getSizeX() * BLOCKWIDTH);
+	}
 	if (bullets != nullptr) {
 		for (auto b : *bullets)
 		{

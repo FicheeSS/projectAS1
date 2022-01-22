@@ -80,6 +80,7 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
 			{
 				EnnemiList->push_back(new Ennemi(static_cast<int>(x) * BLOCKWIDTH, static_cast<int>(y) * BLOCKHEIGHT,
 				                                 generatePersoImgInPlace("e", &RP)));
+
 			}
 		}
 	}
