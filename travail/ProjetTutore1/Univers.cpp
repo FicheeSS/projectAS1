@@ -414,7 +414,7 @@ void Univers::loadTerrain(int lvl)
 	catch (std::invalid_argument& e)
 	{
 		std::cerr << e.what() << std::endl;
-		playerEndWithMessage("Vous avez Gagnez");
+		playerEndWithMessage("Vous avez Gagne");
 		shutdown();
 		return;
 	}
