@@ -9,7 +9,7 @@ class Character
 {
 protected:
 	
-	const float VITESSE = 1.5;
+	float VITESSE = 1.5;
 
 	float _x = 0.0f;
 	float _y = 0.0f;
@@ -18,6 +18,7 @@ protected:
 	std::vector<sf::Texture*>* _tex;
 	float _accel = 0;
 	int _maxX;
+	unsigned timeLastWallJump = 0;
 
 	enum places { LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3 };
 
