@@ -6,4 +6,10 @@ ASAN_SYMBOLIZER_PATH=$(VC_ExecutablePath_x86)
 ASAN_OPTIONS=new_delete_type_mismatch=0</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Linux|Win32'">
+    <LocalDebuggerEnvironment>PATH=$(VC_ExecutablePath_x86);%PATH%
+ASAN_SYMBOLIZER_PATH=$(VC_ExecutablePath_x86)
+ASAN_OPTIONS=new_delete_type_mismatch=0</LocalDebuggerEnvironment>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>

@@ -4,7 +4,10 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/regex/v5/regex.hpp>
 #pragma warning(pop)
+#include <iostream>
 #include <regex>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 int getMaxFromPathStem(std::vector<boost::filesystem::path>* path)
 {
@@ -63,6 +66,9 @@ void RessourcePack::generateImg(std::string path)
 		boost::regex nb("[0-9]*");
 		boost::regex background(".*backgrounds.*");
 		boost::regex bullet(".*bullet*.");
+		boost::regex hud(".*hud*.");
+		boost::regex font(".*font*.");
+		boost::regex nont(".*nont*.");
 		if (boost::regex_match(path.stem().string(), nb))
 		{
 			//C'est un block ou un bakcground
@@ -81,12 +87,23 @@ void RessourcePack::generateImg(std::string path)
 			if(boost::regex_match(path.stem().string(), bullet)){
 				imgBullet = img; 
 			}
+			else if (boost::regex_match(path.stem().string(), hud)) {
+				hudImage->push_back(img);
+			}
+			else if(boost::regex_match(path.stem().string(),font))
+			{
+				generate_font(img);
+			}else if(boost::regex_match(path.stem().string(),nont))
+			{
+				generate_nont(img);
+			}
 			else {
 				//C'est une image de personnage
 				imgLocPerso->push_back(std::make_tuple(path.stem().string(), img));
 			}
 		}
 	}
+	return;
 }
 
 [[deprecated]]
@@ -161,8 +178,8 @@ void RessourcePack::generateAudioData(std::string path) const
 	std::sort(paths.begin(), paths.end());
 	for (auto path : paths)
 	{
-		std::regex nb(".*\\\d*\.flac");
-		if (std::regex_search(path.string(), nb))
+		boost::regex nb("[0-9]*");
+		if (boost::regex_match(path.stem().string(), nb))
 		{
 			auto music = new sf::Music;
 			if (!music->openFromFile(path.string())) throw std::invalid_argument(
@@ -191,6 +208,46 @@ sf::SoundBuffer* RessourcePack::getSoundBufferByName(std::string name)
 	return nullptr;
 }
 
+void RessourcePack::generate_font(sf::Image* imgFont)
+{
+	int x = 14;
+	int y = 18;
+	char c = 'A';
+	const auto tex = new sf::Texture(); //Fuite memoire a gerer maybe
+	tex->loadFromImage(*imgFont);
+	for (int z = 0; z < 2; z++) {
+		for (int i = 0; i < 13; i++)
+		{
+			tex->setSmooth(true);
+			const auto rec = new sf::IntRect(x, y, sizeXChar, sizeYChar);
+			auto sp = new sf::Sprite(*tex, *rec);
+			fontSprite->insert({ c, sp });
+			c++;
+			x += 68;
+		}
+		y += 80;
+		x = 14;
+	}
+}
+
+void RessourcePack::generate_nont(sf::Image* imgFont)
+{
+	int x = 14;
+	int y = 18;
+	char c = '0';
+	const auto tex = new sf::Texture(); //Fuite memoire a gerer maybe
+	tex->loadFromImage(*imgFont);
+		for (int i = 0; i < 10; i++)
+		{
+			tex->setSmooth(true);
+			const auto rec = new sf::IntRect(x, y, sizeXChar, sizeYChar);
+			auto sp = new sf::Sprite(*tex, *rec);
+			fontSprite->insert({ c, sp });
+			c++;
+			x += 66;
+	}
+}
+
 RessourcePack::RessourcePack()
 {
 	imgLoc = new std::vector<sf::Image*>;
@@ -199,6 +256,7 @@ RessourcePack::RessourcePack()
 	musicList = new std::vector<sf::Music*>;
 	backgroundImages = new std::vector<sf::Image*>;
 	imgBullet = new sf::Image();
+	hudImage = new std::vector<sf::Image*>;
 }
 
 sf::Image* RessourcePack::getImg(int n)
@@ -236,6 +294,29 @@ RessourcePack::~RessourcePack()
 	delete(imgLoc);
 	delete(backgroundImages);
 	delete(imgBullet);
+}
+
+std::vector<sf::Sprite*>* RessourcePack::generateText(std::string s, int x, int y)
+{
+	auto result = new std::vector<sf::Sprite*>();
+	for(auto c : s )
+	{
+		c  = std::toupper(c);
+		try
+		{
+			auto s = fontSprite->at(c);
+			auto sp = new sf::Sprite(*s);
+			sp->setPosition(x, y);
+			result->push_back(sp);
+		}
+		catch (std::out_of_range)
+		{
+			std::cerr << c << " out of range" << std::endl;
+		}
+		x += sizeXChar - 5;
+	}
+	return  result;
+
 }
 
 sf::Image* RessourcePack::getPlayerImg(std::string s) const

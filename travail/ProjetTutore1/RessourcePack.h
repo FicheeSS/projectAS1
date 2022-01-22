@@ -1,6 +1,7 @@
 #ifndef RESSOURCEPACK_H
 #define RESSOURCEPACK_H
 
+#include <map>
 #include <string>
 #include <vector>
 #include <SFML/Graphics/Image.hpp>
@@ -8,6 +9,11 @@
 #define IMGEXT ".png"
 #define AUDEXT ".flac"
 
+
+namespace sf
+{
+	class Sprite;
+}
 
 class RessourcePack
 {
@@ -19,10 +25,18 @@ private:
 	std::vector<sf::Image*>* backgroundImages;
 	std::string defaultFolder ;
 	sf::Image* imgBullet;
+	std::vector<sf::Image*>* hudImage;
+	std::map<char, sf::Sprite*>* fontSprite = new std::map<char, sf::Sprite*>();
+	void generate_font(sf::Image* imgFont);
+	void generate_nont(sf::Image* imgFont);
+	int const sizeXChar = 44;
+	int const sizeYChar = 42;
 
 public:
 	RessourcePack();
 	~RessourcePack();
+
+	std::vector<sf::Sprite*>* generateText(std::string s, int x, int y);
 
 	/**
 	 * \brief Charge les images depuis le path specifié en paramètre 
@@ -58,12 +72,27 @@ public:
 	 * \return sf::SoundBuffer*
 	 */
 	sf::SoundBuffer* getSoundBufferByName(std::string name);
+
+	/**
+	 * \brief Recupère l'image qui correspond à l'image de hud
+	 * \param n : int de l'image de HUD
+	 * \return sf::Image*
+	 */
+	sf::Image* getImgHud(int n) const
+	{
+		return hudImage->at(n);
+	}
 	/**
 	 * \brief Recupère l'image qui correspond à l'image de background
-	 * \param n : int le niveau 
-	 * \return sf::SoundBuffer*
+	 * \param n : int le niveau
+	 * \return sf::Image*
 	 */
-	sf::Image* getImgBackground(int n) { return backgroundImages->at(n - 1); };
+	sf::Image* getImgBackground(int n) const
+	{
+		return (static_cast<unsigned>(n) >= backgroundImages->size()) ?
+			backgroundImages->at(backgroundImages->size() -1)
+			:backgroundImages->at(n-1);
+	};
 	/**
 	 * \brief renvoie la music pour le niveau donner en paramètre ou si le niveau est en dehors du tableau la music la plus proche
 	 * \param lvl : int le niveau pour la musique

@@ -22,4 +22,5 @@ void Ennemi::moveWithIa(std::vector<bool> cols, sf::Vector2i pos_j)
 		}
 	}
 	move(dir, cols);
+
 }

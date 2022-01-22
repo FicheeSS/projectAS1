@@ -8,6 +8,9 @@
 class Character
 {
 protected:
+	
+	float VITESSE = 1.5;
+
 	float _x = 0.0f;
 	float _y = 0.0f;
 	sf::IntRect* _rect;
@@ -15,6 +18,7 @@ protected:
 	std::vector<sf::Texture*>* _tex;
 	float _accel = 0;
 	int _maxX;
+	unsigned timeLastWallJump = 0;
 
 	enum places { LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3 };
 
@@ -46,5 +50,6 @@ public :
 	void setMaxX(int x) { _maxX = x; };
 	sf::Vector2u getSize() { return _size; };
 	void setDoubleJump(bool jmp) { _canDoubleJump = jmp; };
+	bool getDoubleJump() { return _canDoubleJump; };
 };
 #endif

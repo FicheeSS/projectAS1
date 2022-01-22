@@ -30,7 +30,7 @@ std::vector<sf::Image*>* TerrainConstructor::generatePersoImgInPlace(const std::
 	return img;
 }
 
-std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level, RessourcePack& RP)
+std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level, RessourcePack& RP, Player* oldp)
 {
 	std::vector<std::vector<int>>* lvl;
 	imageVectorMemory = new std::vector<std::vector<sf::Image*>*>();
@@ -41,6 +41,9 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
 		break;
 	case 2:
 		lvl = &level2;
+		break;
+	case 3:
+		lvl = &level3;
 		break;
 	default: //Ajouter ici si ils ont veux d'autres niveaux
 		throw std::invalid_argument("Le niveau demande n'existe pas");
@@ -69,13 +72,15 @@ std::vector<Block*>* TerrainConstructor::ConstructTerrainFromLevelFile(int level
 			}
 			else if (line[x] == -1)
 			{
+				
 				p = new Player(static_cast<int>(x) * BLOCKWIDTH, static_cast<int>(y) * BLOCKHEIGHT,
-				               generatePersoImgInPlace("p", &RP));
+						generatePersoImgInPlace("p", &RP), oldp);
 			}
 			else if (line[x] == -2)
 			{
 				EnnemiList->push_back(new Ennemi(static_cast<int>(x) * BLOCKWIDTH, static_cast<int>(y) * BLOCKHEIGHT,
 				                                 generatePersoImgInPlace("e", &RP)));
+
 			}
 		}
 	}

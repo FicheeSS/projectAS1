@@ -42,6 +42,24 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 		_accel += DECEL;
 		_place = DOWN;
 	}
+	if(cols.at(RIGHT))
+	{
+		_x--;
+		_place = RIGHT;
+		if(std::get<1>(dir) == DIRDEP::RIGHT)
+		{
+			timeLastWallJump++;
+		}
+	}
+	if(cols.at(LEFT))
+	{
+		_x++;
+		_place = LEFT;
+		if (std::get<1>(dir) == DIRDEP::LEFT)
+		{
+			timeLastWallJump++;
+		}
+	}
 	if (cols.at(TOP))
 	{
 		if (_accel < 0)
@@ -55,7 +73,10 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 	switch (std::get<0>(dir))
 	{
 	case DIRDEP::UP:
-		if (cols[BOTTOM] && !cols[TOP])
+		if (cols[BOTTOM] && !cols[TOP] 
+			&& !(std::get<1>(dir) == DIRDEP::LEFT && cols[LEFT])
+			&& !(std::get<1>(dir) == DIRDEP::RIGHT && cols[RIGHT])
+			&& timeLastWallJump == 0)
 		{
 			//on est sur le sol et il n'y a pas de mur au dessus
 			_accel = -MAXACC;
@@ -79,7 +100,7 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 	case DIRDEP::LEFT:
 		if (_x > 0 && !cols[COLDIR::LEFT])
 		{
-			_x--;
+			_x-=VITESSE;
 			_place = LEFT;
 		}
 		break;
@@ -87,10 +108,17 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 		if (!cols[COLDIR::RIGHT] && _x + BLOCKWIDTH < _maxX)
 		{
 			//TODO : Ajouter la vérification du max 
-			_x++;
+			_x+=VITESSE;
 			_place = RIGHT;
 		}
 		break;
+	}
+	if(timeLastWallJump >= 100 )
+	{
+		timeLastWallJump = 0;
+	}else if(timeLastWallJump != 0)
+	{
+		timeLastWallJump++;
 	}
 	_sprite->at(_place)->setPosition(_x, _y);
 	_rect->top = static_cast<int>(_y);
