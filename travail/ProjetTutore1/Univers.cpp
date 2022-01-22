@@ -225,29 +225,17 @@ std::vector<bool>* Univers::collision(Character* c)//block 50 fait tomber ds la 
 					}
 
 				}else if(action == JUMP){
-					auto tex = new sf::Texture();
-					tex->loadFromImage(*RP->getImgHud(0));
-					tex->setSmooth(true);
-					auto rec = new sf::IntRect(0,0,RP->getImgHud(0)->getSize().x, RP->getImgHud(0)->getSize().y);
-					auto sp = new sf::Sprite(*tex,*rec);
+					auto sp = loadSprite(RP->getImgHud(0));
 					sp->setPosition(10, 10);
 					hudList->push_back(sp);
-					garbage.push_back(tex);
-					garbage.push_back(rec);
 					goto remove_elem;
 				}else if(action == NEXTLEVEL){
 					return nullptr;
 				}else if (action == CANSHOOT)
 				{
-					auto tex = new sf::Texture();
-					tex->loadFromImage(*RP->getImgHud(1));
-					tex->setSmooth(true);
-					auto rec = new sf::IntRect(0, 0, RP->getImgHud(0)->getSize().x, RP->getImgHud(0)->getSize().y);
-					auto sp = new sf::Sprite(*tex, *rec);
-					hudList->push_back(sp);
-					garbage.push_back(tex);
-					garbage.push_back(rec);
+					auto sp = loadSprite(RP->getImgHud(1));
 					sp->setPosition(10 + RP->getImgHud(0)->getSize().x, 10 );
+					hudList->push_back(sp);
 					p->setCanShoot(true);
 					goto remove_elem;
 				}
@@ -309,17 +297,29 @@ del:
 }
 
 
+sf::Sprite* Univers::loadSprite(sf::Image* img)
+{
+	auto tex = new sf::Texture();
+	tex->loadFromImage(*img);
+	tex->setSmooth(true);
+	auto rec = new sf::IntRect(0, 0, img->getSize().x, img->getSize().y);
+	auto sp = new sf::Sprite(*tex, *rec);
+	garbage.push_back(tex);
+	garbage.push_back(rec);
+	return sp;
+}
+
 void Univers::loadTerrain(int lvl)
 {
 	// on nettoie le terrain
 
 	delete(ter);
-
+	sf::Sprite* sp;
 	switch (lvl) {
 	case 1:
-		text = RP->generateText("se deplacer", 30, 520);
-		break;
-	default:
+		sp = loadSprite(RP->getImgHud(2));
+		sp->setPosition(350, 500);
+		text->push_back(sp);
 		break;
 	}
 

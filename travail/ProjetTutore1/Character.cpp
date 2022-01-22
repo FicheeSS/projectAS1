@@ -46,11 +46,19 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 	{
 		_x--;
 		_place = RIGHT;
+		if(std::get<1>(dir) == DIRDEP::RIGHT)
+		{
+			timeLastWallJump++;
+		}
 	}
 	if(cols.at(LEFT))
 	{
 		_x++;
 		_place = LEFT;
+		if (std::get<1>(dir) == DIRDEP::LEFT)
+		{
+			timeLastWallJump++;
+		}
 	}
 	if (cols.at(TOP))
 	{
@@ -67,7 +75,8 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 	case DIRDEP::UP:
 		if (cols[BOTTOM] && !cols[TOP] 
 			&& !(std::get<1>(dir) == DIRDEP::LEFT && cols[LEFT])
-			&& !(std::get<1>(dir) == DIRDEP::RIGHT && cols[RIGHT]))
+			&& !(std::get<1>(dir) == DIRDEP::RIGHT && cols[RIGHT])
+			&& timeLastWallJump == 0)
 		{
 			//on est sur le sol et il n'y a pas de mur au dessus
 			_accel = -MAXACC;
@@ -103,6 +112,13 @@ void Character::move(std::tuple<DIRDEP, DIRDEP> dir, std::vector<bool> cols)
 			_place = RIGHT;
 		}
 		break;
+	}
+	if(timeLastWallJump >= 100 )
+	{
+		timeLastWallJump = 0;
+	}else if(timeLastWallJump != 0)
+	{
+		timeLastWallJump++;
 	}
 	_sprite->at(_place)->setPosition(_x, _y);
 	_rect->top = static_cast<int>(_y);

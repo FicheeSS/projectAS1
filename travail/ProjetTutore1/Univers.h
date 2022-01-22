@@ -19,8 +19,8 @@ private:
 	sf::RenderWindow* RW = nullptr;
 	std::vector<Bullet*>* bullets = nullptr;
 	Ennemi* EnnemiToBeDeleted = nullptr;
-	std::vector<sf::Sprite*>* text;
-
+	std::vector<sf::Sprite*>* text = new std::vector<sf::Sprite*>();
+	sf::Sprite* loadSprite(sf::Image *img);
 #ifdef DEBUG
 	bool ctrlIsInUse = false;
 	bool tabIsUse = false;
