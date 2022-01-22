@@ -7,7 +7,7 @@
 #define DECEL 0.2f
 #include <vector>
 
-#define DEBUG
+//#define DEBUG
 
  
  enum class DIRDEP {LEFT,RIGHT,UP,DOWN,NONE};
