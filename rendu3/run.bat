@@ -1,0 +1,1 @@
+.\Release\ProjetTutore1.exe %cd%
