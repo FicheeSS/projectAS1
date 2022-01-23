@@ -1,5 +1,5 @@
 .vs/
 vcpkg_installed/
 *.obj
-Release/
+Debug/
 x64/
